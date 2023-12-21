@@ -59,12 +59,21 @@ PROGRAM_START:
 LINE_100:
 LINE_110:
 LINE_120:
-        LD          HL, 0
-        LD          [VARI_I], HL
-        LD          HL, 3
-        LD          [svari_I_FOR_END], HL
-        LD          HL, 1
-        LD          [svari_I_FOR_STEP], HL
+        LD          HL, VARI_I
+        LD          DE, 0
+        LD          [HL], E
+        INC         HL
+        LD          [HL], D
+        LD          HL, svari_I_FOR_END
+        LD          DE, 3
+        LD          [HL], E
+        INC         HL
+        LD          [HL], D
+        LD          HL, svari_I_FOR_STEP
+        LD          DE, 1
+        LD          [HL], E
+        INC         HL
+        LD          [HL], D
         LD          HL, _pt1
         LD          [svari_I_LABEL], HL
         JR          _pt0
