@@ -10,7 +10,7 @@
 #include "expression.h"
 
 // --------------------------------------------------------------------
-//	*(èÊéZ)
+//	*(‰πóÁÆó)
 class CEXPRESSION_OPERATOR_MUL: public CEXPRESSION_NODE {
 public:
 	CEXPRESSION_NODE *p_left;

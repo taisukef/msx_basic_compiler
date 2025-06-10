@@ -18,11 +18,11 @@ bool CCOMMENT::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 	if( p_info->list.is_line_end() ) {
-		//	' ‚â REM ‚¾‚¯‚ÅI‚í‚Á‚Ä‚éê‡
+		//	' ã‚„ REM ã ã‘ã§çµ‚ã‚ã£ã¦ã‚‹å ´åˆ
 		s = "";
 	}
 	else {
-		//	ƒRƒƒ“ƒg‚Ì’†g‚ª‚ ‚Á‚½ê‡
+		//	ã‚³ãƒ¡ãƒ³ãƒˆã®ä¸­èº«ãŒã‚ã£ãŸå ´åˆ
 		s = p_info->list.p_position->s_word;
 		p_info->list.p_position++;
 	}

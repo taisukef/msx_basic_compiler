@@ -11,7 +11,7 @@
 #define __EXPRESSION_TIME_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_TIME: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_TIME() {

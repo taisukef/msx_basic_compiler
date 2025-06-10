@@ -8,7 +8,7 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  SETPROMPT プロンプト
+//  SETPROMPT 繝励Ο繝ｳ繝励ヨ
 bool CSETPROMPT::exec( CCOMPILE_INFO *p_info ) {
 	CEXPRESSION exp;
 	CASSEMBLER_LINE asm_line;
@@ -32,7 +32,7 @@ bool CSETPROMPT::exec( CCOMPILE_INFO *p_info ) {
 		p_info->errors.add( MISSING_OPERAND, line_no );
 		return true;
 	}
-	//	第1引数 プロンプト
+	//	隨ｬ1蠑墓焚 繝励Ο繝ｳ繝励ヨ
 	if( exp.compile( p_info, CEXPRESSION_TYPE::STRING ) ) {
 		exp.release();
 	}

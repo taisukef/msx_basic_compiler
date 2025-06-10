@@ -1,12 +1,12 @@
-C++ �̃\�[�X�R�[�h��ɃT�u���[�`����z�u���Ă��邪�A������
-���ڏ����ƍ������郌�x���̃T�u���[�`���́A�܂������� ASM �Ƃ���
-�����Ă����Ă���AC++ �փ\�[�X�R�[�h��֏����ʂ����Ƃɂ���B
+C++ のソースコード上にサブルーチンを配置しているが、そこに
+直接書くと混乱するレベルのサブルーチンは、まずここで ASM として
+書いておいてから、C++ へソースコード上へ書き写すことにする。
 
-������A�z��ϐ��́A��������Œ�A�h���X�� 2byte �̗̈悪�m�ۂ���A
-���� 2byte �� HEAP �̒��̂ǂ������w�������B
+文字列、配列変数は、いずれも固定アドレスに 2byte の領域が確保され、
+その 2byte が HEAP の中のどこかを指し示す。
 
-������̏ꍇ�́AHEAP �̐擪 1byte �������񒷁B2byte�ڈȍ~�����̕�����B
-	[������L(1byte)][������(Lbyte)]
+文字列の場合は、HEAP の先頭 1byte が文字列長。2byte目以降がその文字列。
+	[文字列長L(1byte)][文字列(Lbyte)]
 
-�z��ϐ��̏ꍇ�́AHEAP �̐擪 1byte ��������N�B���� Nbyte ���e�����̗v�f���B
-	[�̈�̃T�C�Y(2byte)][������N(1byte)][�v�f�̌�(N*2byte)][�ϐ��f�[�^]
+配列変数の場合は、HEAP の先頭 1byte が次元数N。次の Nbyte が各次元の要素数。
+	[領域のサイズ(2byte)][次元数N(1byte)][要素の個数(N*2byte)][変数データ]

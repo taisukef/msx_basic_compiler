@@ -7,7 +7,7 @@
 #include "goto.h"
 
 // --------------------------------------------------------------------
-//  GOTO �s�ԍ�
+//  GOTO 行番号
 bool CGOTO::exec( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 	int line_no = p_info->list.get_line_no();
@@ -17,12 +17,12 @@ bool CGOTO::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 	if( p_info->list.is_command_end() ) {
-		//	GOTO �����ŏI����Ă�ꍇ�� Syntax error.
+		//	GOTO だけで終わってる場合は Syntax error.
 		p_info->errors.add( SYNTAX_ERROR, line_no );
 		return true;
 	}
 	if( p_info->list.p_position->type != CBASIC_WORD_TYPE::LINE_NO ) {
-		//	�s�ԍ��w�肪���������ꍇ�� Syntax error.
+		//	行番号指定がおかしい場合は Syntax error.
 		p_info->errors.add( SYNTAX_ERROR, line_no );
 		return true;
 	}

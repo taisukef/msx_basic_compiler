@@ -8,7 +8,7 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  SETTITLE ƒ^ƒCƒgƒ‹ [, F]
+//  SETTITLE ã‚¿ã‚¤ãƒˆãƒ« [, è‰²]
 bool CSETTITLE::exec( CCOMPILE_INFO *p_info ) {
 	CEXPRESSION exp;
 	CASSEMBLER_LINE asm_line;
@@ -33,7 +33,7 @@ bool CSETTITLE::exec( CCOMPILE_INFO *p_info ) {
 		p_info->errors.add( MISSING_OPERAND, line_no );
 		return true;
 	}
-	//	‘æ1ˆø” ƒ^ƒCƒgƒ‹
+	//	ç¬¬1å¼•æ•° ã‚¿ã‚¤ãƒˆãƒ«
 	if( exp.compile( p_info, CEXPRESSION_TYPE::STRING ) ) {
 		exp.release();
 		asm_line.set( "PUSH", "", "HL" );
@@ -45,7 +45,7 @@ bool CSETTITLE::exec( CCOMPILE_INFO *p_info ) {
 	}
 	if( p_info->list.is_command_end() ) {
 		if( has_title ) {
-			//	SET TITLE <ƒ^ƒCƒgƒ‹> ‚Ìê‡B
+			//	SET TITLE <ã‚¿ã‚¤ãƒˆãƒ«> ã®å ´åˆã€‚
 			asm_line.set( "POP", "", "HL" );
 			p_info->assembler_list.body.push_back( asm_line );
 			asm_line.set( "LD", "", "DE", "0" );
@@ -57,19 +57,19 @@ bool CSETTITLE::exec( CCOMPILE_INFO *p_info ) {
 			return true;
 		}
 		else {
-			//	ˆø”‚ª‰½‚àw’è‚³‚ê‚Ä‚¢‚È‚¢ê‡‚ÍƒGƒ‰[
+			//	å¼•æ•°ãŒä½•ã‚‚æŒ‡å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯ã‚¨ãƒ©ãƒ¼
 			p_info->errors.add( ILLEGAL_FUNCTION_CALL, line_no );
 			return true;
 		}
 	}
 	//	,
 	if( p_info->list.p_position->s_word != "," ) {
-		//	SET TITLE ‰ğß•s”\•¶š ‚Ìê‡‚ÍƒGƒ‰[
+		//	SET TITLE è§£é‡ˆä¸èƒ½æ–‡å­— ã®å ´åˆã¯ã‚¨ãƒ©ãƒ¼
 		p_info->errors.add( SYNTAX_ERROR, line_no );
 		return true;
 	}
 	p_info->list.p_position++;
-	//	‘æ2ˆø” F
+	//	ç¬¬2å¼•æ•° è‰²
 	if( exp.compile( p_info ) ) {
 		exp.release();
 		if( has_title ) {
@@ -92,7 +92,7 @@ bool CSETTITLE::exec( CCOMPILE_INFO *p_info ) {
 		}
 	}
 	else {
-		//	SET BEEP <‰¹F>, ‰ğß•s”\•¶š ‚Ìê‡‚ÍƒGƒ‰[
+		//	SET BEEP <éŸ³è‰²>, è§£é‡ˆä¸èƒ½æ–‡å­— ã®å ´åˆã¯ã‚¨ãƒ©ãƒ¼
 		p_info->errors.add( ILLEGAL_FUNCTION_CALL, line_no );
 		return true;
 	}

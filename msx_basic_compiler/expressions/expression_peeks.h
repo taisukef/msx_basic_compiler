@@ -11,7 +11,7 @@
 #define __EXPRESSION_PEEKS_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_PEEKS: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_PEEKS() {

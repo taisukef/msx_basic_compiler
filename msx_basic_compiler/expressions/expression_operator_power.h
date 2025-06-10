@@ -11,7 +11,7 @@
 #define __CEXPRESSION_OPERATOR_POWER_H__
 
 // --------------------------------------------------------------------
-//	ä÷êîåƒÇ—èoÇµ
+//	Èñ¢Êï∞Âëº„Å≥Âá∫„Åó
 class CEXPRESSION_OPERATOR_POWER: public CEXPRESSION_NODE {
 public:
 	CEXPRESSION_NODE *p_left;

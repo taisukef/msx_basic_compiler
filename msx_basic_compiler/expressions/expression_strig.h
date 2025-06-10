@@ -11,7 +11,7 @@
 #define __EXPRESSION_STRIG_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_STRIG: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_STRIG() {

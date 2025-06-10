@@ -8,7 +8,7 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  POKES <ƒAƒhƒŒƒX>, <•¶š—ñ®>
+//  POKES <ã‚¢ãƒ‰ãƒ¬ã‚¹>, <æ–‡å­—åˆ—å¼>
 bool CPOKES::exec( CCOMPILE_INFO *p_info ) {
 	int line_no = p_info->list.get_line_no();
 
@@ -19,7 +19,7 @@ bool CPOKES::exec( CCOMPILE_INFO *p_info ) {
 
 	CEXPRESSION exp;
 	CASSEMBLER_LINE asm_line;
-	//	‘æ1ˆø” <ƒAƒhƒŒƒX>
+	//	ç¬¬1å¼•æ•° <ã‚¢ãƒ‰ãƒ¬ã‚¹>
 	if( exp.compile( p_info, CEXPRESSION_TYPE::EXTENDED_INTEGER ) ) {
 		asm_line.set( CMNEMONIC_TYPE::PUSH, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "HL", COPERAND_TYPE::NONE, "" );
 		p_info->assembler_list.body.push_back( asm_line );
@@ -34,7 +34,7 @@ bool CPOKES::exec( CCOMPILE_INFO *p_info ) {
 		return true;
 	}
 	p_info->list.p_position++;
-	//	‘æ2ˆø” <’l>
+	//	ç¬¬2å¼•æ•° <å€¤>
 	if( exp.compile( p_info, CEXPRESSION_TYPE::STRING ) ) {
 		p_info->assembler_list.activate_free_string();
 		p_info->assembler_list.add_label( "blib_pokes", "0x04087" );

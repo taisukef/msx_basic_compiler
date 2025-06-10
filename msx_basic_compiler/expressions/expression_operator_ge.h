@@ -11,7 +11,7 @@
 #define __CEXPRESSION_OPERATOR_GE_H__
 
 // --------------------------------------------------------------------
-//	>= =>(��Ȃ��v)
+//	>= =>(大なり一致)
 class CEXPRESSION_OPERATOR_GE: public CEXPRESSION_NODE {
 public:
 	CEXPRESSION_NODE *p_left;

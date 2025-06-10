@@ -11,7 +11,7 @@
 #define __EXPRESSION_SQR_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_SQR: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_SQR() {

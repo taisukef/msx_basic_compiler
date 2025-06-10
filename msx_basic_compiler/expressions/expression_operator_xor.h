@@ -11,7 +11,7 @@
 #define __CEXPRESSION_OPERATOR_XOR_H__
 
 // --------------------------------------------------------------------
-//	XOR(”r‘¼“I˜_—˜a)
+//	XOR(æŽ’ä»–çš„è«–ç†å’Œ)
 class CEXPRESSION_OPERATOR_XOR: public CEXPRESSION_NODE {
 public:
 	CEXPRESSION_NODE *p_left;

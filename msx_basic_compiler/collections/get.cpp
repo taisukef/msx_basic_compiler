@@ -8,9 +8,9 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  GET DATE <•¶Žš—ñ•Ï”–¼> [,A]
-//	GET TIME <•¶Žš—ñ•Ï”–¼> [,A]
-//	GET #<ƒtƒ@ƒCƒ‹”Ô†>, <ƒŒƒR[ƒh”Ô†>
+//  GET DATE <æ–‡å­—åˆ—å¤‰æ•°å> [,A]
+//	GET TIME <æ–‡å­—åˆ—å¤‰æ•°å> [,A]
+//	GET #<ãƒ•ã‚¡ã‚¤ãƒ«ç•ªå·>, <ãƒ¬ã‚³ãƒ¼ãƒ‰ç•ªå·>
 //
 bool CGET::exec( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
@@ -24,7 +24,7 @@ bool CGET::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 	if( p_info->list.is_command_end() ) {
-		//	GET ‚¾‚¯‚ÅI‚í‚Á‚Ä‚éê‡‚Í Syntax error.
+		//	GET ã ã‘ã§çµ‚ã‚ã£ã¦ã‚‹å ´åˆã¯ Syntax error.
 		p_info->errors.add( SYNTAX_ERROR, line_no );
 		return true;
 	}
@@ -130,7 +130,7 @@ bool CGET::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 
-	//	ƒŒƒR[ƒh”Ô†
+	//	ãƒ¬ã‚³ãƒ¼ãƒ‰ç•ªå·
 	if( !exp.compile( p_info ) ) {
 		p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 		return true;

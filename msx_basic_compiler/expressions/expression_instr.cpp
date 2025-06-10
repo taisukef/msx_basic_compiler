@@ -36,13 +36,13 @@ void CEXPRESSION_INSTR::compile( CCOMPILE_INFO *p_info ) {
 	if( this->p_operand1 == nullptr || this->p_operand2 == nullptr ) {
 		return;
 	}
-	//	‘æ‚Pˆø”‚ðˆ—
+	//	ç¬¬ï¼‘å¼•æ•°ã‚’å‡¦ç†
 	this->p_operand1->compile( p_info );
 	this->convert_type( p_info, CEXPRESSION_TYPE::STRING, this->p_operand1->type );
 	asm_line.set( CMNEMONIC_TYPE::PUSH, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "HL", COPERAND_TYPE::NONE, "" );
 	p_info->assembler_list.body.push_back( asm_line );
 
-	//	‘æ‚Qˆø”‚ðˆ—
+	//	ç¬¬ï¼’å¼•æ•°ã‚’å‡¦ç†
 	this->p_operand2->compile( p_info );
 	this->convert_type( p_info, CEXPRESSION_TYPE::STRING, this->p_operand2->type );
 	asm_line.set( CMNEMONIC_TYPE::POP, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "DE", COPERAND_TYPE::NONE, "" );

@@ -11,7 +11,7 @@
 #define __EXPRESSION_TAN_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_TAN: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_TAN() {

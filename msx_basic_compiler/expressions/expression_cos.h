@@ -11,7 +11,7 @@
 #define __EXPRESSION_COS_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_COS: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_COS() {

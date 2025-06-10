@@ -18,14 +18,14 @@ sub_bload_r_trans:
 		ld		ix, blib_bload
 		call	bios_calslt
 
-		; ŠJŽnƒAƒhƒŒƒX(DE) ‚ª HIMEM–¢–ž‚È‚ç END ˆ—‚Ö
+		; é–‹å§‹ã‚¢ãƒ‰ãƒ¬ã‚¹(DE) ãŒ HIMEMæœªæº€ãªã‚‰ END å‡¦ç†ã¸
 		push	hl
 		ld		hl, [work_himem]
 		ex		de, hl
 		rst		0x20				; CP HL, DE		CP start, himem
-		; start >= himem : ƒx[ƒRƒ“‚ÌƒR[ƒh‚ð‘‚«’×‚µ‚Ä‚¢‚È‚¢ê‡ nc
+		; start >= himem : ãƒ™ãƒ¼ã‚³ãƒ³ã®ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãæ½°ã—ã¦ã„ãªã„å ´åˆ nc
 		ret		nc
-		; start < himem : ƒx[ƒRƒ“‚ÌƒR[ƒh‚ð‘‚«’×‚µ‚Ä‚¢‚éê‡A‹­§I—¹
+		; start < himem : ãƒ™ãƒ¼ã‚³ãƒ³ã®ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãæ½°ã—ã¦ã„ã‚‹å ´åˆã€å¼·åˆ¶çµ‚äº†
         LD          HL, _basic_end
         CALL        bios_newstt
 _basic_end:

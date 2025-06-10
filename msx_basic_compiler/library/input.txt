@@ -1,46 +1,46 @@
-	PUSH		‘æ3ˆø”
-	PUSH		‘æ2ˆø”
-	PUSH		‘æ1ˆø”
+	PUSH		ç¬¬3å¼•æ•°
+	PUSH		ç¬¬2å¼•æ•°
+	PUSH		ç¬¬1å¼•æ•°
 	CALL		sub_input
-	DEFB		2,4,3,0			; ˆø”‚ÌŒ^‚ğ‘æ1ˆø”‚©‚ç‡‚É•À‚×‚éB2:®”, 3:•¶š—ñ, 4:’P¸“x, 8:”{¸“x, 0:I’[‹L†
+	DEFB		2,4,3,0			; å¼•æ•°ã®å‹ã‚’ç¬¬1å¼•æ•°ã‹ã‚‰é †ã«ä¸¦ã¹ã‚‹ã€‚2:æ•´æ•°, 3:æ–‡å­—åˆ—, 4:å˜ç²¾åº¦, 8:å€ç²¾åº¦, 0:çµ‚ç«¯è¨˜å·
 
-‚±‚ñ‚ÈŠ´‚¶‚ÅŒÄ‚Ôƒ‹[ƒ`ƒ“‚É‚·‚éB
-‚½‚¾‚µAINPUT <•¶š—ñ>; <ˆø”> ... ‚Ì <•¶š—ñ>; ‚Í‚±‚ê‚æ‚è‘O‚É puts ‚µ‚Ä‚¨‚­‚±‚ÆB
+ã“ã‚“ãªæ„Ÿã˜ã§å‘¼ã¶ãƒ«ãƒ¼ãƒãƒ³ã«ã™ã‚‹ã€‚
+ãŸã ã—ã€INPUT <æ–‡å­—åˆ—>; <å¼•æ•°> ... ã® <æ–‡å­—åˆ—>; ã¯ã“ã‚Œã‚ˆã‚Šå‰ã« puts ã—ã¦ãŠãã“ã¨ã€‚
 
 bios_qinlin		:= 0x00B4
 
 sub_input::
 		call	bios_qinlin
-		inc		hl				; “ü—ÍŒ‹‰Ê‚Ìƒoƒbƒtƒ@‚ÌƒAƒhƒŒƒX -1 ‚ª•Ô‚Á‚Ä‚­‚é‚Ì‚ÅA+1 ‚µ‚Ä‚¨‚­BF55Dh ‚Æ‚©‚ª•Ô‚Á‚Ä‚­‚éB
+		inc		hl				; å…¥åŠ›çµæœã®ãƒãƒƒãƒ•ã‚¡ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ -1 ãŒè¿”ã£ã¦ãã‚‹ã®ã§ã€+1 ã—ã¦ãŠãã€‚F55Dh ã¨ã‹ãŒè¿”ã£ã¦ãã‚‹ã€‚
 	_sub_input_string_loop:
 		ex		de, hl
-		pop		hl				; –ß‚èƒAƒhƒŒƒX = ˆø”‚ÌŒ^î•ñ‚ª“ü‚Á‚Ä‚éêŠ
+		pop		hl				; æˆ»ã‚Šã‚¢ãƒ‰ãƒ¬ã‚¹ = å¼•æ•°ã®å‹æƒ…å ±ãŒå…¥ã£ã¦ã‚‹å ´æ‰€
 		ld		a, [hl]
-		cp		a, 3			; •¶š—ñ‚©H
+		cp		a, 3			; æ–‡å­—åˆ—ã‹ï¼Ÿ
 		jr		z, _sub_input_string
 
-		; ”’l‚Ì“ü—Í
+		; æ•°å€¤ã®å…¥åŠ›
 	_sub_input_number:
 		ex		de, hl
-		push	de				; –ß‚èƒAƒhƒŒƒXi{ˆø”Œ^î•ñj‚ğ•Û‘¶
-		ld		a, [hl]			; Å‰‚Ì•¶š
-		call	bios_fin		; VAL()ŒÄ‚Ño‚µ
-		ld		a, d			; Œ…”‚ğ A ‚ÉƒRƒs[
-		or		a, a			; Œ…” = 0 ‚È‚ç Redo from start
+		push	de				; æˆ»ã‚Šã‚¢ãƒ‰ãƒ¬ã‚¹ï¼ˆï¼‹å¼•æ•°å‹æƒ…å ±ï¼‰ã‚’ä¿å­˜
+		ld		a, [hl]			; æœ€åˆã®æ–‡å­—
+		call	bios_fin		; VAL()å‘¼ã³å‡ºã—
+		ld		a, d			; æ¡æ•°ã‚’ A ã«ã‚³ãƒ”ãƒ¼
+		or		a, a			; æ¡æ•° = 0 ãªã‚‰ Redo from start
 		jr		z, _sub_input_redo_from_start
 
-		; •ÏŠ·‚µ‚½”’l•”•ª‚ğ“Ç‚İ”ò‚Î‚·
+		; å¤‰æ›ã—ãŸæ•°å€¤éƒ¨åˆ†ã‚’èª­ã¿é£›ã°ã™
 		call	_sub_input_skip_white
-		ld		a, [hl]			; Ÿ‚Ì•¶š‚ğƒ`ƒFƒbƒN
+		ld		a, [hl]			; æ¬¡ã®æ–‡å­—ã‚’ãƒã‚§ãƒƒã‚¯
 		or		a, a
 		jr		z, _sub_input_number_branch
 		cp		a, ','
 		jr		z, _sub_input_number_branch
 		jr		_sub_input_redo_from_start
 
-		; ˆø”‚ÌŒ^‚É•ÏŠ·
+		; å¼•æ•°ã®å‹ã«å¤‰æ›
 	_sub_input_number_branch:
-		pop		de				; –ß‚èƒAƒhƒŒƒXi{ˆø”Œ^î•ñj‚ğ•œ‹A
+		pop		de				; æˆ»ã‚Šã‚¢ãƒ‰ãƒ¬ã‚¹ï¼ˆï¼‹å¼•æ•°å‹æƒ…å ±ï¼‰ã‚’å¾©å¸°
 		ld		a, [de]
 		inc		de
 		cp		a, 4
@@ -49,93 +49,93 @@ sub_input::
 		jr		z, _sub_input_single_real
 		jr		nc, sub_input_double_real
 
-		; ®”Œ^
+		; æ•´æ•°å‹
 		call	bios_frcint
-		pop		de				; “ü—Í•¶š—ñˆÊ’u•œ‹A
-		pop		bc				; –ß‚èƒAƒhƒŒƒX•œ‹A
-		pop		hl				; “]‘—æ‚Ì•Ï”‚ÌƒAƒhƒŒƒXæ“¾
-		push	bc				; –ß‚èƒAƒhƒŒƒX•Û‘¶
-		push	de				; “ü—Í•¶š—ñˆÊ’u•Û‘¶
+		pop		de				; å…¥åŠ›æ–‡å­—åˆ—ä½ç½®å¾©å¸°
+		pop		bc				; æˆ»ã‚Šã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å¸°
+		pop		hl				; è»¢é€å…ˆã®å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹å–å¾—
+		push	bc				; æˆ»ã‚Šã‚¢ãƒ‰ãƒ¬ã‚¹ä¿å­˜
+		push	de				; å…¥åŠ›æ–‡å­—åˆ—ä½ç½®ä¿å­˜
 		ld		de, [work_dac + 2]
 		ld		[hl], e
 		inc		hl
-		ld		[hl], d			; ®”•Ï”‚ÖŠi”[
-		pop		hl				; “ü—Í•¶š—ñˆÊ’u•œ‹A
+		ld		[hl], d			; æ•´æ•°å¤‰æ•°ã¸æ ¼ç´
+		pop		hl				; å…¥åŠ›æ–‡å­—åˆ—ä½ç½®å¾©å¸°
 		jr		_check_next_data
 
-		; ’P¸“xÀ”
+		; å˜ç²¾åº¦å®Ÿæ•°
 	_sub_input_single_real:
 		call	bios_frcsng
-		pop		hl				; “ü—Í•¶š—ñˆÊ’u•œ‹A
-		pop		bc				; –ß‚èƒAƒhƒŒƒX•œ‹A
-		pop		de				; “]‘—æ‚Ì•Ï”‚ÌƒAƒhƒŒƒXæ“¾
-		push	bc				; –ß‚èƒAƒhƒŒƒX•Û‘¶
-		push	hl				; “ü—Í•¶š—ñˆÊ’u•Û‘¶
+		pop		hl				; å…¥åŠ›æ–‡å­—åˆ—ä½ç½®å¾©å¸°
+		pop		bc				; æˆ»ã‚Šã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å¸°
+		pop		de				; è»¢é€å…ˆã®å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹å–å¾—
+		push	bc				; æˆ»ã‚Šã‚¢ãƒ‰ãƒ¬ã‚¹ä¿å­˜
+		push	hl				; å…¥åŠ›æ–‡å­—åˆ—ä½ç½®ä¿å­˜
 		ld		hl, work_dac
 		ld		bc, 4
 		ldir
-		pop		hl				; “ü—Í•¶š—ñˆÊ’u•œ‹A
+		pop		hl				; å…¥åŠ›æ–‡å­—åˆ—ä½ç½®å¾©å¸°
 		jr		_check_next_data
 
-		; ”{¸“xÀ”
+		; å€ç²¾åº¦å®Ÿæ•°
 	sub_input_double_real:
 		call	bios_frcdbl
-		pop		hl				; “ü—Í•¶š—ñˆÊ’u•œ‹A
-		pop		bc				; –ß‚èƒAƒhƒŒƒX•œ‹A
-		pop		de				; “]‘—æ‚Ì•Ï”‚ÌƒAƒhƒŒƒXæ“¾
-		push	bc				; –ß‚èƒAƒhƒŒƒX•Û‘¶
-		push	hl				; “ü—Í•¶š—ñˆÊ’u•Û‘¶
+		pop		hl				; å…¥åŠ›æ–‡å­—åˆ—ä½ç½®å¾©å¸°
+		pop		bc				; æˆ»ã‚Šã‚¢ãƒ‰ãƒ¬ã‚¹å¾©å¸°
+		pop		de				; è»¢é€å…ˆã®å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹å–å¾—
+		push	bc				; æˆ»ã‚Šã‚¢ãƒ‰ãƒ¬ã‚¹ä¿å­˜
+		push	hl				; å…¥åŠ›æ–‡å­—åˆ—ä½ç½®ä¿å­˜
 		ld		hl, work_dac
 		ld		bc, 8
 		ldir
-		pop		hl				; “ü—Í•¶š—ñˆÊ’u•œ‹A
+		pop		hl				; å…¥åŠ›æ–‡å­—åˆ—ä½ç½®å¾©å¸°
 		jr		_check_next_data
 
-		; •¶š—ñ‚Ì“ü—Í
+		; æ–‡å­—åˆ—ã®å…¥åŠ›
 	_sub_input_string:
-		inc		hl				; ˆø”Œ^î•ñ‚ğ1‚ÂÁ”ï
-		pop		bc				; ˆø”‚ğ1‚Âæ“¾
-		push	hl				; –ß‚èƒAƒhƒŒƒX‚ğ•Û‘¶
+		inc		hl				; å¼•æ•°å‹æƒ…å ±ã‚’1ã¤æ¶ˆè²»
+		pop		bc				; å¼•æ•°ã‚’1ã¤å–å¾—
+		push	hl				; æˆ»ã‚Šã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ä¿å­˜
 		ex		de, hl
 		call	_sub_input_skip_white
-		ld		a, [hl]			; “ü—Í•¶š—ñ‚Ì“ª‚ğ“¾‚é
-		cp		a, '"'			; æ“ª‚Í " ‚©H
+		ld		a, [hl]			; å…¥åŠ›æ–‡å­—åˆ—ã®é ­ã‚’å¾—ã‚‹
+		cp		a, '"'			; å…ˆé ­ã¯ " ã‹ï¼Ÿ
 		jr		z, _get_quote_string
 
-		; " " ‚ÅˆÍ‚Ü‚ê‚Ä‚¢‚È‚¢•¶š—ñ‚ğæ“¾
+		; " " ã§å›²ã¾ã‚Œã¦ã„ãªã„æ–‡å­—åˆ—ã‚’å–å¾—
 	_get_normal_string:
-		push	bc				; ˆø”‚ğˆê’U•Û‘¶
+		push	bc				; å¼•æ•°ã‚’ä¸€æ—¦ä¿å­˜
 		ld		e, l
-		ld		d, h			; æ“ªˆÊ’u‚ğŠo‚¦‚Ä‚¨‚­
-		ld		c, 0			; ’·‚³ƒJƒEƒ“ƒ^ƒNƒŠƒA
+		ld		d, h			; å…ˆé ­ä½ç½®ã‚’è¦šãˆã¦ãŠã
+		ld		c, 0			; é•·ã•ã‚«ã‚¦ãƒ³ã‚¿ã‚¯ãƒªã‚¢
 	_get_normal_string_loop:
 		ld		a, [hl]
-		or		a, a			; ’[––•¶š‚©H
+		or		a, a			; ç«¯æœ«æ–‡å­—ã‹ï¼Ÿ
 		jr		z, _get_string_loop_exit
-		cp		a, ','			; ’[––•¶š‚©H
+		cp		a, ','			; ç«¯æœ«æ–‡å­—ã‹ï¼Ÿ
 		jr		z, _get_string_loop_exit
 		inc		hl
 		inc		c
 		jr		_get_normal_string_loop
 
-		; " " ‚ÅˆÍ‚Ü‚ê‚½•¶š—ñ‚ğæ“¾
+		; " " ã§å›²ã¾ã‚ŒãŸæ–‡å­—åˆ—ã‚’å–å¾—
 	_get_quote_string:
-		push	bc				; ˆø”‚ğˆê’U•Û‘¶
-		inc		hl				; æ“ª‚Ì " ‚ğÁ”ï
+		push	bc				; å¼•æ•°ã‚’ä¸€æ—¦ä¿å­˜
+		inc		hl				; å…ˆé ­ã® " ã‚’æ¶ˆè²»
 		ld		e, l
-		ld		d, h			; æ“ªˆÊ’u‚ğŠo‚¦‚Ä‚¨‚­
-		ld		c, 0			; ’·‚³ƒJƒEƒ“ƒ^ƒNƒŠƒA
+		ld		d, h			; å…ˆé ­ä½ç½®ã‚’è¦šãˆã¦ãŠã
+		ld		c, 0			; é•·ã•ã‚«ã‚¦ãƒ³ã‚¿ã‚¯ãƒªã‚¢
 	_get_quote_string_loop:
 		ld		a, [hl]
-		or		a, a			; ’[––•¶š‚©H
+		or		a, a			; ç«¯æœ«æ–‡å­—ã‹ï¼Ÿ
 		jr		z, _get_string_loop_exit
-		cp		a, '"'			; ’[––•¶š‚©H
+		cp		a, '"'			; ç«¯æœ«æ–‡å­—ã‹ï¼Ÿ
 		inc		hl
 		jr		z, _get_string_loop_exit
 		inc		c
 		jr		_get_quote_string_loop
 
-		; •¶š—ñ‚Ì—Ìˆæ‚ğŠm•Û‚·‚é
+		; æ–‡å­—åˆ—ã®é ˜åŸŸã‚’ç¢ºä¿ã™ã‚‹
 	_get_string_loop_exit:
 		ld		a, c
 		or		a, a
@@ -147,22 +147,22 @@ sub_input::
 		push	hl
 		inc		hl
 		ex		de, hl
-		ldir					; •¶š—ñ‚ğƒRƒs[
+		ldir					; æ–‡å­—åˆ—ã‚’ã‚³ãƒ”ãƒ¼
 		pop		bc
 		jr		_sub_input_copy_string
 
-		; •¶š—ñ‚ª’·‚³ 0 ‚¾‚Á‚½ê‡Šm•Û‚à•K—v‚È‚¢
+		; æ–‡å­—åˆ—ãŒé•·ã• 0 ã ã£ãŸå ´åˆç¢ºä¿ã‚‚å¿…è¦ãªã„
 	_get_quote_string_zero:
 		ld		bc, str_0
 	_sub_input_copy_string:
-		pop		de				; ˆø”‚Ì•Ï”ƒAƒhƒŒƒX‚ğæ“¾
-		ex		de, hl			; DE = ƒ†[ƒU[‚ª“ü—Í‚µ‚½•¶š—ñ‚ÌŒ»İQÆˆÊ’u, HL = ˆø”‚Ì•Ï”‚ÌƒAƒhƒŒƒX
+		pop		de				; å¼•æ•°ã®å¤‰æ•°ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—
+		ex		de, hl			; DE = ãƒ¦ãƒ¼ã‚¶ãƒ¼ãŒå…¥åŠ›ã—ãŸæ–‡å­—åˆ—ã®ç¾åœ¨å‚ç…§ä½ç½®, HL = å¼•æ•°ã®å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 		ld		[hl], c
 		inc		hl
 		ld		[hl], b
 		ex		de, hl
 
-		; Ÿ‚Ì“ü—Í•¶š—ñ‚Ì‘¶İ‚ğŠm”F‚·‚é
+		; æ¬¡ã®å…¥åŠ›æ–‡å­—åˆ—ã®å­˜åœ¨ã‚’ç¢ºèªã™ã‚‹
 	_check_next_data:
 		ld		a, [hl]
 		cp		'"'
@@ -174,23 +174,23 @@ sub_input::
 		or		a, a
 		jr		z, _check_next_parameter
 
-		; Ÿ‚Ì“ü—Í•¶š—ñ‚ª‘¶İ‚·‚éó‘Ô‚ÅAˆø”‚Ì•Ï”‚ğŠm”F‚·‚é
+		; æ¬¡ã®å…¥åŠ›æ–‡å­—åˆ—ãŒå­˜åœ¨ã™ã‚‹çŠ¶æ…‹ã§ã€å¼•æ•°ã®å¤‰æ•°ã‚’ç¢ºèªã™ã‚‹
 		pop		de
 		push	de
 		ld		a, [de]
 		or		a, a
 		jr		z, _sub_input_extra_ignored
 
-		inc		hl				; ‚±‚±‚É‚­‚é‚Ì‚Í "," ‚Ìê‡B"," ‚ğ“Ç‚İ”ò‚Î‚·B
+		inc		hl				; ã“ã“ã«ãã‚‹ã®ã¯ "," ã®å ´åˆã€‚"," ã‚’èª­ã¿é£›ã°ã™ã€‚
 		jp		_sub_input_string_loop
 
-		; Ÿ‚Ì“ü—Í•¶š‚ª‘¶İ‚µ‚È‚¢ó‘Ô‚ÅAŸ‚Ìˆø”‚Ì‘¶İ‚ğŠm”F‚·‚é
+		; æ¬¡ã®å…¥åŠ›æ–‡å­—ãŒå­˜åœ¨ã—ãªã„çŠ¶æ…‹ã§ã€æ¬¡ã®å¼•æ•°ã®å­˜åœ¨ã‚’ç¢ºèªã™ã‚‹
 	_check_next_parameter:
 		pop		hl
 		push	hl
 		ld		a, [hl]
 		or		a, a
-		ret		z				; “ü—Í•¶š‚àAˆø”‚à‘¶İ‚µ‚È‚¢‚Ì‚Å–ß‚é
+		ret		z				; å…¥åŠ›æ–‡å­—ã‚‚ã€å¼•æ•°ã‚‚å­˜åœ¨ã—ãªã„ã®ã§æˆ»ã‚‹
 	_sub_input_retype:
 		ld		a, '?'
 		rst		0x18

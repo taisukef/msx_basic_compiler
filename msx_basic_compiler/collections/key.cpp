@@ -8,14 +8,14 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  KEY �t�@���N�V�����L�[����
+//  KEY ファンクションキー制御
 bool CKEY::exec( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 	CEXPRESSION exp;
 	int line_no = p_info->list.get_line_no();
 	std::vector< CBASIC_WORD >::const_iterator p_position;
 
-	//	KEY(n) {ON|OFF|STOP} �� ON KEY �̂Ƃ���ŏ�������̂ŁA�����̑ΏۊO�̖��߂�������߂���悤�Ɋo���Ă���
+	//	KEY(n) {ON|OFF|STOP} は ON KEY のところで処理するので、ここの対象外の命令だったら戻せるように覚えておく
 	p_position = p_info->list.p_position;
 	if( p_info->list.p_position->s_word != "KEY" ) {
 		return false;
@@ -27,7 +27,7 @@ bool CKEY::exec( CCOMPILE_INFO *p_info ) {
 	}
 
 	if( p_info->list.p_position->s_word == "(" ) {
-		//	KEY(n) �͂����̑ΏۊO�B
+		//	KEY(n) はここの対象外。
 		p_info->list.p_position = p_position;
 		return false;
 	}

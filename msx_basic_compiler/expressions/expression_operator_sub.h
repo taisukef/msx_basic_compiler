@@ -11,7 +11,7 @@
 #define __CEXPRESSION_OPERATOR_SUB_H__
 
 // --------------------------------------------------------------------
-//	-(Œ¸ŽZ)
+//	-(æ¸›ç®—)
 class CEXPRESSION_OPERATOR_SUB: public CEXPRESSION_NODE {
 public:
 	CEXPRESSION_NODE *p_left;

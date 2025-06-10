@@ -11,7 +11,7 @@
 #define __EXPRESSION_LEN_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_LEN: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_LEN() {

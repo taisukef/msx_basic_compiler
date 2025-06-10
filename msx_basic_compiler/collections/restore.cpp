@@ -7,7 +7,7 @@
 #include "restore.h"
 
 // --------------------------------------------------------------------
-//  RESTORE [s”Ô†]
+//  RESTORE [è¡Œç•ªå·]
 bool CRESTORE::exec( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 	int line_no = p_info->list.get_line_no();
@@ -21,9 +21,9 @@ bool CRESTORE::exec( CCOMPILE_INFO *p_info ) {
 	p_info->list.p_position++;
 
 	if( p_info->list.is_command_end() ) {
-		//	s”Ô†‚ªÈ—ª‚³‚ê‚Ä‚¢‚éê‡
+		//	è¡Œç•ªå·ãŒçœç•¥ã•ã‚Œã¦ã„ã‚‹å ´åˆ
 		if( p_info->list.data_line_no.size() != 0 ) {
-			//	ƒf[ƒ^‚ª‚ ‚éê‡‚É‚Ì‚ÝƒR[ƒh‚ð¶¬‚·‚é
+			//	ãƒ‡ãƒ¼ã‚¿ãŒã‚ã‚‹å ´åˆã«ã®ã¿ã‚³ãƒ¼ãƒ‰ã‚’ç”Ÿæˆã™ã‚‹
 			s_label = "data_" + std::to_string( p_info->list.data_line_no[0] );
 			asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "HL", COPERAND_TYPE::CONSTANT, s_label );
 			p_info->assembler_list.body.push_back( asm_line );
@@ -33,11 +33,11 @@ bool CRESTORE::exec( CCOMPILE_INFO *p_info ) {
 		return true;
 	}
 	if( p_info->list.p_position->type != CBASIC_WORD_TYPE::LINE_NO || p_info->list.p_position->s_word[0] == '*' ) {
-		//	s”Ô†‚Å–³‚¢‰½‚©‚ªŽw’è‚³‚ê‚Ä‚¢‚éê‡
+		//	è¡Œç•ªå·ã§ç„¡ã„ä½•ã‹ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹å ´åˆ
 		p_info->errors.add( SYNTAX_ERROR, line_no );
 		return true;
 	}
-	//	s”Ô†‚ªŽw’è‚³‚ê‚Ä‚¢‚éê‡
+	//	è¡Œç•ªå·ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹å ´åˆ
 	target_line_no = std::stoi( p_info->list.p_position->s_word );
 	target_is_found = false;
 	p_info->list.p_position++;
@@ -49,7 +49,7 @@ bool CRESTORE::exec( CCOMPILE_INFO *p_info ) {
 		}
 	}
 	if( !target_is_found ) {
-		//	s”Ô†‚ÌŽw’è‚ªÅŒã‚Ìƒf[ƒ^‚Ìs‚æ‚è‘å‚«‚¢’l
+		//	è¡Œç•ªå·ã®æŒ‡å®šãŒæœ€å¾Œã®ãƒ‡ãƒ¼ã‚¿ã®è¡Œã‚ˆã‚Šå¤§ãã„å€¤
 		p_info->errors.add( UNDIFINED_LINE_NUMBER, line_no );
 		return true;
 	}

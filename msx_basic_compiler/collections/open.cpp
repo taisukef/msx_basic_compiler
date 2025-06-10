@@ -8,7 +8,7 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  OPEN <ƒtƒ@ƒCƒ‹–¼> [FOR {INPUT|OUTPUT|APPEND}] AS #<ƒtƒ@ƒCƒ‹”Ô†> [LEN=<ƒŒƒR[ƒh’·>]
+//  OPEN <ãƒ•ã‚¡ã‚¤ãƒ«å> [FOR {INPUT|OUTPUT|APPEND}] AS #<ãƒ•ã‚¡ã‚¤ãƒ«ç•ªå·> [LEN=<ãƒ¬ã‚³ãƒ¼ãƒ‰é•·>]
 bool COPEN::exec( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 	int line_no = p_info->list.get_line_no();
@@ -20,7 +20,7 @@ bool COPEN::exec( CCOMPILE_INFO *p_info ) {
 	p_info->list.p_position++;
 
 	CEXPRESSION exp;
-	//	‘æ1ˆø” <ƒtƒ@ƒCƒ‹–¼>
+	//	ç¬¬1å¼•æ•° <ãƒ•ã‚¡ã‚¤ãƒ«å>
 	p_info->use_file_access = true;
 	if( exp.compile( p_info, CEXPRESSION_TYPE::STRING ) ) {
 		asm_line.set( "PUSH", "", "HL" );
@@ -35,7 +35,7 @@ bool COPEN::exec( CCOMPILE_INFO *p_info ) {
 		p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 		return true;
 	}
-	//	FOR `
+	//	FOR ï½
 	if( p_info->list.p_position->s_word == "FOR" ) {
 		p_info->list.p_position++;
 		if( p_info->list.is_command_end() ) {
@@ -68,7 +68,7 @@ bool COPEN::exec( CCOMPILE_INFO *p_info ) {
 		return true;
 	}
 	p_info->list.p_position++;
-	//	‘æ2ˆø” #<ƒtƒ@ƒCƒ‹”Ô†>
+	//	ç¬¬2å¼•æ•° #<ãƒ•ã‚¡ã‚¤ãƒ«ç•ªå·>
 	if( p_info->list.is_command_end() || p_info->list.p_position->s_word != "#" ) {
 		p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 		return true;
@@ -80,7 +80,7 @@ bool COPEN::exec( CCOMPILE_INFO *p_info ) {
 	}
 	exp.release();
 	if( for_type != 3 ) {
-		//	FOR INPUT, OUTPUT, APPEND ‚Ìê‡‚Í‚±‚±‚ÅŠm’è
+		//	FOR INPUT, OUTPUT, APPEND ã®å ´åˆã¯ã“ã“ã§ç¢ºå®š
 		asm_line.set( "EX", "", "DE", "HL" );
 		p_info->assembler_list.body.push_back( asm_line );
 		asm_line.set( "POP", "", "HL" );
@@ -104,9 +104,9 @@ bool COPEN::exec( CCOMPILE_INFO *p_info ) {
 			return true;
 		}
 	}
-	//	FOR‚Ìw’è‚ª–³‚¢ê‡‚ÍA#n ‚ÌŒã‚É LEN ‚Ìw’è‚ª‚ ‚é‚©Šm”F‚·‚é
+	//	FORã®æŒ‡å®šãŒç„¡ã„å ´åˆã¯ã€#n ã®å¾Œã« LEN ã®æŒ‡å®šãŒã‚ã‚‹ã‹ç¢ºèªã™ã‚‹
 	if( p_info->list.is_command_end() ) {
-		//	AS #n ‚ÅI‚í‚Á‚Ä‚¢‚é‚Ì‚Å LEN = 256 ‚Æ”»’f‚·‚é
+		//	AS #n ã§çµ‚ã‚ã£ã¦ã„ã‚‹ã®ã§ LEN = 256 ã¨åˆ¤æ–­ã™ã‚‹
 		asm_line.set( "EX", "", "DE", "HL" );
 		p_info->assembler_list.body.push_back( asm_line );
 		asm_line.set( "POP", "", "HL" );
@@ -115,7 +115,7 @@ bool COPEN::exec( CCOMPILE_INFO *p_info ) {
 		p_info->assembler_list.body.push_back( asm_line );
 	}
 	else {
-		//	LEN = n ‚ª‚ ‚é‚©ƒ`ƒFƒbƒN‚·‚é
+		//	LEN = n ãŒã‚ã‚‹ã‹ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 		if( p_info->list.p_position->s_word != "LEN" ) {
 			p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 			return true;

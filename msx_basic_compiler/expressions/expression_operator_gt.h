@@ -11,7 +11,7 @@
 #define __CEXPRESSION_OPERATOR_GT_H__
 
 // --------------------------------------------------------------------
-//	>(ëÂÇ»ÇË)
+//	>(Â§ß„Å™„Çä)
 class CEXPRESSION_OPERATOR_GT: public CEXPRESSION_NODE {
 public:
 	CEXPRESSION_NODE *p_left;

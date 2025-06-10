@@ -11,7 +11,7 @@
 #define __CEXPRESSION_OPERATOR_MOD_H__
 
 // --------------------------------------------------------------------
-//	<(¬‚È‚è)
+//	<(å°ãªã‚Š)
 class CEXPRESSION_OPERATOR_MOD: public CEXPRESSION_NODE {
 public:
 	CEXPRESSION_NODE *p_left;

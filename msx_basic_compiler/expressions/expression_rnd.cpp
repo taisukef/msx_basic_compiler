@@ -26,7 +26,7 @@ CEXPRESSION_NODE* CEXPRESSION_RND::optimization( CCOMPILE_INFO *p_info ) {
 void CEXPRESSION_RND::compile( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 
-	//	æ‚Éˆø”‚ğˆ—
+	//	å…ˆã«å¼•æ•°ã‚’å‡¦ç†
 	if( this->p_operand == nullptr ) {
 		return;
 	}

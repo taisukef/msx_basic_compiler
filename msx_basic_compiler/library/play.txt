@@ -1,48 +1,48 @@
-MML�̎d�l
+MMLの仕様
 ===============================================================================
 
-���K
-	C,D,E,F,G,A,B ���h���~�t�@�\���V�ɑΉ�����B
-	+ �܂��� # ���E�ׂɋL������ƁA�����グ�B
-	- ���E�ׂɋL������ƁA���������B
+音階
+	C,D,E,F,G,A,B がドレミファソラシに対応する。
+	+ または # を右隣に記入すると、半音上げ。
+	- を右隣に記入すると、半音下げ。
 
-	Nn �� n �ŉ��K�ԍ��ɂ��w����ł���B
+	Nn の n で音階番号による指定もできる。
 
-�x��
-	R ���x���ɑΉ�����B
+休符
+	R が休符に対応する。
 
-����
-	Ln �� n���������w�肷��BLn �ȍ~�̉��K�E�x���́A���̉����ɂȂ�B
-	���K�̌�� An �̂悤�ɉ�����t����ƁA���̉������s���|�C���g�ł��̉����ɂȂ�B
-	�x���̌�� Rn �̂悤�ɉ�����t����ƁA���̋x�������ۂ�|�C���g�ł��̉����ɂȂ�B
-	n. �ŕt�_���w��ł���B������ 1.5�{�ɂȂ�B����͉��K�E�x�������l�ł���B
+音長
+	Ln で n分音符を指定する。Ln 以降の音階・休符は、その音長になる。
+	音階の後に An のように音長を付けると、その音だけピンポイントでその音長になる。
+	休符の後に Rn のように音長を付けると、その休符だけぽんポイントでその音長になる。
+	n. で付点を指定できる。音長が 1.5倍になる。これは音階・休符も同様である。
 
-	MSX-BASIC �ł́ALn �ɂ� . (�t�_) �͕t�����Ȃ��B������ MSX-BACON �ł͕t������B
+	MSX-BASIC では、Ln には . (付点) は付けられない。しかし MSX-BACON では付けられる。
 
-���F
-	@n �� ���F�ԍ�n �ɐ؂�ւ���B
+音色
+	@n で 音色番号n に切り替える。
 
-	MSX-BASIC �� PLAY���ł͎g���Ȃ��B
-	MSX-MUSIC �� PLAY #2�ł͎g����B
-	MSX-MIDI �� PLAY #1�ł̓v���O�����`�F���W�� MIDI�R�}���h�𑗐M����B
+	MSX-BASIC の PLAY文では使えない。
+	MSX-MUSIC の PLAY #2では使える。
+	MSX-MIDI の PLAY #1ではプログラムチェンジの MIDIコマンドを送信する。
 
-����
-	Vn �ŉ���n ���w�肷��B
-	V0 �ŉ����o���AV15 �ōő剹�ʂɂȂ�B
+音量
+	Vn で音量n を指定する。
+	V0 で音が出ず、V15 で最大音量になる。
 
-	MSX-MUSIC, MSX-MIDI �ł́A���F���V�e�B(���Ղ�@������)�Ƃ��đ��M�����炵���B
-	MIDI�̉��ʂ́A@V �� 0�`127 �Ŏw��ł���B
+	MSX-MUSIC, MSX-MIDI では、ヴェロシティ(鍵盤を叩く強さ)として送信されるらしい。
+	MIDIの音量は、@V で 0～127 で指定できる。
 
-������
-	Qn �ŉ�����n ���w�肷��B
-	Q1�`Q8 �Ŏw�肷��B
+音長比
+	Qn で音長比n を指定する。
+	Q1～Q8 で指定する。
 
-	MSX-BASIC �� PLAY���ł͎󂯕t���邪�Ⴂ��������Ȃ��B
-	MSX-MUSIC/MSX-MIDI �ł́AKEY ON/KEY RELEASE/KEY OFF �̔䗦�w��B
-	Q1���ƁA������ KEY RELEASE����AQ8���ƁAKEY RELEASE��KEY OFF�������B
+	MSX-BASIC の PLAY文では受け付けるが違いが分からない。
+	MSX-MUSIC/MSX-MIDI では、KEY ON/KEY RELEASE/KEY OFF の比率指定。
+	Q1だと、すぐに KEY RELEASEする、Q8だと、KEY RELEASEとKEY OFFが同時。
 
-�I�N�^�[�u
-	On �ŃI�N�^�[�un ���w�肷��B
-	> ��1�I�N�^�[�u�グ��B
-	< ��1�I�N�^�[�u������B
+オクターブ
+	On でオクターブn を指定する。
+	> で1オクターブ上げる。
+	< で1オクターブ下げる。
 

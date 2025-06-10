@@ -8,7 +8,7 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  PUT #n, ƒŒƒR[ƒh”Ô†
+//  PUT #n, ãƒ¬ã‚³ãƒ¼ãƒ‰ç•ªå·
 //
 bool CPUT::exec( CCOMPILE_INFO *p_info ) {
 	CEXPRESSION exp;
@@ -21,7 +21,7 @@ bool CPUT::exec( CCOMPILE_INFO *p_info ) {
 	p_info->list.p_position++;
 
 	if( p_info->list.is_command_end() || p_info->list.p_position->s_word != "#" ) {
-		//	PUT SPRITE “™•Ê‚Ì–½—ß‚©‚à‚µ‚ê‚È‚¢‚Ì‚ÅA‚±‚Ì’PŒê‚ğÁ”ï‚µ‚È‚¢BPUT ‚àŒ©‚È‚©‚Á‚½‚±‚Æ‚É‚·‚éB
+		//	PUT SPRITE ç­‰åˆ¥ã®å‘½ä»¤ã‹ã‚‚ã—ã‚Œãªã„ã®ã§ã€ã“ã®å˜èªã‚’æ¶ˆè²»ã—ãªã„ã€‚PUT ã‚‚è¦‹ãªã‹ã£ãŸã“ã¨ã«ã™ã‚‹ã€‚
 		p_info->list.p_position--;
 		return false;
 	}
@@ -30,7 +30,7 @@ bool CPUT::exec( CCOMPILE_INFO *p_info ) {
 	p_info->assembler_list.activate_file_number();
 	p_info->use_file_access = true;
 
-	//	#n ‚Ì n
+	//	#n ã® n
 	if( !exp.compile( p_info ) ) {
 		p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 		return true;
@@ -46,7 +46,7 @@ bool CPUT::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 
-	//	ƒŒƒR[ƒh”Ô†
+	//	ãƒ¬ã‚³ãƒ¼ãƒ‰ç•ªå·
 	if( !exp.compile( p_info ) ) {
 		p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 		return true;

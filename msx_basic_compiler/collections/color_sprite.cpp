@@ -8,8 +8,8 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  COLOR SPRITE( <ƒXƒvƒ‰ƒCƒgƒvƒŒ[ƒ“”Ô†> ) = <F>
-//  COLOR SPRITE$( <ƒXƒvƒ‰ƒCƒgƒvƒŒ[ƒ“”Ô†> ) = <F>
+//  COLOR SPRITE( <ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒ—ãƒ¬ãƒ¼ãƒ³ç•ªå·> ) = <è‰²>
+//  COLOR SPRITE$( <ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒ—ãƒ¬ãƒ¼ãƒ³ç•ªå·> ) = <è‰²>
 bool CCOLOR_SPRITE::exec( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 	CEXPRESSION exp;
@@ -51,7 +51,7 @@ bool CCOLOR_SPRITE::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 
-	//	ƒXƒvƒ‰ƒCƒgƒvƒŒ[ƒ“”Ô†
+	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒ—ãƒ¬ãƒ¼ãƒ³ç•ªå·
 	if( exp.compile( p_info ) ) {
 		asm_line.set( "PUSH", "", "HL" );
 		p_info->assembler_list.body.push_back( asm_line );
@@ -76,10 +76,10 @@ bool CCOLOR_SPRITE::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 
-	//	F
+	//	è‰²
 	if( is_string ) {
 		if( exp.compile( p_info, CEXPRESSION_TYPE::STRING ) ) {
-			//	F•¶Žš—ñ
+			//	è‰²æ–‡å­—åˆ—
 			p_info->assembler_list.activate_free_string();
 			asm_line.set( "POP", "", "DE" );
 			p_info->assembler_list.body.push_back( asm_line );
@@ -104,7 +104,7 @@ bool CCOLOR_SPRITE::exec( CCOMPILE_INFO *p_info ) {
 	}
 	else {
 		if( exp.compile( p_info ) ) {
-			//	F
+			//	è‰²
 			asm_line.set( "POP", "", "DE" );
 			p_info->assembler_list.body.push_back( asm_line );
 			asm_line.set( "LD", "", "A", "E" );

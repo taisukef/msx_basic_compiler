@@ -28,7 +28,7 @@ CEXPRESSION_NODE* CEXPRESSION_POINT::optimization( CCOMPILE_INFO *p_info ) {
 		delete this->p_operand2;
 		this->p_operand2 = p;
 	}
-	//	POINTŠÖ”‚ÍÅ“K‰»‚ÅÁ–Å‚·‚é‚±‚Æ‚Í‚È‚¢
+	//	POINTé–¢æ•°ã¯æœ€é©åŒ–ã§æ¶ˆæ»…ã™ã‚‹ã“ã¨ã¯ãªã„
 	return nullptr;
 }
 
@@ -42,16 +42,16 @@ void CEXPRESSION_POINT::compile( CCOMPILE_INFO *p_info ) {
 
 	p_info->assembler_list.add_label( "blib_point", "0x040db" );
 
-	//	XÀ•W
+	//	Xåº§æ¨™
 	this->p_operand1->compile( p_info );
 	this->p_operand1->convert_type( p_info, CEXPRESSION_TYPE::INTEGER, this->p_operand1->type );
-	asm_line.set( "PUSH", "", "HL" );		//	XÀ•W‚ğ push
+	asm_line.set( "PUSH", "", "HL" );		//	Xåº§æ¨™ã‚’ push
 	p_info->assembler_list.body.push_back( asm_line );
 
-	//	YÀ•W
+	//	Yåº§æ¨™
 	this->p_operand2->compile( p_info );
 	this->p_operand2->convert_type( p_info, CEXPRESSION_TYPE::INTEGER, this->p_operand2->type );
-	asm_line.set( "POP", "", "DE" );		//	XÀ•W‚ğ pop
+	asm_line.set( "POP", "", "DE" );		//	Xåº§æ¨™ã‚’ pop
 	p_info->assembler_list.body.push_back( asm_line );
 
 	asm_line.set( "LD", "", "IX", "blib_point" );

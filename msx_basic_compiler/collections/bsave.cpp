@@ -8,7 +8,7 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  BSAVE "ƒtƒ@ƒCƒ‹–¼" [,S]
+//  BSAVE "ãƒ•ã‚¡ã‚¤ãƒ«å" [,S]
 bool CBSAVE::exec( CCOMPILE_INFO *p_info ) {
 	CEXPRESSION exp;
 	CASSEMBLER_LINE asm_line;
@@ -22,9 +22,9 @@ bool CBSAVE::exec( CCOMPILE_INFO *p_info ) {
 
 	p_info->list.p_position++;
 
-	//	‘æ1ˆø” ƒtƒ@ƒCƒ‹–¼
+	//	ç¬¬1å¼•æ•° ãƒ•ã‚¡ã‚¤ãƒ«å
 	if( exp.compile( p_info, CEXPRESSION_TYPE::STRING ) ) {
-		//	BSAVE "ƒtƒ@ƒCƒ‹–¼" ‚Ì "ƒtƒ@ƒCƒ‹–¼" ‚ÌƒAƒhƒŒƒX‚ğ push
+		//	BSAVE "ãƒ•ã‚¡ã‚¤ãƒ«å" ã® "ãƒ•ã‚¡ã‚¤ãƒ«å" ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ push
 		asm_line.set( CMNEMONIC_TYPE::PUSH, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "HL", COPERAND_TYPE::NONE, "" );
 		p_info->assembler_list.body.push_back( asm_line );
 		exp.release();
@@ -42,7 +42,7 @@ bool CBSAVE::exec( CCOMPILE_INFO *p_info ) {
 
 	p_info->assembler_list.add_label( "work_buf", "0x0F55E" );
 
-	//	‘æ2ˆø” ŠJnƒAƒhƒŒƒX
+	//	ç¬¬2å¼•æ•° é–‹å§‹ã‚¢ãƒ‰ãƒ¬ã‚¹
 	if( exp.compile( p_info, CEXPRESSION_TYPE::EXTENDED_INTEGER ) ) {
 		asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::MEMORY, "[work_buf + 50]", COPERAND_TYPE::REGISTER, "HL" );
 		p_info->assembler_list.body.push_back( asm_line );
@@ -59,7 +59,7 @@ bool CBSAVE::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 
-	//	‘æ3ˆø” I—¹ƒAƒhƒŒƒX
+	//	ç¬¬3å¼•æ•° çµ‚äº†ã‚¢ãƒ‰ãƒ¬ã‚¹
 	if( exp.compile( p_info, CEXPRESSION_TYPE::EXTENDED_INTEGER ) ) {
 		asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::MEMORY, "[work_buf + 52]", COPERAND_TYPE::REGISTER, "HL" );
 		p_info->assembler_list.body.push_back( asm_line );
@@ -71,7 +71,7 @@ bool CBSAVE::exec( CCOMPILE_INFO *p_info ) {
 	}
 
 	if( p_info->list.is_command_end() ) {
-		//	‘æ4ˆø”‚ªÈ—ª‚³‚ê‚Ä‚¢‚éê‡
+		//	ç¬¬4å¼•æ•°ãŒçœç•¥ã•ã‚Œã¦ã„ã‚‹å ´åˆ
 		asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "HL", COPERAND_TYPE::MEMORY, "[work_buf + 50]" );
 		p_info->assembler_list.body.push_back( asm_line );
 		asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::MEMORY, "[work_buf + 54]", COPERAND_TYPE::REGISTER, "HL" );
@@ -100,7 +100,7 @@ bool CBSAVE::exec( CCOMPILE_INFO *p_info ) {
 			p_info->list.p_position++;
 		}
 		else if( exp.compile( p_info, CEXPRESSION_TYPE::EXTENDED_INTEGER ) ) {
-			//	‘æ4ˆø” ÀsƒAƒhƒŒƒX
+			//	ç¬¬4å¼•æ•° å®Ÿè¡Œã‚¢ãƒ‰ãƒ¬ã‚¹
 			asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::MEMORY, "[work_buf + 54]", COPERAND_TYPE::REGISTER, "HL" );
 			p_info->assembler_list.body.push_back( asm_line );
 			exp.release();

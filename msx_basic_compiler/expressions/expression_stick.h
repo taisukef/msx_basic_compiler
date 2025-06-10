@@ -11,7 +11,7 @@
 #define __EXPRESSION_STICK_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_STICK: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_STICK() {

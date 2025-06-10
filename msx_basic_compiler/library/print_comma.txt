@@ -11,7 +11,7 @@
 		ret
 	loop1:
 		sub		a, 14
-		jr		nc, loop1		; 0�ȏ�Ȃ� loop1, -14�`-1 �Ȃ�X���[
+		jr		nc, loop1		; 0以上なら loop1, -14～-1 ならスルー
 		neg						; 13,12,...,1,14
 		ld		b, a
 		ld		a, ' '

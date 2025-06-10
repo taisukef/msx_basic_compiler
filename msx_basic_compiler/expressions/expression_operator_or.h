@@ -11,7 +11,7 @@
 #define __CEXPRESSION_OPERATOR_OR_H__
 
 // --------------------------------------------------------------------
-//	OR(˜_—˜a)
+//	OR(è«–ç†å’Œ)
 class CEXPRESSION_OPERATOR_OR: public CEXPRESSION_NODE {
 public:
 	CEXPRESSION_NODE *p_left;

@@ -27,7 +27,7 @@ CEXPRESSION_NODE* CEXPRESSION_LEN::optimization( CCOMPILE_INFO *p_info ) {
 void CEXPRESSION_LEN::compile( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 
-	//	æ‚Éˆø”‚ðˆ—
+	//	å…ˆã«å¼•æ•°ã‚’å‡¦ç†
 	this->p_operand->compile( p_info );
 
 	if( this->p_operand->type != CEXPRESSION_TYPE::STRING ) {

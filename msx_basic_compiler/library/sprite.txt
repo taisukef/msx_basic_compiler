@@ -1,17 +1,17 @@
-464Eh ‚É’†ŠÔƒR[ƒh 81hˆÈã‚Ìê‡‚ÌƒWƒƒƒ“ƒvƒe[ƒuƒ‹ƒWƒƒƒ“ƒvˆ—‚ª‚ ‚éB
+464Eh ã«ä¸­é–“ã‚³ãƒ¼ãƒ‰ 81hä»¥ä¸Šã®å ´åˆã®ã‚¸ãƒ£ãƒ³ãƒ—ãƒ†ãƒ¼ãƒ–ãƒ«ã‚¸ãƒ£ãƒ³ãƒ—å‡¦ç†ãŒã‚ã‚‹ã€‚
 
 SPRITE$(n)
-	7A48h ‚Éˆ—ƒ‹[ƒ`ƒ“
+	7A48h ã«å‡¦ç†ãƒ«ãƒ¼ãƒãƒ³
 
-	7A48:	CP		'$'				; SPRITE$ ‚Ì $
-			JP		NZ, 0x77AB		; ƒXƒ‹[
+	7A48:	CP		'$'				; SPRITE$ ã® $
+			JP		NZ, 0x77AB		; ã‚¹ãƒ«ãƒ¼
 			LD		A, (FCAFh)		; SCRMOD
 			AND		A
-			JP		Z, 475Ah		; SCREEN0 ‚È‚çƒGƒ‰[?
+			JP		Z, 475Ah		; SCREEN0 ãªã‚‰ã‚¨ãƒ©ãƒ¼?
 			CALL	7AA0h
 
 		7AA0:	RST		08h
-				DB		'$'			; 0008h ‚ªŽg‚¤B
+				DB		'$'			; 0008h ãŒä½¿ã†ã€‚
 				LD		A, FFh
 				CALL	7C08h
 

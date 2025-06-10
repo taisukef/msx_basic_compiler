@@ -8,7 +8,7 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  POKEW <アドレス>, <値>
+//  POKEW <繧｢繝峨Ξ繧ｹ>, <蛟､>
 bool CPOKEW::exec( CCOMPILE_INFO *p_info ) {
 	int line_no = p_info->list.get_line_no();
 
@@ -19,7 +19,7 @@ bool CPOKEW::exec( CCOMPILE_INFO *p_info ) {
 
 	CEXPRESSION exp;
 	CASSEMBLER_LINE asm_line;
-	//	第1引数 <アドレス>
+	//	隨ｬ1蠑墓焚 <繧｢繝峨Ξ繧ｹ>
 	if( exp.compile( p_info, CEXPRESSION_TYPE::EXTENDED_INTEGER ) ) {
 		asm_line.set( CMNEMONIC_TYPE::PUSH, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "HL", COPERAND_TYPE::NONE, "" );
 		p_info->assembler_list.body.push_back( asm_line );
@@ -34,7 +34,7 @@ bool CPOKEW::exec( CCOMPILE_INFO *p_info ) {
 		return true;
 	}
 	p_info->list.p_position++;
-	//	第2引数 <値>
+	//	隨ｬ2蠑墓焚 <蛟､>
 	if( exp.compile( p_info ) ) {
 		asm_line.set( CMNEMONIC_TYPE::POP, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "DE", COPERAND_TYPE::NONE, "" );
 		p_info->assembler_list.body.push_back( asm_line );

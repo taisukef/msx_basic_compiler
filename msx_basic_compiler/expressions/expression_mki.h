@@ -11,7 +11,7 @@
 #define __EXPRESSION_MKI_H__
 
 // --------------------------------------------------------------------
-//	ŠÖ”ŒÄ‚Ño‚µ
+//	é–¢æ•°å‘¼ã³å‡ºã—
 class CEXPRESSION_MKI: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_MKI() {

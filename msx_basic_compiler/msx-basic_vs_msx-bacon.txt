@@ -1,46 +1,46 @@
-MSX-BASIC�Ƃ̈Ⴂ
+MSX-BASICとの違い
 ===============================================================================
-�@MSX-BACON �́AMSX-BASIC �Ƃقړ����L�q�ŁA��荂���ɓ��삷��v���O�����𐶐�
-�o���邱�Ƃ���Ԃ̖ړI�ɍ���Ă��܂��B
-�@���̂��߂ɁA����������؂肪�����Ă��܂��B
-�@���̃e�L�X�g�́A���̊���؂�ɂ���Ĕ������鍷�قɂ��Ă܂Ƃ߂Ă��܂��B
+　MSX-BACON は、MSX-BASIC とほぼ同じ記述で、より高速に動作するプログラムを生成
+出来ることを一番の目的に作られています。
+　そのために、いくつか割り切りが入っています。
+　このテキストは、その割り切りによって発生する差異についてまとめています。
 
-1. ���l���Z
-�@�e�����̊e���́A�R���p�C�����Ɍ^�����߂Ă��܂��܂��B
-�@���Z�̓x�Ɍ^�̔�����s���������Ȃ����߂ł��B
-�@MSX-BASIC �ł́A���Z���ʂɂ���ď_��Ɍ^��ς��Ă��܂��B
-�@MSX-BACON �ł́A�R���p�C�����Ɍ^�����ߑł��߂ɁA�ꕔ�̉��Z�ɂ����āA���m��
-���ʂ������Ȃ��P�[�X������܂��B
+1. 数値演算
+　各数式の各項は、コンパイル時に型を決めてしまいます。
+　演算の度に型の判定を行う処理を省くためです。
+　MSX-BASIC では、演算結果によって柔軟に型を変えています。
+　MSX-BACON では、コンパイル時に型を決め打つために、一部の演算において、正確な
+結果が得られないケースがあります。
 
 1.1. ABS
-�@ABS�֐��́A�����̌^�Ɠ����^�ł���ƌ��߂Ă��܂��܂��B
-�@���̂��߁A�����̈����ł��� -32768 ��^����ƁA���Z���� 32768 �͐����^�͈̔�
-�@-32768 �` 32767 ���z���Ă��܂����߁A���������ʂ������܂���B
+　ABS関数は、引数の型と同じ型であると決めてしまいます。
+　そのため、整数の引数である -32768 を与えると、演算結果 32768 は整数型の範囲
+　-32768 ～ 32767 を越えてしまうため、正しい結果が得られません。
 
-�@A=ABS(-32768)
-�@PRINT A
+　A=ABS(-32768)
+　PRINT A
 
-�@-32768
+　-32768
 
-1.2. �I�[�o�[�t���[
-�@�������Z�̑唼�́A�T�u���[�`���R�[���ł͖����AZ80 �̓����ȉ��Z���߂ɕϊ����܂��B
-�@���Z���߂ɒu�������ꍇ�A�I�[�o�[�t���[�`�F�b�N���s���܂���B
+1.2. オーバーフロー
+　整数演算の大半は、サブルーチンコールでは無く、Z80 の等価な演算命令に変換します。
+　演算命令に置き換わる場合、オーバーフローチェックを行いません。
 
-�@100 DEFINTA-Z
-�@110 A=A+1:GOTO 110
+　100 DEFINTA-Z
+　110 A=A+1:GOTO 110
 
-�@MSX-BACON �ł́A���̃��[�v�͖����ɑ����܂��B
-�@�������A�ꕔ�̐������Z�ƁA���������_���Z�Ɋւ��ẮAMathPack �ƌĂ΂�� 
-�@MSX �� BIOS �ɑg�ݍ��܂�Ă��鉉�Z���[�`���Q�𗘗p���܂��B�����āAMathPack ��
-�@BASIC �̃G���[�`�F�b�N�������Ă��邽�߁AMathPack ���g���P�[�X�ł́AMSX-BASIC��
-�@���l�̃G���[���������܂��B
+　MSX-BACON では、このループは無限に続きます。
+　ただし、一部の整数演算と、浮動小数点演算に関しては、MathPack と呼ばれる 
+　MSX の BIOS に組み込まれている演算ルーチン群を利用します。そして、MathPack は
+　BASIC のエラーチェックが入っているため、MathPack を使うケースでは、MSX-BASICと
+　同様のエラーが発生します。
 
 2. DEFxxx
-�@�ϐ��̈Öق̕����w�肷�� DEFINT, DEFSNG, DEFDBL, DEFSTR �ł����AMSX-BACON �ł�
-�@�R���p�C�����Ɋm�肳���Ă��܂��܂��B
-�@MSX-BACON �́A�ϐ��̖��O���A�h���X�ɕϊ����Ă��܂����߁A�R���p�C�����ʂɂ́A
-�@�ϐ��̖��O�̏��͎c���Ă��܂���B���̂��߁A���I�ɈÖق̌^��؂�ւ����܂���B
-�@��̓I�ɂ́A���L�̃R�[�h�̋������AMSX-BASIC �ƈقȂ�܂��B
+　変数の暗黙の方を指定する DEFINT, DEFSNG, DEFDBL, DEFSTR ですが、MSX-BACON では
+　コンパイル時に確定させてしまいます。
+　MSX-BACON は、変数の名前をアドレスに変換してしまうため、コンパイル結果には、
+　変数の名前の情報は残っていません。このため、動的に暗黙の型を切り替えられません。
+　具体的には、下記のコードの挙動が、MSX-BASIC と異なります。
 
 	100 A%=100:A!=200:A#=300:A$="STR"
 	110 DEFINT A:GOSUB 1000
@@ -50,17 +50,17 @@ MSX-BASIC�Ƃ̈Ⴂ
 	150 END
 	160 PRINT A:RETURN
 
-3. �G���[
-�@MSX-BASIC �ł̓G���[���������Ē�~����P�[�X�ł��AMSX-BACON �̏ꍇ�̓G���[�ɂȂ炸��
-�@���̂܂ܓ���������P�[�X������܂��B
-�@���邢�́A�G���[�͔������邪�A��������G���[�R�[�h���قȂ�ꍇ������܂��B
+3. エラー
+　MSX-BASIC ではエラーが発生して停止するケースでも、MSX-BACON の場合はエラーにならずに
+　そのまま動き続けるケースがあります。
+　あるいは、エラーは発生するが、発生するエラーコードが異なる場合があります。
 
-3.1. �������s���ɂ���Ĕz��ϐ��̊m�ۂɎ��s�����ꍇ
-�@MSX-BASIC �ł� Subscrpit out of range �̃G���[�ɂȂ�܂����A
-�@MSX-BACON �ł� Out of memory �̃G���[�ɂȂ�܂��B
-�@MSX-BACON �̃q�[�v����������m�ۂ��܂����A���̃q�[�v�������̊m�ۃ��[�`�����Ń������s��
-�@�����m���āAOut of memory �𔭐������邽�߂ł��B
-�@�q�[�v�������̊m�ۃ��[�`���́A������̏����Ȃǂł����p�����ėp���[�`���̂��߁A
-�@�u�z��̎����� Subscrpit out of range �ɍ��������鏈���v�Ȃǂ�����ƁA���̑Ή�����
-�@������A�R�[�h���傫���Ȃ�E�x���Ȃ���Ɍq����̂ŁA�ߖ�̂��߂� Out of memory ��
-�@�܂܂ɂ��Ă���܂��B
+3.1. メモリ不足によって配列変数の確保に失敗した場合
+　MSX-BASIC では Subscrpit out of range のエラーになりますが、
+　MSX-BACON では Out of memory のエラーになります。
+　MSX-BACON のヒープメモリから確保しますが、そのヒープメモリの確保ルーチン内でメモリ不足
+　を検知して、Out of memory を発生させるためです。
+　ヒープメモリの確保ルーチンは、文字列の処理などでも利用される汎用ルーチンのため、
+　「配列の時だけ Subscrpit out of range に差し換える処理」などを入れると、その対応処理
+　が入り、コードが大きくなる・遅くなる問題に繋がるので、節約のために Out of memory の
+　ままにしてあります。

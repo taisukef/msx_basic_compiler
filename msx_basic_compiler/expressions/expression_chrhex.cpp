@@ -22,11 +22,11 @@ CEXPRESSION_NODE* CEXPRESSION_CHRHEX::optimization( CCOMPILE_INFO *p_info ) {
 		delete this->p_operand;
 		this->p_operand = p;
 	}
-	//	Ž–‘OŒvŽZˆ—
+	//	äº‹å‰è¨ˆç®—å‡¦ç†
 	if( (p_info->options.optimize_level >= COPTIMIZE_LEVEL::DEEP) && this->p_operand->is_constant ) {
-		//	’è”‚Ìê‡
+		//	å®šæ•°ã®å ´åˆ
 		if( this->p_operand->type == CEXPRESSION_TYPE::STRING ) {
-			//	•¶Žš—ñ‚Ìê‡
+			//	æ–‡å­—åˆ—ã®å ´åˆ
 			CEXPRESSION_TERM *p_term = new CEXPRESSION_TERM();
 			p_term->type = CEXPRESSION_TYPE::STRING;
 			n = (int) this->p_operand->s_value.size();
@@ -52,7 +52,7 @@ void CEXPRESSION_CHRHEX::compile( CCOMPILE_INFO *p_info ) {
 	if( this->p_operand == nullptr ) {
 		return;
 	}
-	//	æ‚Éˆø”‚ðˆ—
+	//	å…ˆã«å¼•æ•°ã‚’å‡¦ç†
 	this->p_operand->compile( p_info );
 
 	if( this->p_operand->type != CEXPRESSION_TYPE::STRING ) {

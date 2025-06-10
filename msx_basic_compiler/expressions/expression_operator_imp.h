@@ -11,7 +11,7 @@
 #define __CEXPRESSION_OPERATOR_IMP_H__
 
 // --------------------------------------------------------------------
-//	IMP(ïÔä‹)
+//	IMP(ÂåÖÂê´)
 class CEXPRESSION_OPERATOR_IMP: public CEXPRESSION_NODE {
 public:
 	CEXPRESSION_NODE *p_left;

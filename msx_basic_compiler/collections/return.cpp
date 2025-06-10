@@ -19,12 +19,12 @@ bool CRETURN::exec( CCOMPILE_INFO *p_info ) {
 	p_info->list.p_position++;
 
 	if( p_info->list.is_line_end() || p_info->list.p_position->type != CBASIC_WORD_TYPE::LINE_NO ) {
-		//	RETURN �����ŏI����Ă�ꍇ�� RET �����B
+		//	RETURN だけで終わってる場合は RET だけ。
 		asm_line.set( CMNEMONIC_TYPE::RET, CCONDITION::NONE, COPERAND_TYPE::NONE, "", COPERAND_TYPE::NONE, "" );
 		p_info->assembler_list.body.push_back( asm_line );
 	}
 	else {
-		//	�s�ԍ��������Ă�ꍇ�́A�߂�Ԓn���̂ĂĎw��̍s�ɃW�����v����B
+		//	行番号が続いてる場合は、戻り番地を捨てて指定の行にジャンプする。
 		p_info->use_return_line_no = true;
 
 		if( p_info->list.p_position->s_word[0] == '*' ) {

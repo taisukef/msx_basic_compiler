@@ -79,13 +79,13 @@ public:
 // --------------------------------------------------------------------
 class CCONSTANT_INFO {
 public:
-	//	‹ó•¶š—ñ‚Ìƒ‰ƒxƒ‹
+	//	ç©ºæ–‡å­—åˆ—ã®ãƒ©ãƒ™ãƒ«
 	std::string s_blank_string;
 
-	//	’è‹`Ï‚İ‚Ì”’l’è”‚ÌƒŠƒXƒg
+	//	å®šç¾©æ¸ˆã¿ã®æ•°å€¤å®šæ•°ã®ãƒªã‚¹ãƒˆ
 	std::map< std::string, CCONSTANT > dictionary;
 
-	//	’è‹`Ï‚İ‚Ì•¶š—ñ’è”‚ÌƒŠƒXƒg
+	//	å®šç¾©æ¸ˆã¿ã®æ–‡å­—åˆ—å®šæ•°ã®ãƒªã‚¹ãƒˆ
 	std::map< std::string, CCONSTANT > string_list;
 	unsigned int string_label = 0;
 

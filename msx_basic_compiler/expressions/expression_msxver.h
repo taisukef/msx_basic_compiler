@@ -11,7 +11,7 @@
 #define __EXPRESSION_MSXVER_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_MSXVER: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_MSXVER() {

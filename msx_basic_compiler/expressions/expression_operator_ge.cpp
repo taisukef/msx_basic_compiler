@@ -37,22 +37,22 @@ void CEXPRESSION_OPERATOR_GE::compile( CCOMPILE_INFO *p_info ) {
 	if( this->p_left == nullptr || this->p_right == nullptr ) {
 		return;
 	}
-	//	æ‚É€‚ğˆ—
+	//	å…ˆã«é …ã‚’å‡¦ç†
 	this->p_left->compile( p_info );
 
 	p_info->assembler_list.push_hl( this->p_left->type );
 
 	this->p_right->compile( p_info );
 
-	//	‚±‚Ì‰‰Zq‚Ì‰‰ZŒ‹‰Ê‚Í•K‚¸®”
+	//	ã“ã®æ¼”ç®—å­ã®æ¼”ç®—çµæœã¯å¿…ãšæ•´æ•°
 	this->type = CEXPRESSION_TYPE::INTEGER;
 	if( this->p_left->type != this->p_right->type && (this->p_left->type == CEXPRESSION_TYPE::STRING || this->p_right->type == CEXPRESSION_TYPE::STRING) ) {
-		//	¶‰E‚Ì€‚ªˆÙ‚È‚éŒ^‚ÅA•Ğ•û‚ª•¶š—ñŒ^‚È‚çƒGƒ‰[
+		//	å·¦å³ã®é …ãŒç•°ãªã‚‹å‹ã§ã€ç‰‡æ–¹ãŒæ–‡å­—åˆ—å‹ãªã‚‰ã‚¨ãƒ©ãƒ¼
 		p_info->errors.add( TYPE_MISMATCH, p_info->list.get_line_no() );
 		return;
 	}
 	if( this->p_left->type == CEXPRESSION_TYPE::STRING ) {
-		//	•¶š—ñ‚Ìê‡
+		//	æ–‡å­—åˆ—ã®å ´åˆ
 		p_info->assembler_list.activate_free_string();
 		s_label = p_info->get_auto_label();
 		p_info->assembler_list.add_label( "blib_strcmp", "0x04027" );
@@ -101,7 +101,7 @@ void CEXPRESSION_OPERATOR_GE::compile( CCOMPILE_INFO *p_info ) {
 	this->type = CEXPRESSION_TYPE::INTEGER;
 
 	if( compare_type == CEXPRESSION_TYPE::INTEGER ) {
-		//	‚±‚Ì‰‰Zq‚ª®”‚Ìê‡
+		//	ã“ã®æ¼”ç®—å­ãŒæ•´æ•°ã®å ´åˆ
 		std::string s_label = p_info->get_auto_label();
 		asm_line.set( CMNEMONIC_TYPE::POP, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "DE", COPERAND_TYPE::NONE, "" );
 		p_info->assembler_list.body.push_back( asm_line );
@@ -109,7 +109,7 @@ void CEXPRESSION_OPERATOR_GE::compile( CCOMPILE_INFO *p_info ) {
 		p_info->assembler_list.body.push_back( asm_line );
 		asm_line.set( CMNEMONIC_TYPE::XOR, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "A", COPERAND_TYPE::REGISTER, "A" );
 		p_info->assembler_list.body.push_back( asm_line );
-		asm_line.set( CMNEMONIC_TYPE::SBC, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "HL", COPERAND_TYPE::REGISTER, "DE" );	//	HL(¶€) >= DE(‰E€) ‚ª¬—§‚·‚éê‡‚Í S=0 (P), ‚µ‚È‚¢ê‡‚Í S=1 (M)
+		asm_line.set( CMNEMONIC_TYPE::SBC, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "HL", COPERAND_TYPE::REGISTER, "DE" );	//	HL(å·¦é …) >= DE(å³é …) ãŒæˆç«‹ã™ã‚‹å ´åˆã¯ S=0 (P), ã—ãªã„å ´åˆã¯ S=1 (M)
 		p_info->assembler_list.body.push_back( asm_line );
 		asm_line.set( CMNEMONIC_TYPE::JP, CCONDITION::M, COPERAND_TYPE::CONSTANT, s_label, COPERAND_TYPE::NONE, "" );
 		p_info->assembler_list.body.push_back( asm_line );
@@ -123,18 +123,18 @@ void CEXPRESSION_OPERATOR_GE::compile( CCOMPILE_INFO *p_info ) {
 		p_info->assembler_list.body.push_back( asm_line );
 	}
 	else {
-		//	‚±‚Ì‰‰Zq‚ªÀ”‚Ìê‡
+		//	ã“ã®æ¼”ç®—å­ãŒå®Ÿæ•°ã®å ´åˆ
 		p_info->assembler_list.add_label( "bios_xdcomp", "0x02f5c" );
 		asm_line.set( CMNEMONIC_TYPE::CALL, CCONDITION::NONE, COPERAND_TYPE::CONSTANT, "bios_xdcomp", COPERAND_TYPE::NONE, "" );	//	DAC >= ARG
 		p_info->assembler_list.body.push_back( asm_line );
-		//	A= 1 ¨ ARG < DAC : A =-1 ‚É‚µ‚½‚¢
-		//	A= 0 ¨ ARG = DAC : A =-1 ‚É‚µ‚½‚¢
-		//	A=-1 ¨ ARG > DAC : A = 0 ‚É‚µ‚½‚¢
+		//	A= 1 â†’ ARG < DAC : A =-1 ã«ã—ãŸã„
+		//	A= 0 â†’ ARG = DAC : A =-1 ã«ã—ãŸã„
+		//	A=-1 â†’ ARG > DAC : A = 0 ã«ã—ãŸã„
 		asm_line.set( CMNEMONIC_TYPE::SRA, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "A", COPERAND_TYPE::NONE, "" );
 		p_info->assembler_list.body.push_back( asm_line );
 		asm_line.set( CMNEMONIC_TYPE::CPL, CCONDITION::NONE, COPERAND_TYPE::NONE, "", COPERAND_TYPE::NONE, "" );
 		p_info->assembler_list.body.push_back( asm_line );
-		asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "H", COPERAND_TYPE::REGISTER, "A" );		//	HL = 0 ‚Ü‚½‚Í HL = -1
+		asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "H", COPERAND_TYPE::REGISTER, "A" );		//	HL = 0 ã¾ãŸã¯ HL = -1
 		p_info->assembler_list.body.push_back( asm_line );
 		asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "L", COPERAND_TYPE::REGISTER, "A" );
 		p_info->assembler_list.body.push_back( asm_line );

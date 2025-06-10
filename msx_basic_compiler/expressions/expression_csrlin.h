@@ -11,7 +11,7 @@
 #define __EXPRESSION_CSRLIN_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_CSRLIN: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_CSRLIN() {

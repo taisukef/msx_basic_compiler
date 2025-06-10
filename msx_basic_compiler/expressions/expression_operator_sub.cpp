@@ -32,7 +32,7 @@ CEXPRESSION_NODE* CEXPRESSION_OPERATOR_SUB::optimization( CCOMPILE_INFO *p_info 
 	}
 
 	if( this->p_left->is_constant && this->p_right->is_constant ) {
-		//	¶‰E‚Ì€‚ª—¼•û‚Æ‚à’è”‚Ìê‡
+		//	å·¦å³ã®é …ãŒä¸¡æ–¹ã¨ã‚‚å®šæ•°ã®å ´åˆ
 		CEXPRESSION_TERM *p_left  = reinterpret_cast<CEXPRESSION_TERM*> (this->p_left);
 		CEXPRESSION_TERM *p_right = reinterpret_cast<CEXPRESSION_TERM*> (this->p_right);
 		double r = p_left->get_value() - p_right->get_value();
@@ -52,15 +52,15 @@ void CEXPRESSION_OPERATOR_SUB::compile( CCOMPILE_INFO *p_info ) {
 	if( this->p_left == nullptr || this->p_right == nullptr ) {
 		return;
 	}
-	//	æ‚É€‚ğˆ—
+	//	å…ˆã«é …ã‚’å‡¦ç†
 	this->p_left->compile( p_info );
 	p_info->assembler_list.push_hl( this->p_left->type );
 	this->p_right->compile( p_info );
 
-	//	‚±‚Ì‰‰Zq‚Ì‰‰ZŒ‹‰Ê‚ÌŒ^‚ğŒˆ‚ß‚é
+	//	ã“ã®æ¼”ç®—å­ã®æ¼”ç®—çµæœã®å‹ã‚’æ±ºã‚ã‚‹
 	this->type_adjust_2op( p_info, this->p_left, this->p_right );
 	if( this->type == CEXPRESSION_TYPE::INTEGER ) {
-		//	®”‚Ìê‡
+		//	æ•´æ•°ã®å ´åˆ
 		asm_line.set( CMNEMONIC_TYPE::POP, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "DE", COPERAND_TYPE::NONE, "" );
 		p_info->assembler_list.body.push_back( asm_line );
 		asm_line.set( CMNEMONIC_TYPE::EX, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "DE", COPERAND_TYPE::REGISTER, "HL" );
@@ -75,7 +75,7 @@ void CEXPRESSION_OPERATOR_SUB::compile( CCOMPILE_INFO *p_info ) {
 		return;
 	}
 	else {
-		//	À”‚Ìê‡
+		//	å®Ÿæ•°ã®å ´åˆ
 		p_info->assembler_list.add_label( "bios_decsub", "0x0268c" );
 		p_info->assembler_list.add_label( "work_dac", "0x0f7f6" );
 		asm_line.set( CMNEMONIC_TYPE::CALL, CCONDITION::NONE, COPERAND_TYPE::CONSTANT, "bios_decsub", COPERAND_TYPE::NONE, "" );

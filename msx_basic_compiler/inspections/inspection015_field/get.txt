@@ -1,7 +1,7 @@
-1ƒŒƒR[ƒh“Ç‚İ‚ñ‚ÅA•Ï”‚ÖƒRƒs[‚·‚é
+1ãƒ¬ã‚³ãƒ¼ãƒ‰èª­ã¿è¾¼ã‚“ã§ã€å¤‰æ•°ã¸ã‚³ãƒ”ãƒ¼ã™ã‚‹
 
 sub_get:
-		; ƒtƒ@ƒCƒ‹‚Å‚È‚¯‚ê‚ÎƒGƒ‰[
+		; ãƒ•ã‚¡ã‚¤ãƒ«ã§ãªã‘ã‚Œã°ã‚¨ãƒ©ãƒ¼
 		ld		de, [work_ptrfil]
 		ld		a, [de]
 		or		a, a
@@ -10,7 +10,7 @@ sub_get:
 		cp		a, 9
 		ld		e, 61				; Bad file mode
 		jp		nc, bios_errhnd
-		; 1ƒŒƒR[ƒh“Ç‚İæ‚é
+		; 1ãƒ¬ã‚³ãƒ¼ãƒ‰èª­ã¿å–ã‚‹
 		ld		de, work_buf + 1
 		ld		c, _setdta
 		call	bdos
@@ -18,32 +18,32 @@ sub_get:
 		ld		hl, 1
 		ld		c, _rdblk
 		call	bdos
-		; •Ï”‚Ö‚Ì“Ç‚İ‚İƒ‹[ƒv‚Ì€”õ
+		; å¤‰æ•°ã¸ã®èª­ã¿è¾¼ã¿ãƒ«ãƒ¼ãƒ—ã®æº–å‚™
 		ld		hl, [work_ptrfil]
 		ld		de, 37
 		add		hl, de
 		ld		de, work_buf
 		ld		[work_buf + 256], de
-		; •Ï”‚Ö‚Ì“Ç‚İ‚İƒ‹[ƒv
+		; å¤‰æ•°ã¸ã®èª­ã¿è¾¼ã¿ãƒ«ãƒ¼ãƒ—
 sub_get_loop:
-		ld		a, [hl]				; •¶š”‚ğ“¾‚é
+		ld		a, [hl]				; æ–‡å­—æ•°ã‚’å¾—ã‚‹
 		or		a, a
-		ret		z					; 0 ‚È‚çI—¹
-		ld		[de], a				; [DE] = •¶š”
+		ret		z					; 0 ãªã‚‰çµ‚äº†
+		ld		[de], a				; [DE] = æ–‡å­—æ•°
 		inc		hl
-		ld		e, [hl]				; DE = Ši”[æ•Ï”‚ÌƒAƒhƒŒƒX
+		ld		e, [hl]				; DE = æ ¼ç´å…ˆå¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 		inc		hl
 		ld		d, [hl]
 		inc		hl
-		push	hl					; (1) •Ï”ƒŠƒXƒg‚ÌƒAƒhƒŒƒX
+		push	hl					; (1) å¤‰æ•°ãƒªã‚¹ãƒˆã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 		ex		de, hl
-		ld		e, [hl]				; DE = •Ï”‚Ì“à—e(•¶š—ñ‚ÌƒAƒhƒŒƒX)
+		ld		e, [hl]				; DE = å¤‰æ•°ã®å†…å®¹(æ–‡å­—åˆ—ã®ã‚¢ãƒ‰ãƒ¬ã‚¹)
 		inc		hl
 		ld		d, [hl]
 		dec		hl
-		push	hl					; (2) •Ï”‚ÌƒAƒhƒŒƒX
-		ex		de, hl				; HL = •Ï”“à—e(•¶š—ñ‚ÌƒAƒhƒŒƒX)
-		call	free_string			; Œ³‚Ì“à—e‚ğ‰ğ•ú
+		push	hl					; (2) å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+		ex		de, hl				; HL = å¤‰æ•°å†…å®¹(æ–‡å­—åˆ—ã®ã‚¢ãƒ‰ãƒ¬ã‚¹)
+		call	free_string			; å…ƒã®å†…å®¹ã‚’è§£æ”¾
 		ld		hl, [work_buf + 256]
 		ld		e, [hl]
 		ld		d, 0
@@ -52,13 +52,13 @@ sub_get_loop:
 		ld		[work_buf + 256], hl
 		ld		l, e
 		ld		h, d
-		call	copy_string			; ƒRƒs[‚ğ¶¬
-		pop		de					; [2] •Ï”‚ÌƒAƒhƒŒƒX
+		call	copy_string			; ã‚³ãƒ”ãƒ¼ã‚’ç”Ÿæˆ
+		pop		de					; [2] å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 		ex		de, hl
-		ld		[hl], e				; ƒRƒs[‚ğ•Ï”‚ÖŠi”[
+		ld		[hl], e				; ã‚³ãƒ”ãƒ¼ã‚’å¤‰æ•°ã¸æ ¼ç´
 		inc		hl
 		ld		[hl], d
-		pop		hl					; [1] •Ï”ƒŠƒXƒg‚ÌƒAƒhƒŒƒX
+		pop		hl					; [1] å¤‰æ•°ãƒªã‚¹ãƒˆã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 		jr		sub_get_loop
 
 

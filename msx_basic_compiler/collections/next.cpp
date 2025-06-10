@@ -8,7 +8,7 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  NEXT [•Ï”–¼ [,•Ï”–¼ ...]]
+//  NEXT [å¤‰æ•°å [,å¤‰æ•°å ...]]
 bool CNEXT::exec( CCOMPILE_INFO *p_info ) {
 	std::string s;
 	int line_no = p_info->list.get_line_no();
@@ -24,27 +24,27 @@ bool CNEXT::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 	for(;;) {
-		//	•Ï”‚Ì‹Lq‚Ì‘¶İ‚ğŠm”F
+		//	å¤‰æ•°ã®è¨˜è¿°ã®å­˜åœ¨ã‚’ç¢ºèª
 		if( p_info->list.is_command_end() ) {
-			//	•Ï”‚Ì‹Lq‚ªÈ—ª‚³‚ê‚Ä‚¢‚éê‡
+			//	å¤‰æ•°ã®è¨˜è¿°ãŒçœç•¥ã•ã‚Œã¦ã„ã‚‹å ´åˆ
 			if( !at_first ) {
-				//	È—ª‰Â”\‚È‚Ì‚Íˆê”ÔÅ‰‚¾‚¯
+				//	çœç•¥å¯èƒ½ãªã®ã¯ä¸€ç•ªæœ€åˆã ã‘
 				p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 				return true;
 			}
 			if( p_info->for_variable_array.size() == 0 ) {
-				//	ƒ‹[ƒv•Ï”‚ª—\‘ª•s”\‚Èê‡
+				//	ãƒ«ãƒ¼ãƒ—å¤‰æ•°ãŒäºˆæ¸¬ä¸èƒ½ãªå ´åˆ
 				p_info->errors.add( "The loop variable targeted by the NEXT statement is unclear.", p_info->list.get_line_no() );
 				return true;
 			}
 			else {
-				//	ÅŒã‚ÉŒ©‚Â‚¯‚½ FOR•¶‚Ìƒ‹[ƒv•Ï”‚ğÌ—p‚·‚éBFOR•¶‚Å•Ï”‚Í¶¬Ï‚İ‚È‚Ì‚Å¶¬ˆ—‚ÍÈ—ª
+				//	æœ€å¾Œã«è¦‹ã¤ã‘ãŸ FORæ–‡ã®ãƒ«ãƒ¼ãƒ—å¤‰æ•°ã‚’æ¡ç”¨ã™ã‚‹ã€‚FORæ–‡ã§å¤‰æ•°ã¯ç”Ÿæˆæ¸ˆã¿ãªã®ã§ç”Ÿæˆå‡¦ç†ã¯çœç•¥
 				variable_loop = p_info->for_variable_array.back();
 				p_info->for_variable_array.pop_back();
 			}
 		}
 		else {
-			//	•Ï”‚ğ¶¬‚·‚é
+			//	å¤‰æ•°ã‚’ç”Ÿæˆã™ã‚‹
 			std::vector< CEXPRESSION* > exp_list_dummy;
 			variable_loop = p_info->variable_manager.get_variable_info( p_info, exp_list_dummy );
 			if( p_info->for_variable_array.size() > 0 ) {
@@ -52,17 +52,17 @@ bool CNEXT::exec( CCOMPILE_INFO *p_info ) {
 			}
 			p_info->variable_manager.put_special_variable( p_info, variable_loop.s_name + "_LABEL", CVARIABLE_TYPE::INTEGER, variable_loop.type );
 		}
-		//	1•Ï”•¶‚Ìƒ‹[ƒvˆ—
+		//	1å¤‰æ•°æ–‡ã®ãƒ«ãƒ¼ãƒ—å‡¦ç†
 		variable_loopl = p_info->variables.dictionary[ "s" + variable_loop.s_label + "_LABEL" ];
 		asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "HL", COPERAND_TYPE::MEMORY, "[" + variable_loopl.s_label + "]" );
 		p_info->assembler_list.body.push_back( asm_line );
 		asm_line.set( CMNEMONIC_TYPE::CALL, CCONDITION::NONE, COPERAND_TYPE::CONSTANT, "jp_hl", COPERAND_TYPE::NONE, "" );
 		p_info->assembler_list.body.push_back( asm_line );
-		//	Ÿ‚Ì•Ï”‹Lq‚ª‚ ‚é‚©’²‚×‚é
+		//	æ¬¡ã®å¤‰æ•°è¨˜è¿°ãŒã‚ã‚‹ã‹èª¿ã¹ã‚‹
 		if( p_info->list.is_command_end() ) {
 			break;
 		}
-		//	, ‚ğ’²‚×‚é
+		//	, ã‚’èª¿ã¹ã‚‹
 		if( p_info->list.p_position->s_word != "," ) {
 			p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 			return true;

@@ -11,7 +11,7 @@
 #define __EXPRESSION_INPUT_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_INPUT: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_INPUT() {

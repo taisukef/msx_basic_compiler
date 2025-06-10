@@ -1,12 +1,12 @@
-HL: •Ï”ƒŠƒXƒg‚ÌƒAƒhƒŒƒX
-DE: •Ï”‚ÌƒAƒhƒŒƒX
-A : •¶š”
+HL: å¤‰æ•°ãƒªã‚¹ãƒˆã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+DE: å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+A : æ–‡å­—æ•°
 
-[HL] © DE
+[HL] â† DE
 free_string( [DE] )
 [DE] = allocate_string( A )
 
-	// •Ï”ƒŠƒXƒg‚É•Ï”‚ÌƒAƒhƒŒƒX‚ğ‘‚«‚Ş
+	// å¤‰æ•°ãƒªã‚¹ãƒˆã«å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ›¸ãè¾¼ã‚€
 	asm_line.set( "LD",		"", "[HL]", "E" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "INC",	"", "HL" );
@@ -15,13 +15,13 @@ free_string( [DE] )
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "INC",	"", "HL" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "PUSH",	"", "HL" );					// •Ï”ƒŠƒXƒg‚ÌƒAƒhƒŒƒX
+	asm_line.set( "PUSH",	"", "HL" );					// å¤‰æ•°ãƒªã‚¹ãƒˆã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "PUSH",	"", "DE" );					// •Ï”‚ÌƒAƒhƒŒƒX
+	asm_line.set( "PUSH",	"", "DE" );					// å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "PUSH",	"", "AF" );					// •¶š”
+	asm_line.set( "PUSH",	"", "AF" );					// æ–‡å­—æ•°
 	this->subroutines.push_back( asm_line );
-	// •Ï”‚ÌƒAƒhƒŒƒX‚©‚ç•¶š—ñ‚ÌƒAƒhƒŒƒX‚ğ“¾‚é
+	// å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‹ã‚‰æ–‡å­—åˆ—ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å¾—ã‚‹
 	asm_line.set( "EX",		"", "DE", "HL" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD",		"", "E", "[HL]" );
@@ -32,15 +32,15 @@ free_string( [DE] )
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "EX",		"", "DE", "HL" );
 	this->subroutines.push_back( asm_line );
-	// •¶š—ñ‚ğ‰ğ•ú‚·‚é
+	// æ–‡å­—åˆ—ã‚’è§£æ”¾ã™ã‚‹
 	asm_line.set( "CALL",	"", "free_string" );
 	this->subroutines.push_back( asm_line );
-	// w’è‚Ì’·‚³‚Ì•¶š—ñ‚ğ“¾‚é ( SPACE$() )
+	// æŒ‡å®šã®é•·ã•ã®æ–‡å­—åˆ—ã‚’å¾—ã‚‹ ( SPACE$() )
 	asm_line.set( "POP",	"", "AF" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "CALL",	"", "sub_space" );			// HL = space$(A)
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "POP",	"", "DE" );					// •Ï”‚ÌƒAƒhƒŒƒX‚ğ•œ‹A
+	asm_line.set( "POP",	"", "DE" );					// å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å¾©å¸°
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "EX",		"", "DE", "HL" );
 	this->subroutines.push_back( asm_line );
@@ -50,7 +50,7 @@ free_string( [DE] )
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD",		"", "[HL]", "D" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "POP",	"", "HL" );					// •Ï”ƒŠƒXƒg‚ÌƒAƒhƒŒƒX
+	asm_line.set( "POP",	"", "HL" );					// å¤‰æ•°ãƒªã‚¹ãƒˆã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "RET" );
 	this->subroutines.push_back( asm_line );

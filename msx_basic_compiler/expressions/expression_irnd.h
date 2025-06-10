@@ -11,7 +11,7 @@
 #define __EXPRESSION_IRND_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_IRND: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_IRND() {

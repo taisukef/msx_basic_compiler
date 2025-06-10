@@ -27,7 +27,7 @@ void CASSEMBLER_LIST::add_data( int line_no, const std::string s_value, CCONSTAN
 	bool has_label = false;
 	std::string s_label;
 
-	//	Šù‚Éƒf[ƒ^ƒ‰ƒxƒ‹‚ð”z’u‚µ‚½s”Ô†‚©H
+	//	æ—¢ã«ãƒ‡ãƒ¼ã‚¿ãƒ©ãƒ™ãƒ«ã‚’é…ç½®ã—ãŸè¡Œç•ªå·ã‹ï¼Ÿ
 	for( auto i: this->data_lines ) {
 		if( i == line_no ) {
 			has_label = true;
@@ -264,7 +264,7 @@ void CASSEMBLER_LIST::activate_convert_to_integer_from_sngle_real( CCONSTANT_INF
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "CALL", "", "ld_dac_single_real", "" );
 	this->subroutines.push_back( asm_line );
-	//	‚à‚µ DAC < 32768! ‚È‚ç ¨ A = -1 ‚È‚çA•’Ê‚É FRCINT ‚Å•ÏŠ·B(-32768 ‚æ‚è¬‚³‚¯‚ê‚ÎAFRCINT ‚ª Overflow o‚·B)
+	//	ã‚‚ã— DAC < 32768! ãªã‚‰ â†’ A = -1 ãªã‚‰ã€æ™®é€šã« FRCINT ã§å¤‰æ›ã€‚(-32768 ã‚ˆã‚Šå°ã•ã‘ã‚Œã°ã€FRCINT ãŒ Overflow å‡ºã™ã€‚)
 	asm_line.set( "LD", "", "BC", "0x3245" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "DE", "0x8076" );
@@ -323,7 +323,7 @@ void CASSEMBLER_LIST::activate_convert_to_integer_from_double_real( CCONSTANT_IN
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "CALL", "", "ld_dac_double_real", "" );
 	this->subroutines.push_back( asm_line );
-	//	‚à‚µ DAC < 32768! ‚È‚ç ¨ A = -1 ‚È‚çA•’Ê‚É FRCINT ‚Å•ÏŠ·B(-32768 ‚æ‚è¬‚³‚¯‚ê‚ÎAFRCINT ‚ª Overflow o‚·B)
+	//	ã‚‚ã— DAC < 32768! ãªã‚‰ â†’ A = -1 ãªã‚‰ã€æ™®é€šã« FRCINT ã§å¤‰æ›ã€‚(-32768 ã‚ˆã‚Šå°ã•ã‘ã‚Œã°ã€FRCINT ãŒ Overflow å‡ºã™ã€‚)
 	asm_line.set( "LD", "", "BC", "0x3245" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "DE", "0x8076" );
@@ -467,7 +467,7 @@ void CASSEMBLER_LIST::activate_pop_double_real_dac( void ) {
 }
 
 // --------------------------------------------------------------------
-//	single real [HL] ¨ [DAC]
+//	single real [HL] â†’ [DAC]
 void CASSEMBLER_LIST::activate_ld_dac_single_real( void ) {
 	CASSEMBLER_LINE asm_line;
 
@@ -498,7 +498,7 @@ void CASSEMBLER_LIST::activate_ld_dac_single_real( void ) {
 }
 
 // --------------------------------------------------------------------
-//	double real [HL] ¨ [DAC]
+//	double real [HL] â†’ [DAC]
 void CASSEMBLER_LIST::activate_ld_dac_double_real( void ) {
 	CASSEMBLER_LINE asm_line;
 
@@ -525,7 +525,7 @@ void CASSEMBLER_LIST::activate_ld_dac_double_real( void ) {
 }
 
 // --------------------------------------------------------------------
-//	single real [HL] ¨ [ARG]
+//	single real [HL] â†’ [ARG]
 void CASSEMBLER_LIST::activate_ld_arg_single_real( void ) {
 	CASSEMBLER_LINE asm_line;
 
@@ -556,7 +556,7 @@ void CASSEMBLER_LIST::activate_ld_arg_single_real( void ) {
 }
 
 // --------------------------------------------------------------------
-//	double real [HL] ¨ [ARG]
+//	double real [HL] â†’ [ARG]
 void CASSEMBLER_LIST::activate_ld_arg_double_real( void ) {
 	CASSEMBLER_LINE asm_line;
 
@@ -578,7 +578,7 @@ void CASSEMBLER_LIST::activate_ld_arg_double_real( void ) {
 }
 
 // --------------------------------------------------------------------
-//	single real [HL] ¨ [DE]
+//	single real [HL] â†’ [DE]
 void CASSEMBLER_LIST::activate_ld_de_single_real( void ) {
 	CASSEMBLER_LINE asm_line;
 
@@ -597,7 +597,7 @@ void CASSEMBLER_LIST::activate_ld_de_single_real( void ) {
 }
 
 // --------------------------------------------------------------------
-//	double real [HL] ¨ [DE]
+//	double real [HL] â†’ [DE]
 void CASSEMBLER_LIST::activate_ld_de_double_real( void ) {
 	CASSEMBLER_LINE asm_line;
 
@@ -648,7 +648,7 @@ void CASSEMBLER_LIST::activate_puts( void ) {
 }
 
 // --------------------------------------------------------------------
-//	A ‚É•¶Žš—ñ’· 1`255 ‚ð“ü‚ê‚ÄŒÄ‚ÔB HL ‚ÉŠm•Û‚µ‚½ƒAƒhƒŒƒX‚ð•Ô‚·B
+//	A ã«æ–‡å­—åˆ—é•· 1ï½ž255 ã‚’å…¥ã‚Œã¦å‘¼ã¶ã€‚ HL ã«ç¢ºä¿ã—ãŸã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¿”ã™ã€‚
 void CASSEMBLER_LIST::activate_allocate_string( void ) {
 	CASSEMBLER_LINE asm_line;
 
@@ -698,7 +698,7 @@ void CASSEMBLER_LIST::activate_allocate_string( void ) {
 }
 
 // --------------------------------------------------------------------
-//	BC ‚ÉŠm•Û‚·‚éƒTƒCƒY‚ð“ü‚ê‚ÄŒÄ‚ÔB HL ‚ÉŠm•Û‚µ‚½ƒAƒhƒŒƒX‚ð•Ô‚·B
+//	BC ã«ç¢ºä¿ã™ã‚‹ã‚µã‚¤ã‚ºã‚’å…¥ã‚Œã¦å‘¼ã¶ã€‚ HL ã«ç¢ºä¿ã—ãŸã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¿”ã™ã€‚
 void CASSEMBLER_LIST::activate_allocate_heap( void ) {
 	CASSEMBLER_LINE asm_line;
 
@@ -816,7 +816,7 @@ void CASSEMBLER_LIST::activate_free_array( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "DEC", "", "HL", "" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "INC", "", "BC", "" );				//	[ƒTƒCƒY] ‚Ì 2byte ‚ð’Ç‰Á
+	asm_line.set( "INC", "", "BC", "" );				//	[ã‚µã‚¤ã‚º] ã® 2byte ã‚’è¿½åŠ 
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "INC", "", "BC", "" );
 	this->subroutines.push_back( asm_line );
@@ -848,7 +848,7 @@ void CASSEMBLER_LIST::activate_free_sarray( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "RET", "NC", "", "" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "PUSH", "", "HL", "" );				//	”z—ñ‚»‚Ì‚à‚Ì‚ÌƒAƒhƒŒƒX‚ð•Û‘¶
+	asm_line.set( "PUSH", "", "HL", "" );				//	é…åˆ—ãã®ã‚‚ã®ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ä¿å­˜
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "E", "[HL]" );
 	this->subroutines.push_back( asm_line );
@@ -924,11 +924,11 @@ void CASSEMBLER_LIST::activate_free_heap( void ) {
 	if( this->is_registered_subroutine( "free_heap" ) ) {
 		return;
 	}
-	//	HL ‚É‰ð•ú‚·‚éƒƒ‚ƒŠ‚ÌƒAƒhƒŒƒXABC ‚É‰ð•ú‚·‚éƒƒ‚ƒŠ‚ÌƒTƒCƒY‚ð“ü‚ê‚ÄŒÄ‚Ño‚·
+	//	HL ã«è§£æ”¾ã™ã‚‹ãƒ¡ãƒ¢ãƒªã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã€BC ã«è§£æ”¾ã™ã‚‹ãƒ¡ãƒ¢ãƒªã®ã‚µã‚¤ã‚ºã‚’å…¥ã‚Œã¦å‘¼ã³å‡ºã™
 	this->subrouines_list.push_back( "free_heap" );
 	asm_line.set( "LABEL", "", "free_heap", "" );
 	this->subroutines.push_back( asm_line );
-	//	ƒuƒƒbƒN“]‘—‚Ìî•ñ‚ðƒƒ‚ƒŠ‚É•Û‘¶‚·‚é
+	//	ãƒ–ãƒ­ãƒƒã‚¯è»¢é€ã®æƒ…å ±ã‚’ãƒ¡ãƒ¢ãƒªã«ä¿å­˜ã™ã‚‹
 	asm_line.set( "PUSH", "", "HL", "" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "ADD", "", "HL", "BC" );
@@ -937,7 +937,7 @@ void CASSEMBLER_LIST::activate_free_heap( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "[heap_remap_address]", "HL" );
 	this->subroutines.push_back( asm_line );
-	//	ƒuƒƒbƒN“]‘—‚ÌƒTƒCƒY‚âƒAƒhƒŒƒX‚ðŒvŽZ‚·‚é
+	//	ãƒ–ãƒ­ãƒƒã‚¯è»¢é€ã®ã‚µã‚¤ã‚ºã‚„ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¨ˆç®—ã™ã‚‹
 	asm_line.set( "EX", "", "DE", "HL" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "HL", "[heap_next]" );
@@ -958,12 +958,12 @@ void CASSEMBLER_LIST::activate_free_heap( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "JR", "Z", "_free_heap_loop0", "" );
 	this->subroutines.push_back( asm_line );
-	//	ƒuƒƒbƒN“]‘—‚·‚é
+	//	ãƒ–ãƒ­ãƒƒã‚¯è»¢é€ã™ã‚‹
 	asm_line.set( "LDIR", "", "", "" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LABEL", "", "_free_heap_loop0", "" );
 	this->subroutines.push_back( asm_line );
-	//	•¶Žš—ñ•Ï”/”’l”z—ñ•Ï”/•¶Žš—ñ”z—ñ•Ï”‚ÌŽÀ‘ÌƒAƒhƒŒƒX‚ðXV‚·‚é
+	//	æ–‡å­—åˆ—å¤‰æ•°/æ•°å€¤é…åˆ—å¤‰æ•°/æ–‡å­—åˆ—é…åˆ—å¤‰æ•°ã®å®Ÿä½“ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ›´æ–°ã™ã‚‹
 	asm_line.set( "LD", "", "[heap_next]", "DE" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "HL", "vars_area_start" );
@@ -1020,7 +1020,7 @@ void CASSEMBLER_LIST::activate_free_heap( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LABEL", "", "_free_heap_loop1_end", "" );
 	this->subroutines.push_back( asm_line );
-	//	•¶Žš—ñ”z—ñ•Ï”‚Ì’†g‚É“ü‚Á‚Ä‚¢‚éŽÀ‘ÌƒAƒhƒŒƒX‚ðXV‚·‚é
+	//	æ–‡å­—åˆ—é…åˆ—å¤‰æ•°ã®ä¸­èº«ã«å…¥ã£ã¦ã„ã‚‹å®Ÿä½“ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ›´æ–°ã™ã‚‹
 	asm_line.set( "LD", "", "HL", "varsa_area_start" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LABEL", "", "_free_heap_loop2", "" );
@@ -1047,7 +1047,7 @@ void CASSEMBLER_LIST::activate_free_heap( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "PUSH", "", "HL", "" );
 	this->subroutines.push_back( asm_line );
-	//	ŽÀ‘Ì‚ÌƒAƒhƒŒƒX‚É•ÏŠ·‚·‚é
+	//	å®Ÿä½“ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã«å¤‰æ›ã™ã‚‹
 	asm_line.set( "EX", "", "DE", "HL" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "E", "[HL]" );
@@ -1084,7 +1084,7 @@ void CASSEMBLER_LIST::activate_free_heap( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "EX", "", "DE", "HL" );
 	this->subroutines.push_back( asm_line );
-	//	•¶Žš—ñ”z—ñ•Ï”‚P‚Â•ª
+	//	æ–‡å­—åˆ—é…åˆ—å¤‰æ•°ï¼‘ã¤åˆ†
 	asm_line.set( "LABEL", "", "_free_heap_sarray_elements", "" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "E", "[HL]" );
@@ -1095,8 +1095,8 @@ void CASSEMBLER_LIST::activate_free_heap( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "PUSH", "", "HL", "" );
 	this->subroutines.push_back( asm_line );
-	//	•¶Žš—ñ”z—ñ•Ï”‚Ì’†‚Ì—v‘f‚P‚Â•ª
-	//	heap_remap_address ˆÈã‚Ì’l‚È‚ç‘ÎÛ
+	//	æ–‡å­—åˆ—é…åˆ—å¤‰æ•°ã®ä¸­ã®è¦ç´ ï¼‘ã¤åˆ†
+	//	heap_remap_address ä»¥ä¸Šã®å€¤ãªã‚‰å¯¾è±¡
 	asm_line.set( "LD", "", "HL", "[heap_remap_address]" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "EX", "", "DE", "HL" );
@@ -1105,7 +1105,7 @@ void CASSEMBLER_LIST::activate_free_heap( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "JR", "C", "_free_heap_loop2_next", "" );
 	this->subroutines.push_back( asm_line );
-	//	‘ÎÛ‚ÌƒAƒhƒŒƒX‚È‚Ì‚Åˆ—‚·‚é
+	//	å¯¾è±¡ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ãªã®ã§å‡¦ç†ã™ã‚‹
 	asm_line.set( "LD", "", "DE", "[heap_move_size]" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "SBC", "", "HL", "DE" );
@@ -1145,9 +1145,9 @@ void CASSEMBLER_LIST::activate_free_heap( void ) {
 }
 
 // --------------------------------------------------------------------
-//	V‚½‚ÉŠm•Û‚µ‚½•¶Žš—ñ”z—ñ‚ÉA‹ó•¶Žš—ñ‚ð‹l‚ß‚é
-//	HL ... •¶Žš—ñ”z—ñ‚ÌŽÀ‘Ì‚Ìæ“ª (—v‘f (0, 0, ..., 0) ‚ÌƒAƒhƒŒƒX)
-//	DE ... ‹l‚ß‚éƒTƒCƒY (byte”)
+//	æ–°ãŸã«ç¢ºä¿ã—ãŸæ–‡å­—åˆ—é…åˆ—ã«ã€ç©ºæ–‡å­—åˆ—ã‚’è©°ã‚ã‚‹
+//	HL ... æ–‡å­—åˆ—é…åˆ—ã®å®Ÿä½“ã®å…ˆé ­ (è¦ç´  (0, 0, ..., 0) ã®ã‚¢ãƒ‰ãƒ¬ã‚¹)
+//	DE ... è©°ã‚ã‚‹ã‚µã‚¤ã‚º (byteæ•°)
 void CASSEMBLER_LIST::activate_init_string_array( void ) {
 	CASSEMBLER_LINE asm_line;
 
@@ -1184,7 +1184,7 @@ void CASSEMBLER_LIST::activate_init_string_array( void ) {
 }
 
 // --------------------------------------------------------------------
-//	[HL] ‚Ì•¶Žš—ñ‚ðŠi”[‚Å‚«‚é—Ìˆæ‚ðŠm•Û‚µ‚ÄƒRƒs[ŒãAHL‚ÉƒAƒhƒŒƒX‚ð•Ô‚·B
+//	[HL] ã®æ–‡å­—åˆ—ã‚’æ ¼ç´ã§ãã‚‹é ˜åŸŸã‚’ç¢ºä¿ã—ã¦ã‚³ãƒ”ãƒ¼å¾Œã€HLã«ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¿”ã™ã€‚
 void CASSEMBLER_LIST::activate_copy_string( void ) {
 	CASSEMBLER_LINE asm_line;
 
@@ -1223,9 +1223,9 @@ void CASSEMBLER_LIST::activate_copy_string( void ) {
 }
 
 // --------------------------------------------------------------------
-//	HL‚É•Ï”‚È‚Ç‚Ì•¶Žš—ñ‚ÌƒAƒhƒŒƒX‚ðŽw’è‚µ‚ÄŒÄ‚Ô
-//	XV‰Â”\‚È•¶Žš—ñ‚Å‚ ‚ê‚ÎA‚»‚ê‚ð‚»‚Ì‚Ü‚Ü HL ‚É•Ô‚·
-//	XV•s‰Â”\‚È•¶Žš—ñ‚Å‚ ‚ê‚ÎAƒRƒs[‚ðì¬‚µ‚Ä‚»‚ÌƒAƒhƒŒƒX‚ð HL ‚É•Ô‚·
+//	HLã«å¤‰æ•°ãªã©ã®æ–‡å­—åˆ—ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æŒ‡å®šã—ã¦å‘¼ã¶
+//	æ›´æ–°å¯èƒ½ãªæ–‡å­—åˆ—ã§ã‚ã‚Œã°ã€ãã‚Œã‚’ãã®ã¾ã¾ HL ã«è¿”ã™
+//	æ›´æ–°ä¸å¯èƒ½ãªæ–‡å­—åˆ—ã§ã‚ã‚Œã°ã€ã‚³ãƒ”ãƒ¼ã‚’ä½œæˆã—ã¦ãã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ HL ã«è¿”ã™
 void CASSEMBLER_LIST::activate_get_writeable_string( void ) {
 	CASSEMBLER_LINE asm_line;
 
@@ -1263,9 +1263,9 @@ void CASSEMBLER_LIST::activate_str( void ) {
 	if( this->is_registered_subroutine( "str" ) ) {
 		return;
 	}
-	// DAC‚É“ü‚Á‚Ä‚¢‚é”’l‚ð•¶Žš—ñ‚É•ÏŠ·‚·‚é STR(dac)
-	// Œ‹‰Ê‚ÍˆêŽžƒoƒbƒtƒ@‚ÖƒJƒG‚³‚ê‚é‚Ì‚Å free_string ‚Ì•K—v‚Í–³‚¢‚ª
-	// •Ï”‚È‚Ç‚Ö‘ã“ü‚·‚éê‡‚ÍAƒRƒs[‚ðì¬‚µ‚Ä‘ã“ü‚·‚é‚±‚ÆB
+	// DACã«å…¥ã£ã¦ã„ã‚‹æ•°å€¤ã‚’æ–‡å­—åˆ—ã«å¤‰æ›ã™ã‚‹ STR(dac)
+	// çµæžœã¯ä¸€æ™‚ãƒãƒƒãƒ•ã‚¡ã¸ã‚«ã‚¨ã•ã‚Œã‚‹ã®ã§ free_string ã®å¿…è¦ã¯ç„¡ã„ãŒ
+	// å¤‰æ•°ãªã©ã¸ä»£å…¥ã™ã‚‹å ´åˆã¯ã€ã‚³ãƒ”ãƒ¼ã‚’ä½œæˆã—ã¦ä»£å…¥ã™ã‚‹ã“ã¨ã€‚
 	this->subrouines_list.push_back( "str" );
 	this->add_label( "bios_fout", "0x03425" );
 	asm_line.set( "LABEL", "", "str", "" );
@@ -1521,9 +1521,9 @@ void CASSEMBLER_LIST::activate_check_array( void ) {
 }
 
 // --------------------------------------------------------------------
-//	•¶Žš—ñ”z—ñ‚ðƒ`ƒFƒbƒN‚·‚é
-//	HL ... •¶Žš—ñ”z—ñ•Ï”‚ÌŠi”[ƒAƒhƒŒƒX
-//	D .... ŽŸŒ³”
+//	æ–‡å­—åˆ—é…åˆ—ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
+//	HL ... æ–‡å­—åˆ—é…åˆ—å¤‰æ•°ã®æ ¼ç´ã‚¢ãƒ‰ãƒ¬ã‚¹
+//	D .... æ¬¡å…ƒæ•°
 //	BC ... 
 void CASSEMBLER_LIST::activate_check_sarray( CCONSTANT_INFO *p_constants ) {
 	CASSEMBLER_LINE asm_line;
@@ -1651,7 +1651,7 @@ void CASSEMBLER_LIST::activate_calc_array_top( void ) {
 
 	asm_line.set( "LABEL", "", "calc_array_top", "" );
 	this->subroutines.push_back( asm_line );
-	//	•Ï”‚ÌŽw‚µŽ¦‚·æ‚ð“Ç‚Þ
+	//	å¤‰æ•°ã®æŒ‡ã—ç¤ºã™å…ˆã‚’èª­ã‚€
 	asm_line.set( "LD", "", "E", "[HL]" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "INC", "", "HL", "" );
@@ -1660,12 +1660,12 @@ void CASSEMBLER_LIST::activate_calc_array_top( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "EX", "", "DE", "HL" );
 	this->subroutines.push_back( asm_line );
-	//	ƒTƒCƒYƒtƒB[ƒ‹ƒh‚ð“Ç‚Ý”ò‚Î‚·
+	//	ã‚µã‚¤ã‚ºãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’èª­ã¿é£›ã°ã™
 	asm_line.set( "INC", "", "HL", "" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "INC", "", "HL", "" );
 	this->subroutines.push_back( asm_line );
-	//	ŽŸŒ³”ƒtƒB[ƒ‹ƒh‚ðŽæ“¾
+	//	æ¬¡å…ƒæ•°ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’å–å¾—
 	asm_line.set( "LD", "", "E", "[HL]" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "INC", "", "HL", "" );
@@ -1678,13 +1678,13 @@ void CASSEMBLER_LIST::activate_calc_array_top( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "A", "E" );
 	this->subroutines.push_back( asm_line );
-	//	–ß‚èƒAƒhƒŒƒX‚ðƒXƒ^ƒbƒN‚©‚ç DE ‚Ö‘Ò”ð
+	//	æˆ»ã‚Šã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ã‚¹ã‚¿ãƒƒã‚¯ã‹ã‚‰ DE ã¸å¾…é¿
 	asm_line.set( "POP", "", "DE", "" );
 	this->subroutines.push_back( asm_line );
-	//	Å‰‚Ì—v‘f‚ÌƒAƒhƒŒƒX‚ðƒXƒ^ƒbƒN‚ÖÏ‚Þ
+	//	æœ€åˆã®è¦ç´ ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ã‚¹ã‚¿ãƒƒã‚¯ã¸ç©ã‚€
 	asm_line.set( "PUSH", "", "HL", "" );
 	this->subroutines.push_back( asm_line );
-	//	—v‘f”ƒtƒB[ƒ‹ƒh‚ð“Ç‚ÝŽæ‚Á‚ÄƒXƒ^ƒbƒN‚ÉÏ‚Þ
+	//	è¦ç´ æ•°ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’èª­ã¿å–ã£ã¦ã‚¹ã‚¿ãƒƒã‚¯ã«ç©ã‚€
 	asm_line.set( "JR", "", "_calc_array_top_l2", "" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LABEL", "", "_calc_array_top_l1", "" );
@@ -1766,7 +1766,7 @@ void CASSEMBLER_LIST::activate_sub_input( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "RST", "", "0x20" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "JP", "Z", "_sub_input_all_blank", "" );		//	‰½‚à“ü—Í‚µ‚Ä‚¢‚È‚¢ê‡‚ÍAŽc‚è‚Ì•Ï”‘S‚Ä 0 ‚â "" ‚É‚·‚é
+	asm_line.set( "JP", "Z", "_sub_input_all_blank", "" );		//	ä½•ã‚‚å…¥åŠ›ã—ã¦ã„ãªã„å ´åˆã¯ã€æ®‹ã‚Šã®å¤‰æ•°å…¨ã¦ 0 ã‚„ "" ã«ã™ã‚‹
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "CALL", "", "_sub_input_skip_white", "" );
 	this->subroutines.push_back( asm_line );
@@ -2134,7 +2134,7 @@ void CASSEMBLER_LIST::activate_sub_input( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "JR", "", "_sub_input_skip_white", "" );
 	this->subroutines.push_back( asm_line );
-	//	‘S‚Ä‚ÌŽc‚è‚Ì•Ï”‚É 0 ‚Ü‚½‚Í "" ‚ðŠi”[‚·‚é
+	//	å…¨ã¦ã®æ®‹ã‚Šã®å¤‰æ•°ã« 0 ã¾ãŸã¯ "" ã‚’æ ¼ç´ã™ã‚‹
 	asm_line.set( "COMMENT", "", "Store 0 or \"\" in all remaining variables" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LABEL", "", "_sub_input_all_blank" );
@@ -2222,7 +2222,7 @@ void CASSEMBLER_LIST::activate_sub_input( void ) {
 	asm_line.set( "PUSH", "", "bc" );
 	this->subroutines.push_back( asm_line );
 
-	//	•s—v‚É‚È‚Á‚½•¶Žš—ñ•Ï”—Ìˆæ‚ÌŠJ•úˆ—
+	//	ä¸è¦ã«ãªã£ãŸæ–‡å­—åˆ—å¤‰æ•°é ˜åŸŸã®é–‹æ”¾å‡¦ç†
 	asm_line.set( "COMMENT", "", "Release of unneeded string variable areas" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LABEL", "", "_sub_input_all_free" );
@@ -2851,7 +2851,7 @@ void CASSEMBLER_LIST::activate_circle( class CCOMPILE_INFO *p_info ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "[work_cpcnt + 1]", "A" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "COMMENT", "", "	Convert End angle to 0`255." );
+	asm_line.set( "COMMENT", "", "	Convert End angle to 0ï½ž255." );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "HL", "work_crcsum" );
 	this->subroutines.push_back( asm_line );
@@ -2923,7 +2923,7 @@ void CASSEMBLER_LIST::activate_circle( class CCOMPILE_INFO *p_info ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "[work_circle_cyoff1]", "HL" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "COMMENT", "", "	ƒÆ = 0[deg]¨45[deg]" );
+	asm_line.set( "COMMENT", "", "	Î¸ = 0[deg]â†’45[deg]" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "A", "[work_csclxy]" );
 	this->subroutines.push_back( asm_line );
@@ -3053,7 +3053,7 @@ void CASSEMBLER_LIST::activate_circle( class CCOMPILE_INFO *p_info ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "CALL", "", "_sub_circle_quadrant_process" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "COMMENT", "", "		Quadrant 3 (270[deg]`360[deg])" );
+	asm_line.set( "COMMENT", "", "		Quadrant 3 (270[deg]ï½ž360[deg])" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LABEL", "", "_sub_circle_quadrant3_process" );
 	this->subroutines.push_back( asm_line );
@@ -3749,7 +3749,7 @@ void CASSEMBLER_LIST::activate_circle( class CCOMPILE_INFO *p_info ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "BC", "[work_circle_centerx]" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "COMMENT", "", " I“_Y1" );
+	asm_line.set( "COMMENT", "", " çµ‚ç‚¹Y1" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "DE", "[work_circle_centery]" );
 	this->subroutines.push_back( asm_line );
@@ -3859,13 +3859,13 @@ void CASSEMBLER_LIST::activate_circle( class CCOMPILE_INFO *p_info ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "RET" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "COMMENT", "", "	Get cos(THETA): A = THETA (0:0[deg]`256:360[deg]) ¨ A = cos(THETA)" );
+	asm_line.set( "COMMENT", "", "	Get cos(THETA): A = THETA (0:0[deg]ï½ž256:360[deg]) â†’ A = cos(THETA)" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LABEL", "", "_sub_circle_cos" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "SUB", "", "A", "64" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "COMMENT", "", "	sinƒÆ‚ð•Ô‚·: A = THETA (0:0[deg]`256:360[deg]) ¨ A = sin(THETA)" );
+	asm_line.set( "COMMENT", "", "	sinÎ¸ã‚’è¿”ã™: A = THETA (0:0[deg]ï½ž256:360[deg]) â†’ A = sin(THETA)" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LABEL", "", "_sub_circle_sin" );
 	this->subroutines.push_back( asm_line );
@@ -3936,8 +3936,8 @@ void CASSEMBLER_LIST::activate_circle( class CCOMPILE_INFO *p_info ) {
 }
 
 // --------------------------------------------------------------------
-//	ŠJ‚¢‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ð•Â‚¶‚é
-//	L = 1`15 : CLOSE #L
+//	é–‹ã„ã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
+//	L = 1ï½ž15 : CLOSE #L
 //
 void CASSEMBLER_LIST::activate_close( void ) {
 	CASSEMBLER_LINE asm_line;
@@ -3971,7 +3971,7 @@ void CASSEMBLER_LIST::activate_close( void ) {
 	asm_line.set( "OR", "", "A", "L" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "RET", "Z" );
-	this->subroutines.push_back( asm_line );			//	CLOSE#0 ‚ÍA‰½‚à‚¹‚¸‚É–ß‚é(ƒGƒ‰[‚É‚Í‚È‚ç‚È‚¢)
+	this->subroutines.push_back( asm_line );			//	CLOSE#0 ã¯ã€ä½•ã‚‚ã›ãšã«æˆ»ã‚‹(ã‚¨ãƒ©ãƒ¼ã«ã¯ãªã‚‰ãªã„)
 	asm_line.set( "DEC", "", "L" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "DE", "file_info_size" );				//	FCB 37 + BUFFER 256
@@ -3986,7 +3986,7 @@ void CASSEMBLER_LIST::activate_close( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "INC", "", "HL" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "LD", "", "A", "[HL]" );				//	0: No Open, 1`8: FILE, 128: GRP, 129: CON, 130: CRT, 255: NUL
+	asm_line.set( "LD", "", "A", "[HL]" );				//	0: No Open, 1ï½ž8: FILE, 128: GRP, 129: CON, 130: CRT, 255: NUL
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "DEC", "", "A" );
 	this->subroutines.push_back( asm_line );
@@ -4004,14 +4004,14 @@ void CASSEMBLER_LIST::activate_close( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LABEL", "", "sub_close_end" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "LD", "", "[HL]", "0" );				//	No Open ‚Éƒ}[ƒN‚·‚é
+	asm_line.set( "LD", "", "[HL]", "0" );				//	No Open ã«ãƒžãƒ¼ã‚¯ã™ã‚‹
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "RET" );
 	this->subroutines.push_back( asm_line );
 }
 
 // --------------------------------------------------------------------
-//	ŠJ‚¢‚Ä‚¢‚é‘S‚Ä‚Ìƒtƒ@ƒCƒ‹‚ð•Â‚¶‚é
+//	é–‹ã„ã¦ã„ã‚‹å…¨ã¦ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
 void CASSEMBLER_LIST::activate_all_close( void ) {
 	CASSEMBLER_LINE asm_line;
 
@@ -4051,7 +4051,7 @@ void CASSEMBLER_LIST::activate_all_close( void ) {
 }
 
 // --------------------------------------------------------------------
-//	HL = V‚µ‚¢ MAXFILES ‚Ì’l
+//	HL = æ–°ã—ã„ MAXFILES ã®å€¤
 void CASSEMBLER_LIST::activate_maxfiles( void ) {
 	CASSEMBLER_LINE asm_line;
 
@@ -4066,14 +4066,14 @@ void CASSEMBLER_LIST::activate_maxfiles( void ) {
 	asm_line.set( "LABEL", "", "sub_maxfiles" );
 	this->subroutines.push_back( asm_line );
 
-	//	‚Ü‚¸Œ»ÝŠJ‚¢‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ð‘S‚Ä close ‚·‚é
+	//	ã¾ãšç¾åœ¨é–‹ã„ã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å…¨ã¦ close ã™ã‚‹
 	asm_line.set( "PUSH", "", "HL" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "CALL", "", "sub_all_close" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "POP", "", "HL" );
 	this->subroutines.push_back( asm_line );
-	//	maxfil ‚ðXV
+	//	maxfil ã‚’æ›´æ–°
 	asm_line.set( "LD", "", "A", "L" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "AND", "", "A", "15" );
@@ -4100,7 +4100,7 @@ void CASSEMBLER_LIST::activate_init_files( void ) {
 	asm_line.set( "LABEL", "", "sub_init_files" );
 	this->subroutines.push_back( asm_line );
 
-	//	ƒƒ‚ƒŠ‚ªŠm•ÛÏ‚Ý‚Å‚ ‚ê‚Î‰ð•ú‚·‚é
+	//	ãƒ¡ãƒ¢ãƒªãŒç¢ºä¿æ¸ˆã¿ã§ã‚ã‚Œã°è§£æ”¾ã™ã‚‹
 	asm_line.set( "LD", "", "HL", "[svaria_file_info]" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "C", "[HL]" );
@@ -4122,7 +4122,7 @@ void CASSEMBLER_LIST::activate_init_files( void ) {
 	asm_line.set( "CALL", "NZ", "free_heap" );
 	this->subroutines.push_back( asm_line );
 
-	//	ƒƒ‚ƒŠ‚ðŠm•Û‚·‚éBƒ[ƒƒNƒŠƒA‚³‚ê‚é‚Ì‚ÅA‘S‚Ä•Â‚¶‚½ó‘Ô‚É‚È‚éB
+	//	ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿ã™ã‚‹ã€‚ã‚¼ãƒ­ã‚¯ãƒªã‚¢ã•ã‚Œã‚‹ã®ã§ã€å…¨ã¦é–‰ã˜ãŸçŠ¶æ…‹ã«ãªã‚‹ã€‚
 	asm_line.set( "LD", "", "A", "[work_maxfil]" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD", "", "E", "A" );
@@ -4170,8 +4170,8 @@ void CASSEMBLER_LIST::activate_open_for_input( void ) {
 	this->add_label( "blib_open_for_input", "0x40e4" );
 	this->activate_open_sub();
 
-	//	HL ... ƒtƒ@ƒCƒ‹–¼
-	//	DE ... ƒtƒ@ƒCƒ‹”Ô†
+	//	HL ... ãƒ•ã‚¡ã‚¤ãƒ«å
+	//	DE ... ãƒ•ã‚¡ã‚¤ãƒ«ç•ªå·
 	asm_line.set( "LABEL", "", "sub_open_for_input" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "CALL", "", "sub_open_sub" );
@@ -4193,8 +4193,8 @@ void CASSEMBLER_LIST::activate_open_for_output( void ) {
 	this->add_label( "blib_open_for_output", "0x40e7" );
 	this->activate_open_sub();
 
-	//	HL ... ƒtƒ@ƒCƒ‹–¼
-	//	DE ... ƒtƒ@ƒCƒ‹”Ô†
+	//	HL ... ãƒ•ã‚¡ã‚¤ãƒ«å
+	//	DE ... ãƒ•ã‚¡ã‚¤ãƒ«ç•ªå·
 	asm_line.set( "LABEL", "", "sub_open_for_output" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "CALL", "", "sub_open_sub" );
@@ -4216,8 +4216,8 @@ void CASSEMBLER_LIST::activate_open_for_append( void ) {
 	this->add_label( "blib_open_for_append", "0x40ea" );
 	this->activate_open_sub();
 
-	//	HL ... ƒtƒ@ƒCƒ‹–¼
-	//	DE ... ƒtƒ@ƒCƒ‹”Ô†
+	//	HL ... ãƒ•ã‚¡ã‚¤ãƒ«å
+	//	DE ... ãƒ•ã‚¡ã‚¤ãƒ«ç•ªå·
 	asm_line.set( "LABEL", "", "sub_open_for_append" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "CALL", "", "sub_open_sub" );
@@ -4239,8 +4239,8 @@ void CASSEMBLER_LIST::activate_open_for_none( void ) {
 	this->add_label( "blib_open_for_none", "0x40f9" );
 	this->activate_open_sub();
 
-	//	HL ... ƒtƒ@ƒCƒ‹–¼
-	//	DE ... ƒtƒ@ƒCƒ‹”Ô†
+	//	HL ... ãƒ•ã‚¡ã‚¤ãƒ«å
+	//	DE ... ãƒ•ã‚¡ã‚¤ãƒ«ç•ªå·
 	//	A .... LEN
 	asm_line.set( "LABEL", "", "sub_open_for_none" );
 	this->subroutines.push_back( asm_line );
@@ -4262,11 +4262,11 @@ void CASSEMBLER_LIST::activate_open_sub( void ) {
 	this->subrouines_list.push_back( "sub_open_sub" );
 	this->add_label( "bios_imult", "0x03193" );
 	this->add_label( "bios_errhand", "0x0406F" );
-	this->add_label( "work_ptrfil", "0x0f864" );	//	Œ‹‰Ê‚ÌŠi”[æ
+	this->add_label( "work_ptrfil", "0x0f864" );	//	çµæžœã®æ ¼ç´å…ˆ
 
-	//	HL ... ƒtƒ@ƒCƒ‹–¼
-	//	DE ... ƒtƒ@ƒCƒ‹”Ô†
-	//	¨ work_ptrfil ‚É FILE_INFO
+	//	HL ... ãƒ•ã‚¡ã‚¤ãƒ«å
+	//	DE ... ãƒ•ã‚¡ã‚¤ãƒ«ç•ªå·
+	//	â†’ work_ptrfil ã« FILE_INFO
 	asm_line.set( "LABEL", "", "sub_open_sub" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "PUSH", "", "AF" );
@@ -4316,8 +4316,8 @@ void CASSEMBLER_LIST::activate_open_sub( void ) {
 }
 
 // --------------------------------------------------------------------
-//	ƒtƒ@ƒCƒ‹”Ô† #n ‚Ì n ‚©‚ç FILE_INFO ‚ÌƒAƒhƒŒƒX‚ð‹‚ß‚éƒ‹[ƒ`ƒ“
-//	HL = 1`15
+//	ãƒ•ã‚¡ã‚¤ãƒ«ç•ªå· #n ã® n ã‹ã‚‰ FILE_INFO ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ±‚ã‚ã‚‹ãƒ«ãƒ¼ãƒãƒ³
+//	HL = 1ï½ž15
 void CASSEMBLER_LIST::activate_file_number( void ) {
 	CASSEMBLER_LINE asm_line;
 
@@ -4326,7 +4326,7 @@ void CASSEMBLER_LIST::activate_file_number( void ) {
 	}
 	this->subrouines_list.push_back( "sub_file_number" );
 	this->add_label( "bios_imult", "0x03193" );
-	this->add_label( "work_ptrfil", "0x0f864" );	//	Œ‹‰Ê‚ÌŠi”[æ
+	this->add_label( "work_ptrfil", "0x0f864" );	//	çµæžœã®æ ¼ç´å…ˆ
 
 	asm_line.set( "LABEL", "", "sub_file_number" );
 	this->subroutines.push_back( asm_line );
@@ -4499,28 +4499,28 @@ void CASSEMBLER_LIST::activate_field( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LABEL",	"", "sub_field" );
 	this->subroutines.push_back( asm_line );
-	// •Ï”ƒŠƒXƒg‚É•Ï”‚ÌƒAƒhƒŒƒX‚ð‘‚«ž‚Þ
+	// å¤‰æ•°ãƒªã‚¹ãƒˆã«å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ›¸ãè¾¼ã‚€
 	asm_line.set( "EX",		"", "DE", "HL" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "LD",		"", "[HL]", "A" );			// ƒTƒCƒY‚ð‘‚«ž‚Þ
+	asm_line.set( "LD",		"", "[HL]", "A" );			// ã‚µã‚¤ã‚ºã‚’æ›¸ãè¾¼ã‚€
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "INC",	"", "HL" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "LD",		"", "[HL]", "E" );			// •Ï”ƒAƒhƒŒƒX‰ºˆÊ
+	asm_line.set( "LD",		"", "[HL]", "E" );			// å¤‰æ•°ã‚¢ãƒ‰ãƒ¬ã‚¹ä¸‹ä½
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "INC",	"", "HL" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "LD",		"", "[HL]", "D" );			// •Ï”ƒAƒhƒŒƒXãˆÊ
+	asm_line.set( "LD",		"", "[HL]", "D" );			// å¤‰æ•°ã‚¢ãƒ‰ãƒ¬ã‚¹ä¸Šä½
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "INC",	"", "HL" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "PUSH",	"", "HL" );					// (1) •Ï”ƒŠƒXƒg‚ÌƒAƒhƒŒƒX•Û‘¶
+	asm_line.set( "PUSH",	"", "HL" );					// (1) å¤‰æ•°ãƒªã‚¹ãƒˆã®ã‚¢ãƒ‰ãƒ¬ã‚¹ä¿å­˜
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "PUSH",	"", "DE" );					// (2) •Ï”‚ÌƒAƒhƒŒƒX•Û‘¶
+	asm_line.set( "PUSH",	"", "DE" );					// (2) å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ä¿å­˜
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "PUSH",	"", "AF" );					// (3) ƒTƒCƒY•Û‘¶
+	asm_line.set( "PUSH",	"", "AF" );					// (3) ã‚µã‚¤ã‚ºä¿å­˜
 	this->subroutines.push_back( asm_line );
-	// •Ï”‚ÌƒAƒhƒŒƒX‚©‚ç•¶Žš—ñ‚ÌƒAƒhƒŒƒX‚ð“¾‚é
+	// å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‹ã‚‰æ–‡å­—åˆ—ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å¾—ã‚‹
 	asm_line.set( "EX",		"", "DE", "HL" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD",		"", "E", "[HL]" );
@@ -4531,27 +4531,27 @@ void CASSEMBLER_LIST::activate_field( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "EX",		"", "DE", "HL" );
 	this->subroutines.push_back( asm_line );
-	// •¶Žš—ñ‚ð‰ð•ú‚·‚é
+	// æ–‡å­—åˆ—ã‚’è§£æ”¾ã™ã‚‹
 	asm_line.set( "CALL",	"", "free_string" );
 		this->subroutines.push_back( asm_line );
-	// Žw’è‚Ì’·‚³‚Ì•¶Žš—ñ‚ð“¾‚é ( SPACE$() )
-	asm_line.set( "POP",	"", "AF" );					// [3] ƒTƒCƒY•œ‹A
+	// æŒ‡å®šã®é•·ã•ã®æ–‡å­—åˆ—ã‚’å¾—ã‚‹ ( SPACE$() )
+	asm_line.set( "POP",	"", "AF" );					// [3] ã‚µã‚¤ã‚ºå¾©å¸°
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "LD",		"", "L", "A" );				// L = ƒTƒCƒY
+	asm_line.set( "LD",		"", "L", "A" );				// L = ã‚µã‚¤ã‚º
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "CALL",	"", "sub_space" );			// HL = space$(A)
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "POP",	"", "DE" );					// [2] •Ï”‚ÌƒAƒhƒŒƒX‚ð•œ‹A
+	asm_line.set( "POP",	"", "DE" );					// [2] å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å¾©å¸°
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "EX",		"", "DE", "HL" );			// HL = •Ï”‚ÌƒAƒhƒŒƒX, DE = SPACE$() ‚Å“¾‚½•¶Žš—ñ‚ÌƒAƒhƒŒƒX
+	asm_line.set( "EX",		"", "DE", "HL" );			// HL = å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹, DE = SPACE$() ã§å¾—ãŸæ–‡å­—åˆ—ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "LD",		"", "[HL]", "E" );			// •Ï”‚É•¶Žš—ñ‚ÌƒAƒhƒŒƒX‰ºˆÊ‚ðƒZƒbƒg
+	asm_line.set( "LD",		"", "[HL]", "E" );			// å¤‰æ•°ã«æ–‡å­—åˆ—ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ä¸‹ä½ã‚’ã‚»ãƒƒãƒˆ
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "INC",	"", "HL" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "LD",		"", "[HL]", "D" );			// •Ï”‚É•¶Žš—ñ‚ÌƒAƒhƒŒƒXãˆÊ‚ðƒZƒbƒg
+	asm_line.set( "LD",		"", "[HL]", "D" );			// å¤‰æ•°ã«æ–‡å­—åˆ—ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ä¸Šä½ã‚’ã‚»ãƒƒãƒˆ
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "POP",	"", "HL" );					// [1] •Ï”ƒŠƒXƒg‚ÌƒAƒhƒŒƒX
+	asm_line.set( "POP",	"", "HL" );					// [1] å¤‰æ•°ãƒªã‚¹ãƒˆã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "RET" );
 	this->subroutines.push_back( asm_line );
@@ -4581,7 +4581,7 @@ void CASSEMBLER_LIST::activate_space( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "OR",		"", "A", "A" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "RET",	"Z" );						//	Žw’è‚Ì’·‚³‚ª 0 ‚È‚ç‰½‚à‚¹‚¸‚É–ß‚é
+	asm_line.set( "RET",	"Z" );						//	æŒ‡å®šã®é•·ã•ãŒ 0 ãªã‚‰ä½•ã‚‚ã›ãšã«æˆ»ã‚‹
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD",		"", "C", "A" );
 	this->subroutines.push_back( asm_line );
@@ -4595,7 +4595,7 @@ void CASSEMBLER_LIST::activate_space( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "DEC",	"", "C" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "RET",	"Z" );						//	Žw’è‚Ì’·‚³‚ª 1 ‚È‚ç‚±‚±‚Å–ß‚é
+	asm_line.set( "RET",	"Z" );						//	æŒ‡å®šã®é•·ã•ãŒ 1 ãªã‚‰ã“ã“ã§æˆ»ã‚‹
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "INC",	"", "HL" );
 	this->subroutines.push_back( asm_line );
@@ -4653,15 +4653,15 @@ void CASSEMBLER_LIST::activate_get( void ) {
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "JP",		"nc",	"bios_errhand" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "DEC",	"",		"hl" );					//	ƒŒƒR[ƒh”Ô†‚ð 0 ƒIƒŠƒWƒ“‚É•Ï‚¦‚é
+	asm_line.set( "DEC",	"",		"hl" );					//	ãƒ¬ã‚³ãƒ¼ãƒ‰ç•ªå·ã‚’ 0 ã‚ªãƒªã‚¸ãƒ³ã«å¤‰ãˆã‚‹
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "EX",		"",		"de", "hl" );			//	DE = ƒŒƒR[ƒh”Ô†
+	asm_line.set( "EX",		"",		"de", "hl" );			//	DE = ãƒ¬ã‚³ãƒ¼ãƒ‰ç•ªå·
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD",		"",		"hl", "[work_ptrfil]" );
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD",		"",		"bc", "33" );
 	this->subroutines.push_back( asm_line );
-	asm_line.set( "ADD",	"",		"hl", "bc" );			//	HL = FCB ‚Ì ƒ‰ƒ“ƒ_ƒ€ƒŒƒR[ƒhƒtƒB[ƒ‹ƒh
+	asm_line.set( "ADD",	"",		"hl", "bc" );			//	HL = FCB ã® ãƒ©ãƒ³ãƒ€ãƒ ãƒ¬ã‚³ãƒ¼ãƒ‰ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 	this->subroutines.push_back( asm_line );
 	asm_line.set( "LD",		"",		"[hl]", "e" );
 	this->subroutines.push_back( asm_line );
@@ -4779,14 +4779,14 @@ bool CASSEMBLER_LIST::save_sub( FILE *p_file, std::vector< CASSEMBLER_LINE > *p_
 // --------------------------------------------------------------------
 void CASSEMBLER_LIST::add_label( const std::string s_name, const std::string s_value ) {
 
-	//	Šù‚É‘¶Ý‚µ‚Ä‚¢‚éƒ‰ƒxƒ‹‚È‚Ì‚©’²‚×‚é
+	//	æ—¢ã«å­˜åœ¨ã—ã¦ã„ã‚‹ãƒ©ãƒ™ãƒ«ãªã®ã‹èª¿ã¹ã‚‹
 	for( auto &p: this->label_list ) {
 		if( p == s_name ) {
-			//	‘¶Ý‚µ‚Ä‚¢‚éê‡‚Í‰½‚à‚µ‚È‚¢
+			//	å­˜åœ¨ã—ã¦ã„ã‚‹å ´åˆã¯ä½•ã‚‚ã—ãªã„
 			return;
 		}
 	}
-	//	ƒŠƒXƒg‚É’Ç‰Á‚·‚é
+	//	ãƒªã‚¹ãƒˆã«è¿½åŠ ã™ã‚‹
 	this->label_list.push_back( s_name );
 
 	CASSEMBLER_LINE asm_line;

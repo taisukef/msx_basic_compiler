@@ -15,7 +15,7 @@ CEXPRESSION_NODE* CEXPRESSION_USR::optimization( CCOMPILE_INFO *p_info ) {
 		return nullptr;
 	}
 	p = this->p_operand->optimization( p_info );
-	//	USRŠÖ”‚ÍÅ“K‰»‚ÅÁ–Å‚·‚é‚±‚Æ‚Í‚È‚¢
+	//	USRé–¢æ•°ã¯æœ€é©åŒ–ã§æ¶ˆæ»…ã™ã‚‹ã“ã¨ã¯ãªã„
 	return nullptr;
 }
 
@@ -27,7 +27,7 @@ void CEXPRESSION_USR::compile( CCOMPILE_INFO *p_info ) {
 	if( this->p_operand == nullptr ) {
 		return;
 	}
-	//	æ‚Éˆø”‚ðˆ—
+	//	å…ˆã«å¼•æ•°ã‚’å‡¦ç†
 	this->p_operand->compile( p_info );
 
 	p_info->assembler_list.add_label( "work_valtyp", "0x0f663" );
@@ -72,7 +72,7 @@ void CEXPRESSION_USR::compile( CCOMPILE_INFO *p_info ) {
 		asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "D", COPERAND_TYPE::CONSTANT, "H" );
 		p_info->assembler_list.body.push_back( asm_line );
 	}
-	//	USRŒÄ‚Ño‚µ
+	//	USRå‘¼ã³å‡ºã—
 	s_label = p_info->get_auto_label();
 	asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "HL", COPERAND_TYPE::CONSTANT, s_label );
 	p_info->assembler_list.body.push_back( asm_line );
@@ -89,7 +89,7 @@ void CEXPRESSION_USR::compile( CCOMPILE_INFO *p_info ) {
 	asm_line.set( CMNEMONIC_TYPE::LABEL, CCONDITION::NONE, COPERAND_TYPE::CONSTANT, s_label, COPERAND_TYPE::NONE, "" );
 	p_info->assembler_list.body.push_back( asm_line );
 
-	//	this->type ‚ÍAexpression.cpp ‚Ì’†‚ÅÝ’è‚µ‚Ä‚¢‚é‚Ì‚ÅA‚±‚±‚Å‚Í‚»‚ÌŽQÆ‚Ì‚Ý
+	//	this->type ã¯ã€expression.cpp ã®ä¸­ã§è¨­å®šã—ã¦ã„ã‚‹ã®ã§ã€ã“ã“ã§ã¯ãã®å‚ç…§ã®ã¿
 	if( this->type == CEXPRESSION_TYPE::INTEGER ) {
 		p_info->assembler_list.add_label( "bios_frcint", "0x02f8a" );
 		asm_line.set( CMNEMONIC_TYPE::CALL, CCONDITION::NONE, COPERAND_TYPE::CONSTANT, "bios_frcint", COPERAND_TYPE::NONE, "" );

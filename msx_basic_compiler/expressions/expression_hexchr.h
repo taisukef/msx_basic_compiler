@@ -11,7 +11,7 @@
 #define __EXPRESSION_HEXCHR_H__
 
 // --------------------------------------------------------------------
-//	ŠÖ”ŒÄ‚Ño‚µ
+//	é–¢æ•°å‘¼ã³å‡ºã—
 class CEXPRESSION_HEXCHR: public CEXPRESSION_NODE {
 private:
 	int hexchr( int c );

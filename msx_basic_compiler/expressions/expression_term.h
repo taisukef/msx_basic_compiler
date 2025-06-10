@@ -11,7 +11,7 @@
 #define __CEXPRESSION_TERM_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_TERM: public CEXPRESSION_NODE {
 public:
 	CEXPRESSION_TERM() {

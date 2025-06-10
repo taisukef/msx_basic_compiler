@@ -8,7 +8,7 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  BLOAD "ƒtƒ@ƒCƒ‹–¼" [,S]
+//  BLOAD "ãƒ•ã‚¡ã‚¤ãƒ«å" [,S]
 bool CBLOAD::exec( CCOMPILE_INFO *p_info ) {
 	CEXPRESSION exp;
 	CASSEMBLER_LINE asm_line;
@@ -32,7 +32,7 @@ bool CBLOAD::exec( CCOMPILE_INFO *p_info ) {
 
 	p_info->assembler_list.add_label( "work_buf", "0x0F55E" );
 	if( p_info->list.is_command_end() ) {
-		//	BLOAD "ƒtƒ@ƒCƒ‹–¼"
+		//	BLOAD "ãƒ•ã‚¡ã‚¤ãƒ«å"
 		p_info->assembler_list.activate_bload();
 		asm_line.set( "LD", "", "DE", "0" );
 		p_info->assembler_list.body.push_back( asm_line );
@@ -56,7 +56,7 @@ bool CBLOAD::exec( CCOMPILE_INFO *p_info ) {
 			p_info->assembler_list.body.push_back( asm_line );
 			if( !is_load && p_info->list.p_position->s_word == "," ) {
 				p_info->list.p_position++;
-				//	BLOAD "ƒtƒ@ƒCƒ‹–¼",R,ƒIƒtƒZƒbƒg
+				//	BLOAD "ãƒ•ã‚¡ã‚¤ãƒ«å",R,ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 				if( exp.compile( p_info, CEXPRESSION_TYPE::EXTENDED_INTEGER ) ) {
 					exp.release();
 				}
@@ -66,7 +66,7 @@ bool CBLOAD::exec( CCOMPILE_INFO *p_info ) {
 				}
 			}
 			else {
-				//	BLOAD "ƒtƒ@ƒCƒ‹–¼",R
+				//	BLOAD "ãƒ•ã‚¡ã‚¤ãƒ«å",R
 				asm_line.set( "LD", "", "HL", "0" );
 				p_info->assembler_list.body.push_back( asm_line );
 			}
@@ -86,7 +86,7 @@ bool CBLOAD::exec( CCOMPILE_INFO *p_info ) {
 			p_info->assembler_list.body.push_back( asm_line );
 			if( !is_load && p_info->list.p_position->s_word == "," ) {
 				p_info->list.p_position++;
-				//	BLOAD "ƒtƒ@ƒCƒ‹–¼",S,ƒIƒtƒZƒbƒg
+				//	BLOAD "ãƒ•ã‚¡ã‚¤ãƒ«å",S,ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 				if( exp.compile( p_info, CEXPRESSION_TYPE::EXTENDED_INTEGER ) ) {
 					exp.release();
 				}
@@ -96,7 +96,7 @@ bool CBLOAD::exec( CCOMPILE_INFO *p_info ) {
 				}
 			}
 			else {
-				//	BLOAD "ƒtƒ@ƒCƒ‹–¼",S
+				//	BLOAD "ãƒ•ã‚¡ã‚¤ãƒ«å",S
 				asm_line.set( "LD", "", "HL", "0" );
 				p_info->assembler_list.body.push_back( asm_line );
 			}
@@ -126,7 +126,7 @@ bool CBLOAD::exec( CCOMPILE_INFO *p_info ) {
 			p_info->assembler_list.body.push_back( asm_line );
 			if( exp.compile( p_info ) ) {
 				exp.release();
-				//	BLOAD "ƒtƒ@ƒCƒ‹–¼", ƒIƒtƒZƒbƒg
+				//	BLOAD "ãƒ•ã‚¡ã‚¤ãƒ«å", ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 				p_info->assembler_list.activate_bload();
 				asm_line.set( "LD", "", "[work_buf]", "HL" );
 				p_info->assembler_list.body.push_back( asm_line );

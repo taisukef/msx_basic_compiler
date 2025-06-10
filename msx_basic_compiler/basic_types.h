@@ -14,22 +14,22 @@ enum class CEXPRESSION_TYPE: int {
 	SINGLE_REAL = 2,
 	DOUBLE_REAL = 3,
 	STRING = 4,
-	EXTENDED_INTEGER = 5,	//	¦ CEXPRESSION::convert_type() ‚Ì target ‚Æ‚µ‚Ä‚Ì‚ÝŽw’è‰Â”\ -32768`65535 ‚ð 2byte®”‚Æ‚µ‚Äˆµ‚¤
+	EXTENDED_INTEGER = 5,	//	â€» CEXPRESSION::convert_type() ã® target ã¨ã—ã¦ã®ã¿æŒ‡å®šå¯èƒ½ -32768ï½ž65535 ã‚’ 2byteæ•´æ•°ã¨ã—ã¦æ‰±ã†
 };
 
 // --------------------------------------------------------------------
 enum class CBASIC_WORD_TYPE {
-	UNKNOWN,					//	0:–¢’m
-	UNKNOWN_NAME,			//	1:‰½‚©‚Ì–¼‘O
-	SYMBOL,					//	2:‹L†
-	INTEGER,				//	3:®”
-	SINGLE_REAL,			//	4:’P¸“xŽÀ”
-	DOUBLE_REAL,			//	5:”{¸“xŽÀ”
-	STRING,					//	6:•¶Žš—ñ
-	RESERVED_WORD,			//	7:—\–ñŒê
-	LINE_NO,				//	8:s”Ô†
-	COMMENT,				//	9:ƒRƒƒ“ƒg
-	BIG_INTEGER,			//	10:ˆêŽž“I‚È‹‘å‚È®”
+	UNKNOWN,					//	0:æœªçŸ¥
+	UNKNOWN_NAME,			//	1:ä½•ã‹ã®åå‰
+	SYMBOL,					//	2:è¨˜å·
+	INTEGER,				//	3:æ•´æ•°
+	SINGLE_REAL,			//	4:å˜ç²¾åº¦å®Ÿæ•°
+	DOUBLE_REAL,			//	5:å€ç²¾åº¦å®Ÿæ•°
+	STRING,					//	6:æ–‡å­—åˆ—
+	RESERVED_WORD,			//	7:äºˆç´„èªž
+	LINE_NO,				//	8:è¡Œç•ªå·
+	COMMENT,				//	9:ã‚³ãƒ¡ãƒ³ãƒˆ
+	BIG_INTEGER,			//	10:ä¸€æ™‚çš„ãªå·¨å¤§ãªæ•´æ•°
 };
 
 // --------------------------------------------------------------------

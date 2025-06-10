@@ -11,7 +11,7 @@
 #define __EXPRESSION_HEX_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_HEX: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_HEX() {

@@ -11,7 +11,7 @@
 #define __EXPRESSION_BIN_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_BIN: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_BIN() {

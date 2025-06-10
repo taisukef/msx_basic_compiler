@@ -11,11 +11,11 @@
 #define __EXPRESSION_VARPTR_H__
 
 // --------------------------------------------------------------------
-//	ŠÖ”ŒÄ‚Ño‚µ
+//	é–¢æ•°å‘¼ã³å‡ºã—
 class CEXPRESSION_VARPTR: public CEXPRESSION_NODE {
 public:
 	bool is_file_type = false;			// false: VARPTR(A), true: VARPTR(#1)
-	int file_number = 0;				// #n ‚Ì nA0`15
+	int file_number = 0;				// #n ã® nã€0ï½15
 	std::vector< CBASIC_WORD >::const_iterator p_position;
 
 	~CEXPRESSION_VARPTR() {

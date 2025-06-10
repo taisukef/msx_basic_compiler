@@ -32,7 +32,7 @@ CEXPRESSION_NODE* CEXPRESSION_LEFT::optimization( CCOMPILE_INFO *p_info ) {
 void CEXPRESSION_LEFT::compile( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 
-	//	æ‚Éˆø”‚ğˆ—
+	//	å…ˆã«å¼•æ•°ã‚’å‡¦ç†
 	if( this->p_operand1 == nullptr || this->p_operand2 == nullptr ) {
 		return;
 	}

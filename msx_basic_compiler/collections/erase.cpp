@@ -7,7 +7,7 @@
 #include "erase.h"
 
 // --------------------------------------------------------------------
-//  ERASE ”z—ñíœ
+//  ERASE é…åˆ—å‰Šé™¤
 bool CERASE::exec( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 	CVARIABLE variable;

@@ -34,7 +34,7 @@ void CEXPRESSION_RIGHT::compile( CCOMPILE_INFO *p_info ) {
 	if( this->p_operand1 == nullptr || this->p_operand2 == nullptr ) {
 		return;
 	}
-	//	æ‚Éˆø”‚ðˆ—
+	//	å…ˆã«å¼•æ•°ã‚’å‡¦ç†
 	this->p_operand1->compile( p_info );
 
 	if( this->p_operand1->type == CEXPRESSION_TYPE::STRING ) {

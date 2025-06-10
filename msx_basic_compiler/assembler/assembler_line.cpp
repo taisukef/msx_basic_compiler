@@ -201,7 +201,7 @@ void CASSEMBLER_LINE::set( std::string s_mnemonic, std::string s_cond, std::stri
 	std::transform( s_cond.begin(),     s_cond.end(),     s_cond.begin(),     ::toupper );
 
 	if( s_mnemonic == "DEFB" || s_mnemonic == "DEFW" || s_mnemonic == "COMMENT" ) {
-		//	‘å•¶Žš‚É•ÏŠ·‚µ‚È‚¢
+		//	å¤§æ–‡å­—ã«å¤‰æ›ã—ãªã„
 	}
 	else {
 		std::transform( s_operand1.begin(), s_operand1.end(), s_operand1.begin(), ::toupper );
@@ -285,30 +285,30 @@ bool CASSEMBLER_LINE::save( FILE *p_file ) {
 
 	CCOMMAND_TYPE command_type = command_list[ this->type ];
 	switch( command_type.parameter_type ) {
-	case 0:	//	ƒIƒyƒ‰ƒ“ƒh–³‚µ
+	case 0:	//	ã‚ªãƒšãƒ©ãƒ³ãƒ‰ç„¡ã—
 		fprintf( p_file, "        %s%s\n",
 			convert_length( command_type.s_name ).c_str(), 
 			condition_list_for_ret[ this->condition ].c_str() );
 		return true;
-	case 1:	//	ƒIƒyƒ‰ƒ“ƒh1ŒÂ
+	case 1:	//	ã‚ªãƒšãƒ©ãƒ³ãƒ‰1å€‹
 		fprintf( p_file, "        %s%s%s\n", 
 				convert_length( command_type.s_name ).c_str(), 
 				convert_condition( this->condition ).c_str(),
 				convert_operand( this->operand1.s_value ).c_str() );
 		return true;
-	case 2:	//	ƒIƒyƒ‰ƒ“ƒh2ŒÂ
+	case 2:	//	ã‚ªãƒšãƒ©ãƒ³ãƒ‰2å€‹
 		fprintf( p_file, "        %s%s, %s\n", 
 				convert_length( command_type.s_name ).c_str(), 
 				convert_operand( this->operand1.s_value ).c_str(), 
 				convert_operand( this->operand2.s_value ).c_str() );
 		return true;
-	case 3:	//	ZMA ‚Å‚ÍƒIƒyƒ‰ƒ“ƒh2ŒÂ‚¾‚¯‚ÇAM80 ‚Å‚Í1ŒÂ
+	case 3:	//	ZMA ã§ã¯ã‚ªãƒšãƒ©ãƒ³ãƒ‰2å€‹ã ã‘ã©ã€M80 ã§ã¯1å€‹
 		fprintf( p_file, "        %s%s, %s\n", 
 				convert_length( command_type.s_name ).c_str(), 
 				this->operand1.s_value.c_str(), 
 				this->operand2.s_value.c_str() );
 		return true;
-	case 4:	//	ƒIƒyƒ‰ƒ“ƒh1ŒÂAƒIƒyƒ‰ƒ“ƒh‚ª HL ‚Ìê‡‚ÍA(HL) ‚É’u‚«Š·‚¦‚é
+	case 4:	//	ã‚ªãƒšãƒ©ãƒ³ãƒ‰1å€‹ã€ã‚ªãƒšãƒ©ãƒ³ãƒ‰ãŒ HL ã®å ´åˆã¯ã€(HL) ã«ç½®ãæ›ãˆã‚‹
 		fprintf( p_file, "        %s%s%s\n", 
 			convert_length( command_type.s_name ).c_str(), 
 			convert_condition( this->condition ).c_str(),

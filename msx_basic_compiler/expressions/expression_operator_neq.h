@@ -11,7 +11,7 @@
 #define __CEXPRESSION_OPERATOR_NEQ_H__
 
 // --------------------------------------------------------------------
-//	<> ><(•sˆê’v)
+//	<> ><(ä¸ä¸€è‡´)
 class CEXPRESSION_OPERATOR_NEQ: public CEXPRESSION_NODE {
 public:
 	CEXPRESSION_NODE *p_left;

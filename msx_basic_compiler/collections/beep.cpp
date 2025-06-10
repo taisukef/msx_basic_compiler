@@ -7,7 +7,7 @@
 #include "beep.h"
 
 // --------------------------------------------------------------------
-//  BEEP ÉuÉUÅ[
+//  BEEP „Éñ„Ç∂„Éº
 bool CBEEP::exec( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 	std::string s_label1, s_label2;

@@ -11,7 +11,7 @@
 #define __EXPRESSION_OCT_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_OCT: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_OCT() {

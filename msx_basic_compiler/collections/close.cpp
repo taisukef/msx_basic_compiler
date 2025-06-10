@@ -9,7 +9,7 @@
 #include "../expressions/expression_term.h"
 
 // --------------------------------------------------------------------
-//  CLOSE ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
+//  CLOSE ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
 bool CCLOSE::exec( CCOMPILE_INFO *p_info ) {
 	CEXPRESSION exp;
 	CASSEMBLER_LINE asm_line;
@@ -23,14 +23,14 @@ bool CCLOSE::exec( CCOMPILE_INFO *p_info ) {
 
 	p_info->use_file_access = true;
 	if( p_info->list.is_command_end() ) {
-		//	ˆø”–³‚µ‚Ìê‡A‘S‚Ä‚Ìƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
+		//	å¼•æ•°ç„¡ã—ã®å ´åˆã€å…¨ã¦ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
 		p_info->assembler_list.activate_all_close();
 		asm_line.set( "CALL", "", "sub_all_close" );
 		return true;
 	}
 
 	for( ;; ) {
-		//	# ‚ª‚ ‚ê‚Î“Ç‚İ”ò‚Î‚·
+		//	# ãŒã‚ã‚Œã°èª­ã¿é£›ã°ã™
 		if( p_info->list.p_position->s_word == "#" ) {
 			if( p_info->list.p_position->type != CBASIC_WORD_TYPE::SYMBOL ) {
 				p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
@@ -38,7 +38,7 @@ bool CCLOSE::exec( CCOMPILE_INFO *p_info ) {
 			}
 			p_info->list.p_position++;
 		}
-		//	”Ô†‚ğ•]‰¿
+		//	ç•ªå·ã‚’è©•ä¾¡
 		if( exp.compile( p_info, CEXPRESSION_TYPE::INTEGER ) ) {
 			exp.release();
 			p_info->assembler_list.activate_close();
@@ -48,7 +48,7 @@ bool CCLOSE::exec( CCOMPILE_INFO *p_info ) {
 			p_info->errors.add( SYNTAX_ERROR, line_no );
 			return true;
 		}
-		//	, ‚ª–³‚¯‚ê‚ÎI‚í‚é
+		//	, ãŒç„¡ã‘ã‚Œã°çµ‚ã‚ã‚‹
 		if( p_info->list.is_command_end() ) {
 			break;
 		}

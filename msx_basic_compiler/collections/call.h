@@ -10,7 +10,7 @@
 
 class CCALL: public CCOMPILER_CONTAINER {
 private:
-	//	ƒRƒ}ƒ“ƒhˆ—
+	//	ã‚³ãƒãƒ³ãƒ‰å‡¦ç†
 	void iotinit( CCOMPILE_INFO *p_info );
 	void iotget( CCOMPILE_INFO *p_info );
 	void iotput( CCOMPILE_INFO *p_info );

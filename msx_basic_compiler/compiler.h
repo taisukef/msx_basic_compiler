@@ -31,11 +31,11 @@ private:
 	void exec_sub_on_error( void );
 
 	// ----------------------------------------------------------------
-	//	Œ»İ‚Ìs‚ª”ò‚Ñæ‚Æ‚µ‚Äw’è‚³‚ê‚Ä‚¢‚éê‡Aƒ‰ƒxƒ‹‚ğ¶¬‚·‚é
+	//	ç¾åœ¨ã®è¡ŒãŒé£›ã³å…ˆã¨ã—ã¦æŒ‡å®šã•ã‚Œã¦ã„ã‚‹å ´åˆã€ãƒ©ãƒ™ãƒ«ã‚’ç”Ÿæˆã™ã‚‹
 	void insert_label( void );
 
 	// --------------------------------------------------------------------
-	//	Å“K‰»‚Ìˆ—
+	//	æœ€é©åŒ–ã®å‡¦ç†
 	void optimize_interrupt_process( void );
 	void optimize_push_pop( void );
 	void optimize_remove_interrupt_process( void );
@@ -117,19 +117,19 @@ public:
 
 	void line_compile( bool is_top = false );
 
-	//	•Ï”‚ÌƒAƒhƒŒƒX‚ğæ“¾‚·‚éˆ—
+	//	å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—ã™ã‚‹å‡¦ç†
 	CVARIABLE get_variable_address( void );
-	//	•Ï”‚ÌƒAƒhƒŒƒX‚ğæ“¾‚·‚éˆ—
+	//	å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—ã™ã‚‹å‡¦ç†
 	CVARIABLE get_variable_address_wo_array( void );
-	//	•Ï”‚Ö’l‚ğŠi”[‚·‚éˆ—
+	//	å¤‰æ•°ã¸å€¤ã‚’æ ¼ç´ã™ã‚‹å‡¦ç†
 	void write_variable_value( CVARIABLE &variable );
-	//	body ‚ÌÅ“K‰»
+	//	body ã®æœ€é©åŒ–
 	void optimize( void );
 
 	// --------------------------------------------------------------------
-	//	”Ä—p‚ÌƒRƒ“ƒpƒCƒ‹ˆ—
-	//	is_lop = false : Œ‹‰Ê‚ğ work_logopr (0x0fB02) ‚ÉŠi”[‚·‚éB’Êí‚Í‚±‚¿‚çB
-	//	is_lop = true  : Œ‹‰Ê‚ğ work_lop (0xf570) ‚ÉŠi”[‚·‚éBƒrƒbƒgƒuƒƒbƒNƒgƒ‰ƒ“ƒXƒtƒ@‚Í‚±‚¿‚çB
+	//	æ±ç”¨ã®ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«å‡¦ç†
+	//	is_lop = false : çµæœã‚’ work_logopr (0x0fB02) ã«æ ¼ç´ã™ã‚‹ã€‚é€šå¸¸ã¯ã“ã¡ã‚‰ã€‚
+	//	is_lop = true  : çµæœã‚’ work_lop (0xf570) ã«æ ¼ç´ã™ã‚‹ã€‚ãƒ“ãƒƒãƒˆãƒ–ãƒ­ãƒƒã‚¯ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚¡ã¯ã“ã¡ã‚‰ã€‚
 	void put_logical_operation( bool is_lop = false );
 
 	bool is_integer( const std::string s );

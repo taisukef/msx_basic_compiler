@@ -8,7 +8,7 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  [LSET] {•Ï”–¼}[(”z—ñ—v‘f, ”z—ñ—v‘f ...)] = ®
+//  [LSET] {å¤‰æ•°å}[(é…åˆ—è¦ç´ , é…åˆ—è¦ç´  ...)] = å¼
 bool CLSET::exec( CCOMPILE_INFO *p_info ) {
 	std::string s;
 	int line_no = p_info->list.get_line_no();
@@ -22,53 +22,53 @@ bool CLSET::exec( CCOMPILE_INFO *p_info ) {
 	is_rset = ( p_info->list.p_position->s_word == "RSET" );
 	p_info->list.p_position++;
 	
-	//	•Ï”‚ğ¶¬‚·‚é
+	//	å¤‰æ•°ã‚’ç”Ÿæˆã™ã‚‹
 	CVARIABLE variable = p_info->p_compiler->get_variable_address();
 	p_info->assembler_list.activate_allocate_string();
 	p_info->assembler_list.activate_free_string();
-	asm_line.set( "PUSH", "", "HL", "" );					//	HL = •Ï”‚ÌƒAƒhƒŒƒX
+	asm_line.set( "PUSH", "", "HL", "" );					//	HL = å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 	p_info->assembler_list.body.push_back( asm_line );
 	asm_line.set( "LD", "", "E", "[HL]" );
 	p_info->assembler_list.body.push_back( asm_line );
 	asm_line.set( "INC", "", "HL", "" );
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "LD", "", "D", "[HL]" );					//	DE = Œ³‚Ì•¶š—ñ
+	asm_line.set( "LD", "", "D", "[HL]" );					//	DE = å…ƒã®æ–‡å­—åˆ—
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "LD", "", "A", "[DE]" );					//	A = Œ³‚Ì•¶š—ñ‚Ì’·‚³
+	asm_line.set( "LD", "", "A", "[DE]" );					//	A = å…ƒã®æ–‡å­—åˆ—ã®é•·ã•
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "PUSH", "", "AF", "" );					//	Œ³‚Ì•¶š—ñ‚Ì’·‚³‚ğ•Û‘¶
+	asm_line.set( "PUSH", "", "AF", "" );					//	å…ƒã®æ–‡å­—åˆ—ã®é•·ã•ã‚’ä¿å­˜
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "EX", "", "DE", "HL" );					//	HL = Œ³‚Ì•¶š—ñ
+	asm_line.set( "EX", "", "DE", "HL" );					//	HL = å…ƒã®æ–‡å­—åˆ—
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "CALL", "", "free_string", "" );			//	Œ³‚Ì•¶š—ñ‚ğ‰ğ•ú
+	asm_line.set( "CALL", "", "free_string", "" );			//	å…ƒã®æ–‡å­—åˆ—ã‚’è§£æ”¾
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "POP", "", "AF", "" );					//	Œ³‚Ì•¶š—ñ‚Ì’·‚³‚ğ•œ‹A
+	asm_line.set( "POP", "", "AF", "" );					//	å…ƒã®æ–‡å­—åˆ—ã®é•·ã•ã‚’å¾©å¸°
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "CALL", "", "allocate_string", "" );		//	HL = Œ‹‰Ê‚ÌŠi”[æ‚ğŠm•Û
+	asm_line.set( "CALL", "", "allocate_string", "" );		//	HL = çµæœã®æ ¼ç´å…ˆã‚’ç¢ºä¿
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "POP", "", "DE", "" );					//	DE = •Ï”‚ÌƒAƒhƒŒƒX
+	asm_line.set( "POP", "", "DE", "" );					//	DE = å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "EX", "", "DE", "HL" );					//	HL = •Ï”‚ÌƒAƒhƒŒƒX, DE = Œ‹‰Ê‚ÌŠi”[æ
+	asm_line.set( "EX", "", "DE", "HL" );					//	HL = å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹, DE = çµæœã®æ ¼ç´å…ˆ
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "PUSH", "", "HL", "" );					//	HL = •Ï”‚ÌƒAƒhƒŒƒX
+	asm_line.set( "PUSH", "", "HL", "" );					//	HL = å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 	p_info->assembler_list.body.push_back( asm_line );
 	asm_line.set( "LD", "", "[HL]", "E" );
 	p_info->assembler_list.body.push_back( asm_line );
 	asm_line.set( "INC", "", "HL", "" );
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "LD", "", "[HL]", "D" );					//	•Ï”‚ÉŒ‹‰Ê‚ÌŠi”[æ‚ğ•Û‘¶
+	asm_line.set( "LD", "", "[HL]", "D" );					//	å¤‰æ•°ã«çµæœã®æ ¼ç´å…ˆã‚’ä¿å­˜
 	p_info->assembler_list.body.push_back( asm_line );
 
-	//	= ‚Ìƒ`ƒFƒbƒN
+	//	= ã®ãƒã‚§ãƒƒã‚¯
 	if( !p_info->list.check_word( &(p_info->errors), "=", SYNTAX_ERROR ) ) {
-		// ƒGƒ‰[‚ÍAcheck_word ‚Ì’†‚Å“o˜^‚³‚ê‚é
+		// ã‚¨ãƒ©ãƒ¼ã¯ã€check_word ã®ä¸­ã§ç™»éŒ²ã•ã‚Œã‚‹
 		return true;
 	}
 	else if( p_info->list.is_command_end() ) {
 		p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 		return true;
 	}
-	//	‰E•Ó‚Ìˆ—
+	//	å³è¾ºã®å‡¦ç†
 	if( variable.type != CVARIABLE_TYPE::STRING ) {
 		p_info->errors.add( TYPE_MISMATCH, p_info->list.get_line_no() );
 		return true;
@@ -81,11 +81,11 @@ bool CLSET::exec( CCOMPILE_INFO *p_info ) {
 		return true;
 	}
 
-	asm_line.set( "POP", "", "DE", "" );				//	DE = •Ï”‚ÌƒAƒhƒŒƒX
+	asm_line.set( "POP", "", "DE", "" );				//	DE = å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "EX", "", "DE", "HL" );			//	HL = •Ï”‚ÌƒAƒhƒŒƒX, DE = ‰E•Ó
+	asm_line.set( "EX", "", "DE", "HL" );			//	HL = å¤‰æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹, DE = å³è¾º
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "PUSH", "", "DE", "" );				//	‰E•Ó•Û‘¶
+	asm_line.set( "PUSH", "", "DE", "" );				//	å³è¾ºä¿å­˜
 	p_info->assembler_list.body.push_back( asm_line );
 
 	if( is_rset ) {
@@ -103,9 +103,9 @@ bool CLSET::exec( CCOMPILE_INFO *p_info ) {
 		p_info->assembler_list.body.push_back( asm_line );
 	}
 
-	asm_line.set( "POP", "", "HL", "" );				//	‰E•Ó•œ‹A
+	asm_line.set( "POP", "", "HL", "" );				//	å³è¾ºå¾©å¸°
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "CALL", "", "free_string", "" );		//	Œ³‚Ì•¶š—ñ‚ğ‰ğ•ú
+	asm_line.set( "CALL", "", "free_string", "" );		//	å…ƒã®æ–‡å­—åˆ—ã‚’è§£æ”¾
 	p_info->assembler_list.body.push_back( asm_line );
 	return true;
 }

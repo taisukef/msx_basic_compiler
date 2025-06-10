@@ -236,8 +236,8 @@ bool CBASIC_LIST::is_command_end( void ) {
 }
 
 // --------------------------------------------------------------------
-//	’†ŠÔŒ¾ŒêŒ`®(ƒoƒCƒiƒŠƒtƒ@ƒCƒ‹)‚©AASCIIƒZ[ƒuŒ`®‚©‚ğ”»’è‚·‚é
-//	’†ŠÔŒ¾ŒêŒ`®‚Å‚ ‚ê‚Î true ‚ğ•Ô‚·
+//	ä¸­é–“è¨€èªå½¢å¼(ãƒã‚¤ãƒŠãƒªãƒ•ã‚¡ã‚¤ãƒ«)ã‹ã€ASCIIã‚»ãƒ¼ãƒ–å½¢å¼ã‹ã‚’åˆ¤å®šã™ã‚‹
+//	ä¸­é–“è¨€èªå½¢å¼ã§ã‚ã‚Œã° true ã‚’è¿”ã™
 bool CBASIC_LIST::check_binary_program( FILE *p_file ) {
 
 	return( *(this->p_file_image) == 0xFF );
@@ -316,16 +316,16 @@ std::string CBASIC_LIST::get_word( void ) {
 	std::string s_word;
 	char s[32];
 
-	//	ƒXƒy[ƒX‚Í“Ç‚İ”ò‚Î‚·
+	//	ã‚¹ãƒšãƒ¼ã‚¹ã¯èª­ã¿é£›ã°ã™
 	this->skip_white_space();
 	if( *(this->p_file_image) == 0x0B || *( this->p_file_image ) == 0x0C || *( this->p_file_image ) == 0x1C ) {
-		//	2byte ‚Ì’l‚¾‚Á‚½ê‡
+		//	2byte ã®å€¤ã ã£ãŸå ´åˆ
 		this->p_file_image++;
 		s_word = std::to_string( this->get_2bytes() );
 		return s_word;
 	}
 	if( *( this->p_file_image ) == 0x0E ) {
-		//	s”Ô†‚¾‚Á‚½ê‡
+		//	è¡Œç•ªå·ã ã£ãŸå ´åˆ
 		this->p_file_image++;
 		number = this->get_2bytes();
 		s_word = std::to_string( number );
@@ -333,19 +333,19 @@ std::string CBASIC_LIST::get_word( void ) {
 		return s_word;
 	}
 	if( *( this->p_file_image ) == 0x0F ){
-		//	1byte ‚Ì’l‚¾‚Á‚½ê‡
+		//	1byte ã®å€¤ã ã£ãŸå ´åˆ
 		this->p_file_image++;
 		s_word = std::to_string( this->get_1byte() );
 		return s_word;
 	}
 	if( *( this->p_file_image ) >= 0x11 && *( this->p_file_image ) <= 0x1A ){
-		//	1Œ…‚Ì”’l‚¾‚Á‚½ê‡
+		//	1æ¡ã®æ•°å€¤ã ã£ãŸå ´åˆ
 		s_word = std::to_string( *( this->p_file_image ) - 0x11 );
 		this->p_file_image++;
 		return s_word;
 	}
 	if( *( this->p_file_image ) == 0x1D ) {
-		//	’P¸“x•‚“®¬”“_”‚¾‚Á‚½ê‡
+		//	å˜ç²¾åº¦æµ®å‹•å°æ•°ç‚¹æ•°ã ã£ãŸå ´åˆ
 		this->p_file_image++;
 		s_word = "";
 		for( i = 0; i < 4; i++ ) {
@@ -356,7 +356,7 @@ std::string CBASIC_LIST::get_word( void ) {
 		return s_word;
 	}
 	if( *( this->p_file_image ) == 0x1F ){
-		//	”{¸“x•‚“®¬”“_”‚¾‚Á‚½ê‡
+		//	å€ç²¾åº¦æµ®å‹•å°æ•°ç‚¹æ•°ã ã£ãŸå ´åˆ
 		this->p_file_image++;
 		s_word = "";
 		for( i = 0; i < 4; i++ ) {
@@ -367,7 +367,7 @@ std::string CBASIC_LIST::get_word( void ) {
 		return s_word;
 	}
 	if( *( this->p_file_image ) == '"' ) {
-		//	•¶š—ñ‚¾‚Á‚½ê‡
+		//	æ–‡å­—åˆ—ã ã£ãŸå ´åˆ
 		s_word = "\"";
 		this->p_file_image++;
 		while( *(this->p_file_image) != '\"' && *(this->p_file_image) != 0 ){
@@ -383,7 +383,7 @@ std::string CBASIC_LIST::get_word( void ) {
 	if( this->p_file_image[0] == '&' ) {
 		this->skip_white_space();
 		if( this->p_file_image[0] == 'B' ) {
-			//	2i”‚¾‚Á‚½ê‡
+			//	2é€²æ•°ã ã£ãŸå ´åˆ
 			number = 0;
 			this->p_file_image++;
 			while( *(this->p_file_image) == '0' || *(this->p_file_image) == '1' ) {
@@ -394,12 +394,12 @@ std::string CBASIC_LIST::get_word( void ) {
 			return s_word;
 		}
 		else {
-			//	'&' ‚¾‚Á‚½ê‡
+			//	'&' ã ã£ãŸå ´åˆ
 			s_word = '&';
 			return s_word;
 		}
 	}
-	//	ˆê’v‚·‚é—\–ñŒêƒR[ƒh‚ª‚ ‚é‚©’²‚×‚é
+	//	ä¸€è‡´ã™ã‚‹äºˆç´„èªã‚³ãƒ¼ãƒ‰ãŒã‚ã‚‹ã‹èª¿ã¹ã‚‹
 	for( auto p = reserved_words.begin(); p != reserved_words.end(); p++ ) {
 		i = 0;
 		auto p_code = p->code.begin();
@@ -409,19 +409,19 @@ std::string CBASIC_LIST::get_word( void ) {
 			}
 		}
 		if( p_code == p->code.end() ) {
-			//	—\–ñŒêƒR[ƒh‚Æˆê’v‚µ‚½ê‡A‚»‚Ì—\–ñŒê‚ğ•Ô‚·
+			//	äºˆç´„èªã‚³ãƒ¼ãƒ‰ã¨ä¸€è‡´ã—ãŸå ´åˆã€ãã®äºˆç´„èªã‚’è¿”ã™
 			this->p_file_image += i;
 			s_word = p->s_name;
 			return s_word;
 		}
 	}
-	//	—\–ñŒê‚Å‚È‚¢‹L†‚ª‚ ‚é‚©’²‚×‚é
+	//	äºˆç´„èªã§ãªã„è¨˜å·ãŒã‚ã‚‹ã‹èª¿ã¹ã‚‹
 	if( !isalpha(this->p_file_image[0] & 255) ) {
 		s_word = (char)this->p_file_image[0];
 		this->p_file_image++;
 		return s_word;
 	}
-	//	•Ï”–¼‚È‚ÇƒAƒ‹ƒtƒ@ƒxƒbƒg‚Ån‚Ü‚é’PŒê‚Ìê‡
+	//	å¤‰æ•°åãªã©ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆã§å§‹ã¾ã‚‹å˜èªã®å ´åˆ
 	s_word = "";
 	while( this->p_file_image != this->file_image.end() ) {
 		if( isalpha(this->p_file_image[0] & 255) || isdigit(this->p_file_image[0] & 255) ) {
@@ -439,7 +439,7 @@ std::string CBASIC_LIST::get_word( void ) {
 bool CBASIC_LIST::check_word( CERROR_LIST *p_error, std::string s, CERROR_ID error_id ) {
 
 	if( this->is_command_end() || this->p_position->s_word != s ) {
-		p_error->add( error_id, this->get_line_no() );	//	‚ ‚é‚×‚«•Â‚¶Š‡ŒÊ
+		p_error->add( error_id, this->get_line_no() );	//	ã‚ã‚‹ã¹ãé–‰ã˜æ‹¬å¼§
 		return false;
 	}
 	this->p_position++;
@@ -453,7 +453,7 @@ CBASIC_WORD CBASIC_LIST::get_decimal( const std::string s, const std::string s_t
 	int decimal;
 
 	s_word.line_no = this->get_line_no();
-	//	•‚“®¬”“_”‚©”Û‚©
+	//	æµ®å‹•å°æ•°ç‚¹æ•°ã‹å¦ã‹
 	for( auto c: s ) {
 		if( c == '.' || c == 'E' || c == '!' || c == '#' ) {
 			is_real = true;
@@ -467,19 +467,19 @@ CBASIC_WORD CBASIC_LIST::get_decimal( const std::string s, const std::string s_t
 		is_real = true;
 	}
 	if( !is_real ) {
-		//	®”‚Ì”ÍˆÍ‚Éû‚Ü‚é‚©H
+		//	æ•´æ•°ã®ç¯„å›²ã«åã¾ã‚‹ã‹ï¼Ÿ
 		double d = 0.;
 		double a = .1;
 		auto p = s.begin();
 		int sign = 0;
 		int exp = 0;
-		//	‰¼”•”‚Ì®”•”
+		//	ä»®æ•°éƒ¨ã®æ•´æ•°éƒ¨
 		while( p != s.end() && isdigit( *p & 255 ) ) {
 			d = d * 10. + (*p - '0');
 			p++;
 		}
 		if( p != s.end() && *p == '.' ) {
-			//	‰¼”•”‚Ì¬”•”
+			//	ä»®æ•°éƒ¨ã®å°æ•°éƒ¨
 			p++;
 			while( p != s.end() && isdigit( *p & 255 ) ) {
 				d = d + (*p - '0') * a;
@@ -488,7 +488,7 @@ CBASIC_WORD CBASIC_LIST::get_decimal( const std::string s, const std::string s_t
 			}
 		}
 		if( p != s.end() && *p == 'E' ) {
-			//	w”•”
+			//	æŒ‡æ•°éƒ¨
 			p++;
 			if( p != s.end() && *p == '-' ) {
 				sign = -1;
@@ -505,14 +505,14 @@ CBASIC_WORD CBASIC_LIST::get_decimal( const std::string s, const std::string s_t
 		decimal = int( d );
 		s_word.s_word = std::to_string( decimal );
 		if( s.size() < 5 || (s.size() == 5 && decimal < 32768) ) {
-			//	®”Šm’è
+			//	æ•´æ•°ç¢ºå®š
 			s_word.type = CBASIC_WORD_TYPE::INTEGER;
 			return s_word;
 		}
 		s_word.type = CBASIC_WORD_TYPE::BIG_INTEGER;
 		return s_word;
 	}
-	//	À”•\Œ»‚¾‚Á‚½ê‡
+	//	å®Ÿæ•°è¡¨ç¾ã ã£ãŸå ´åˆ
 	s_word.s_word = s;
 	this->convert_big_integer( s_word );
 	return s_word;
@@ -562,7 +562,7 @@ CBASIC_WORD CBASIC_LIST::get_data_word( void ) {
 	this->skip_white_space();
 	s_word.line_no = this->line_no;
 
-	//	ƒf[ƒ^‚Ìƒ‰ƒCƒ“”Ô†‚ğ“o˜^‚·‚é
+	//	ãƒ‡ãƒ¼ã‚¿ã®ãƒ©ã‚¤ãƒ³ç•ªå·ã‚’ç™»éŒ²ã™ã‚‹
 	bool has_line_no = false;
 	for( auto i: this->data_line_no ) {
 		if( i == this->line_no ) {
@@ -580,7 +580,7 @@ CBASIC_WORD CBASIC_LIST::get_data_word( void ) {
 		return s_word;
 	}
 	if( this->p_file_image[0] == '"' ) {
-		//	" ‚Ån‚Ü‚éê‡
+		//	" ã§å§‹ã¾ã‚‹å ´åˆ
 		this->p_file_image++;
 		while( this->p_file_image != this->file_image.end() && this->p_file_image[0] != '"' && this->p_file_image[0] != '\r' && this->p_file_image[0] != '\n' && this->p_file_image[0] != '\0' ) {
 			s = s + (char)this->p_file_image[0];
@@ -591,7 +591,7 @@ CBASIC_WORD CBASIC_LIST::get_data_word( void ) {
 		}
 	}
 	else {
-		//	" ‚ª–³‚¢ê‡
+		//	" ãŒç„¡ã„å ´åˆ
 		while( this->p_file_image != this->file_image.end() && this->p_file_image[0] != ':' && this->p_file_image[0] != ',' && this->p_file_image[0] != '\r' && this->p_file_image[0] != '\n' && this->p_file_image[0] != '\0' ) {
 			s = s + (char)this->p_file_image[0];
 			this->p_file_image++;
@@ -642,7 +642,7 @@ CBASIC_WORD CBASIC_LIST::get_ascii_word( bool label_ok ) {
 		this->p_file_image++;
 		this->skip_white_space();
 		if( toupper(this->p_file_image[0]) == 'B' ) {
-			//	2i”‚Ì’l‚¾‚Á‚½ê‡
+			//	2é€²æ•°ã®å€¤ã ã£ãŸå ´åˆ
 			this->p_file_image++;
 			s = this->get_word_in_charlist( "01" );
 			s_word.s_word = std::to_string( stoi( s, nullptr, 2 ) );
@@ -650,7 +650,7 @@ CBASIC_WORD CBASIC_LIST::get_ascii_word( bool label_ok ) {
 			return s_word;
 		}
 		if( toupper(this->p_file_image[0]) == 'O' ) {
-			//	8i”‚Ì’l‚¾‚Á‚½ê‡
+			//	8é€²æ•°ã®å€¤ã ã£ãŸå ´åˆ
 			this->p_file_image++;
 			s = this->get_word_in_charlist( "01234567" );
 			s_word.s_word = std::to_string( stoi( s, nullptr, 8 ) );
@@ -658,7 +658,7 @@ CBASIC_WORD CBASIC_LIST::get_ascii_word( bool label_ok ) {
 			return s_word;
 		}
 		if( toupper(this->p_file_image[0]) == 'H' ) {
-			//	16i”‚Ì’l‚¾‚Á‚½ê‡
+			//	16é€²æ•°ã®å€¤ã ã£ãŸå ´åˆ
 			this->p_file_image++;
 			s = this->get_word_in_charlist( "0123456789abcdefABCDEF" );
 			s_word.s_word = std::to_string( stoi( s, nullptr, 16 ) );
@@ -667,7 +667,7 @@ CBASIC_WORD CBASIC_LIST::get_ascii_word( bool label_ok ) {
 		}
 	}
 	if( isdigit( this->p_file_image[0] & 255 ) || this->p_file_image[0] == '.' ) {
-		//	10i”‚Ì’l‚¾‚Á‚½ê‡A®”E’P¸“xÀ”E”{¸“xÀ”‚Ì‚Ç‚ê‚©
+		//	10é€²æ•°ã®å€¤ã ã£ãŸå ´åˆã€æ•´æ•°ãƒ»å˜ç²¾åº¦å®Ÿæ•°ãƒ»å€ç²¾åº¦å®Ÿæ•°ã®ã©ã‚Œã‹
 		s = this->get_word_in_charlist( "0123456789", true );
 		s = s + this->get_char_in_charlist( ".", true );
 		s = s + this->get_word_in_charlist( "0123456789", true );
@@ -689,7 +689,7 @@ CBASIC_WORD CBASIC_LIST::get_ascii_word( bool label_ok ) {
 		s_word = this->get_decimal( s, s_type );
 		return s_word;
 	}
-	//	ˆê’v‚·‚é—\–ñŒêƒR[ƒh‚ª‚ ‚é‚©’²‚×‚é
+	//	ä¸€è‡´ã™ã‚‹äºˆç´„èªã‚³ãƒ¼ãƒ‰ãŒã‚ã‚‹ã‹èª¿ã¹ã‚‹
 	for( auto p = reserved_words.begin(); p != reserved_words.end(); p++ ) {
 		i = 0;
 		auto p_name = p->s_name.begin();
@@ -699,21 +699,21 @@ CBASIC_WORD CBASIC_LIST::get_ascii_word( bool label_ok ) {
 			}
 		}
 		if( p_name == p->s_name.end() ) {
-			//	—\–ñŒêƒR[ƒh‚Æˆê’v‚µ‚½ê‡A‚»‚Ì—\–ñŒê‚ğ•Ô‚·
+			//	äºˆç´„èªã‚³ãƒ¼ãƒ‰ã¨ä¸€è‡´ã—ãŸå ´åˆã€ãã®äºˆç´„èªã‚’è¿”ã™
 			this->p_file_image += i;
 			s_word.s_word = p->s_name;
 			s_word.type = CBASIC_WORD_TYPE::RESERVED_WORD;
 			return s_word;
 		}
 	}
-	//	—\–ñŒê‚Å‚È‚¢‹L†‚ª‚ ‚é‚©’²‚×‚é
+	//	äºˆç´„èªã§ãªã„è¨˜å·ãŒã‚ã‚‹ã‹èª¿ã¹ã‚‹
 	if( !isalpha(this->p_file_image[0] & 255) ) {
 		s_word.s_word = (char)this->p_file_image[0];
 		s_word.type = CBASIC_WORD_TYPE::SYMBOL;
 		this->p_file_image++;
 		return s_word;
 	}
-	//	•Ï”–¼‚È‚ÇƒAƒ‹ƒtƒ@ƒxƒbƒg‚Ån‚Ü‚é’PŒê‚Ìê‡
+	//	å¤‰æ•°åãªã©ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆã§å§‹ã¾ã‚‹å˜èªã®å ´åˆ
 	s_word.s_word = "";
 	s_word.type = CBASIC_WORD_TYPE::UNKNOWN_NAME;
 	while( this->p_file_image != this->file_image.end() ) {
@@ -754,24 +754,24 @@ bool CBASIC_LIST::load_binary( CERROR_LIST &errors ) {
 	//	skip 0xFF
 	this->p_file_image++;
 
-	//	’†ŠÔƒR[ƒh‚ğƒeƒLƒXƒg‚É•ÏŠ·‚·‚é
+	//	ä¸­é–“ã‚³ãƒ¼ãƒ‰ã‚’ãƒ†ã‚­ã‚¹ãƒˆã«å¤‰æ›ã™ã‚‹
 	while( this->p_file_image != this->file_image.end() ) {
-		//	Ÿ‚Ìs‚ÌƒAƒhƒŒƒX‚Æs”Ô† ‚ğæ“¾
+		//	æ¬¡ã®è¡Œã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã¨è¡Œç•ªå· ã‚’å–å¾—
 		next_address = this->get_2bytes();
 		if( next_address == 0 ) {
-			//	I‚í‚è
+			//	çµ‚ã‚ã‚Š
 			break;
 		}
 		line_no = this->get_2bytes();
 		s = std::to_string( line_no ) + " ";
 		text_code.push_back( s );
-		//	s“à‚Ì‰ğß
+		//	è¡Œå†…ã®è§£é‡ˆ
 		while( this->p_file_image != this->file_image.end() && (this->p_file_image[0] != 0) ) {
 			if( this->skip_white_space() ) {
 				s = " ";
 				text_code.push_back( s );
 			}
-			//	’PŒê‚ğ1‚Âæ“¾‚µ‚ÄAs”Ô†‚ğ•t—^‚µ‚ÄƒŠƒXƒg‚É’Ç‰Á
+			//	å˜èªã‚’1ã¤å–å¾—ã—ã¦ã€è¡Œç•ªå·ã‚’ä»˜ä¸ã—ã¦ãƒªã‚¹ãƒˆã«è¿½åŠ 
 			if( is_data ) {
 				b_word = this->get_data_word();
 				if( b_word.type == CBASIC_WORD_TYPE::STRING ) {
@@ -814,7 +814,7 @@ bool CBASIC_LIST::load_binary( CERROR_LIST &errors ) {
 			}
 		}
 		if( this->p_file_image == this->file_image.end() ) {
-			//	s‚Ì’[––ƒR[ƒh‚ª–³‚¢
+			//	è¡Œã®ç«¯æœ«ã‚³ãƒ¼ãƒ‰ãŒç„¡ã„
 			errors.add( "Cannot find terminator code.", line_no );
 			return false;
 		}
@@ -822,7 +822,7 @@ bool CBASIC_LIST::load_binary( CERROR_LIST &errors ) {
 		text_code.push_back( s );
 		this->p_file_image++;
 	}
-	//	ƒeƒLƒXƒg‚É’u‚«Š·‚¦‚é
+	//	ãƒ†ã‚­ã‚¹ãƒˆã«ç½®ãæ›ãˆã‚‹
 	this->file_image.resize( 0 );
 	for( std::string &basic_word : text_code ) {
 		for( char c : basic_word ) {
@@ -841,13 +841,13 @@ bool CBASIC_LIST::load_ascii( CERROR_LIST &errors ) {
 	bool label_ok = false;
 
 	while( this->p_file_image != this->file_image.end() ) {
-		//	s”Ô†‚ğ“¾‚é
+		//	è¡Œç•ªå·ã‚’å¾—ã‚‹
 		line_no = this->get_integer();
 		label_ok = true;
-		//	s“à‚Ì‰ğß
+		//	è¡Œå†…ã®è§£é‡ˆ
 		while( this->p_file_image != this->file_image.end() && this->p_file_image[0] != '\n' ) {
 			if( is_data ) {
-				//	ƒf[ƒ^‚ğæ“¾
+				//	ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
 				s_word = this->get_data_word();
 				if( this->p_file_image != this->file_image.end() ) {
 					if( this->p_file_image[0] == ',' ) {
@@ -867,7 +867,7 @@ bool CBASIC_LIST::load_ascii( CERROR_LIST &errors ) {
 				}
 			}
 			else {
-				//	’PŒê‚ğ1‚Âæ“¾‚µ‚ÄAs”Ô†‚ğ•t—^‚µ‚ÄƒŠƒXƒg‚É’Ç‰Á
+				//	å˜èªã‚’1ã¤å–å¾—ã—ã¦ã€è¡Œç•ªå·ã‚’ä»˜ä¸ã—ã¦ãƒªã‚¹ãƒˆã«è¿½åŠ 
 				s_word = this->get_ascii_word( label_ok || is_last_jump );
 				if( !(s_word.s_word == ":" && s_word.type == CBASIC_WORD_TYPE::SYMBOL) ) {
 					label_ok = false;
@@ -920,7 +920,7 @@ bool CBASIC_LIST::load_ascii( CERROR_LIST &errors ) {
 		if( this->p_file_image[0] == '\n' ) {
 			this->p_file_image++;
 			if( is_data ) {
-				//	DATA hoge, ‚Ì‚æ‚¤‚Èê‡‚É‚±‚±‚É—ˆ‚é
+				//	DATA hoge, ã®ã‚ˆã†ãªå ´åˆã«ã“ã“ã«æ¥ã‚‹
 				s_word.s_word = "";
 				s_word.line_no = line_no;
 				s_word.type = CBASIC_WORD_TYPE::STRING;

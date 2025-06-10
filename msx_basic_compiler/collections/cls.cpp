@@ -7,7 +7,7 @@
 #include "cls.h"
 
 // --------------------------------------------------------------------
-//  CLS ‰æ–ÊÁ‹
+//  CLS ç”»é¢æ¶ˆå»
 bool CCLS::exec( CCOMPILE_INFO *p_info ) {
 	int line_no = p_info->list.get_line_no();
 

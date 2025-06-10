@@ -1,52 +1,52 @@
 svarf_on_strig0_mode
 	4byte
 		+00: 0=OFF/STOP, 1=ON
-		+01: 0=’èíó‘Ô, FFh=‰Ÿ‚³‚ê‚½ (GTTRIG ‚Ì‰“š)
-		+02: ˆê‚Â‘O‚Ì GTTRIG‰“š
+		+01: 0=å®šå¸¸çŠ¶æ…‹, FFh=æŠ¼ã•ã‚ŒãŸ (GTTRIG ã®å¿œç­”)
+		+02: ä¸€ã¤å‰ã® GTTRIGå¿œç­”
 		+03: Reserved
 
 svari_on_strig0_line
 	2byte
-		”ò‚Ñæ‚Ì”Ô’n
+		é£›ã³å…ˆã®ç•ªåœ°
 
 ; ===============================================================================
-; Š„‚è‚İƒtƒ‰ƒOˆ—ƒ‹[ƒ`ƒ“ ( ON STRIG )
+; å‰²ã‚Šè¾¼ã¿ãƒ•ãƒ©ã‚°å‡¦ç†ãƒ«ãƒ¼ãƒãƒ³ ( ON STRIG )
 
 		LD		HL, svarf_on_strig0_mode
 		LD		DE, svari_on_strig0_line
 		LD		B, 0x05
 _on_strig_loop1:
-		; svarf_on_strig0_mode[+00] ‚ğŠm”F‚·‚é
+		; svarf_on_strig0_mode[+00] ã‚’ç¢ºèªã™ã‚‹
 		LD		A, [HL]
 		INC		HL
 		DEC		A
-		JR		NZ, _skip_strig1				; OFF/STOP ‚È‚çˆ—‚ğƒXƒLƒbƒv‚·‚é
+		JR		NZ, _skip_strig1				; OFF/STOP ãªã‚‰å‡¦ç†ã‚’ã‚¹ã‚­ãƒƒãƒ—ã™ã‚‹
 
-		; svarf_on_strig0_mode[+01] ‚ğŠm”F‚·‚é
+		; svarf_on_strig0_mode[+01] ã‚’ç¢ºèªã™ã‚‹
 		OR		A, [HL]
-		JR		NZ, _skip_strig1				; 0xFF ‚È‚çˆ—‚ğƒXƒLƒbƒv‚·‚é
+		JR		NZ, _skip_strig1				; 0xFF ãªã‚‰å‡¦ç†ã‚’ã‚¹ã‚­ãƒƒãƒ—ã™ã‚‹
 
-		; svarf_on_strig0_mode[+02] ‚ğŠm”F‚·‚é
+		; svarf_on_strig0_mode[+02] ã‚’ç¢ºèªã™ã‚‹
 		INC		HL
 		OR		A, [HL]
 		DEC		HL
-		JR		Z, _skip_strig1					; 0x00 ‚È‚çˆ—‚ğƒXƒLƒbƒv‚·‚é
-		LD		[HL], A							; [+01] ‚ğ 0xFF ‚É‚·‚é
+		JR		Z, _skip_strig1					; 0x00 ãªã‚‰å‡¦ç†ã‚’ã‚¹ã‚­ãƒƒãƒ—ã™ã‚‹
+		LD		[HL], A							; [+01] ã‚’ 0xFF ã«ã™ã‚‹
 
-		; svari_on_strig0_line ‚ğ CALL ‚·‚é
-		PUSH	HL								; svarf_on_strig0_mode + 01 ‚ğ•Û‘¶
+		; svari_on_strig0_line ã‚’ CALL ã™ã‚‹
+		PUSH	HL								; svarf_on_strig0_mode + 01 ã‚’ä¿å­˜
 		EX		DE, HL
 		LD		E, [HL]
 		INC		HL
 		LD		D, [HL]
 		DEC		HL
-		PUSH	HL								; svari_on_strig0_line •Û‘¶
+		PUSH	HL								; svari_on_strig0_line ä¿å­˜
 		EX		DE, HL
 		CALL	jp_hl
 		POP		DE
 		POP		HL
 
-		; Ÿ‚Ö
+		; æ¬¡ã¸
 _skip_strig1:
 		INC		DE
 		INC		DE

@@ -11,7 +11,7 @@
 #define __EXPRESSION_ASC_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_ASC: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_ASC() {

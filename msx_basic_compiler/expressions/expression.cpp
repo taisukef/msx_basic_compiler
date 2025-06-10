@@ -97,7 +97,7 @@ void CEXPRESSION_NODE::type_adjust_2op( CCOMPILE_INFO *p_info, CEXPRESSION_NODE 
 	CASSEMBLER_LINE asm_line;
 
 	if( p_left->type == p_right->type ) {
-		//	¶‰E‚Ì€‚ª“¯‚¶Œ^‚Ìê‡
+		//	å·¦å³ã®é …ãŒåŒã˜åž‹ã®å ´åˆ
 		if( p_left->type == CEXPRESSION_TYPE::INTEGER ) {
 			this->type = CEXPRESSION_TYPE::INTEGER;
 		}
@@ -108,15 +108,15 @@ void CEXPRESSION_NODE::type_adjust_2op( CCOMPILE_INFO *p_info, CEXPRESSION_NODE 
 			p_info->assembler_list.add_label( "work_arg", "0x0f847" );
 			p_info->assembler_list.add_label( "work_dac", "0x0f7f6" );
 			p_info->assembler_list.activate_pop_single_real_dac();
-			this->type = CEXPRESSION_TYPE::DOUBLE_REAL;	//	”{¸“x‚É¸Ši
-			//	‰E€‚ð ARG ‚Ö
+			this->type = CEXPRESSION_TYPE::DOUBLE_REAL;	//	å€ç²¾åº¦ã«æ˜‡æ ¼
+			//	å³é …ã‚’ ARG ã¸
 			asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "DE", COPERAND_TYPE::CONSTANT, "work_arg" );
 			p_info->assembler_list.body.push_back( asm_line );
 			asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "BC", COPERAND_TYPE::CONSTANT, "4" );
 			p_info->assembler_list.body.push_back( asm_line );
 			asm_line.set( CMNEMONIC_TYPE::LDIR, CCONDITION::NONE, COPERAND_TYPE::NONE, "", COPERAND_TYPE::NONE, "" );
 			p_info->assembler_list.body.push_back( asm_line );
-			//	¶€‚ð DAC ‚Ö
+			//	å·¦é …ã‚’ DAC ã¸
 			asm_line.set( CMNEMONIC_TYPE::CALL, CCONDITION::NONE, COPERAND_TYPE::CONSTANT, "pop_single_real_dac", COPERAND_TYPE::NONE, "" );
 			p_info->assembler_list.body.push_back( asm_line );
 			asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::MEMORY, "[work_dac+4]", COPERAND_TYPE::REGISTER, "HL" );
@@ -129,29 +129,29 @@ void CEXPRESSION_NODE::type_adjust_2op( CCOMPILE_INFO *p_info, CEXPRESSION_NODE 
 			this->type = CEXPRESSION_TYPE::DOUBLE_REAL;
 			p_info->assembler_list.add_label( "work_arg", "0x0f847" );
 			p_info->assembler_list.add_label( "work_dac", "0x0f7f6" );
-			//	‰E€‚ð ARG ‚Ö
+			//	å³é …ã‚’ ARG ã¸
 			asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "DE", COPERAND_TYPE::CONSTANT, "work_arg" );
 			p_info->assembler_list.body.push_back( asm_line );
 			asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "BC", COPERAND_TYPE::CONSTANT, "8" );
 			p_info->assembler_list.body.push_back( asm_line );
 			asm_line.set( CMNEMONIC_TYPE::LDIR, CCONDITION::NONE, COPERAND_TYPE::NONE, "", COPERAND_TYPE::NONE, "" );
 			p_info->assembler_list.body.push_back( asm_line );
-			//	¶€‚ð DAC ‚Ö
+			//	å·¦é …ã‚’ DAC ã¸
 			asm_line.set( CMNEMONIC_TYPE::CALL, CCONDITION::NONE, COPERAND_TYPE::CONSTANT, "pop_double_real_dac", COPERAND_TYPE::NONE, "" );
 			p_info->assembler_list.body.push_back( asm_line );
 		}
 	}
 	else if( p_left->type == CEXPRESSION_TYPE::STRING || p_right->type == CEXPRESSION_TYPE::STRING ) {
-		//	¶‰E‚Ì€‚ªˆÙ‚È‚éŒ^‚ÅA•Ð•û‚ª•¶Žš—ñŒ^‚È‚çƒGƒ‰[
+		//	å·¦å³ã®é …ãŒç•°ãªã‚‹åž‹ã§ã€ç‰‡æ–¹ãŒæ–‡å­—åˆ—åž‹ãªã‚‰ã‚¨ãƒ©ãƒ¼
 		p_info->errors.add( TYPE_MISMATCH, p_info->list.get_line_no() );
 		return;
 	}
 	else {
-		//	”{¸“x‚ÅŒvŽZ‚·‚é‚Ì‚Å”{¸“x‚É¸Ši
+		//	å€ç²¾åº¦ã§è¨ˆç®—ã™ã‚‹ã®ã§å€ç²¾åº¦ã«æ˜‡æ ¼
 		this->type = CEXPRESSION_TYPE::DOUBLE_REAL;
-		//	‰E€‚Í”{¸“x‚É‚µ‚Ä ARG ‚Ö“]‘—
+		//	å³é …ã¯å€ç²¾åº¦ã«ã—ã¦ ARG ã¸è»¢é€
 		if( p_right->type == CEXPRESSION_TYPE::INTEGER ) {
-			//	®”‚©‚ç”{¸“xŽÀ”‚É¸Ši
+			//	æ•´æ•°ã‹ã‚‰å€ç²¾åº¦å®Ÿæ•°ã«æ˜‡æ ¼
 			p_info->assembler_list.add_label( "bios_maf", "0x02c4d" );
 			p_info->assembler_list.add_label( "bios_frcdbl", "0x0303a" );
 			p_info->assembler_list.add_label( "work_dac", "0x0f7f6" );
@@ -178,9 +178,9 @@ void CEXPRESSION_NODE::type_adjust_2op( CCOMPILE_INFO *p_info, CEXPRESSION_NODE 
 			p_info->assembler_list.body.push_back( asm_line );
 		}
 
-		//	¶€‚Í”{¸“x‚É‚µ‚Ä DAC ‚Ö“]‘—
+		//	å·¦é …ã¯å€ç²¾åº¦ã«ã—ã¦ DAC ã¸è»¢é€
 		if( p_left->type == CEXPRESSION_TYPE::INTEGER ) {
-			//	®”‚©‚ç”{¸“xŽÀ”‚É¸Ši
+			//	æ•´æ•°ã‹ã‚‰å€ç²¾åº¦å®Ÿæ•°ã«æ˜‡æ ¼
 			p_info->assembler_list.add_label( "bios_frcdbl", "0x0303a" );
 			p_info->assembler_list.add_label( "work_dac", "0x0f7f6" );
 			p_info->assembler_list.add_label( "work_valtyp", "0x0f663" );
@@ -217,7 +217,7 @@ void CEXPRESSION_NODE::convert_type( CCOMPILE_INFO *p_info, CEXPRESSION_TYPE tar
 	}
 	if( target == CEXPRESSION_TYPE::EXTENDED_INTEGER ) {
 		if( current == CEXPRESSION_TYPE::INTEGER ) {
-			//	•ÏŠ·‚Ì•K—v‚È‚µ
+			//	å¤‰æ›ã®å¿…è¦ãªã—
 			return;
 		}
 		if( current == CEXPRESSION_TYPE::SINGLE_REAL ) {
@@ -342,7 +342,7 @@ bool CEXPRESSION::check_word( CCOMPILE_INFO *p_info, std::string s, int error_id
 
 	if( p_info->list.is_command_end() || p_info->list.p_position->s_word != s ) {
 		if( error_id != CERROR_ID::NO_ERROR ) {
-			p_info->errors.add( CERROR_ID( error_id ), p_info->list.get_line_no() );	//	‚ ‚é‚×‚«•Â‚¶Š‡ŒÊ
+			p_info->errors.add( CERROR_ID( error_id ), p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãé–‰ã˜æ‹¬å¼§
 		}
 		return false;
 	}
@@ -356,14 +356,14 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_term( CCOMPILE_INFO *p_info ) {
 	std::string s_operator;
 
 	if( p_info->list.is_command_end() ) {
-		return nullptr;															//	’l‚ª–³‚¢ê‡‚Í nullptr ‚ð•Ô‚·
+		return nullptr;															//	å€¤ãŒç„¡ã„å ´åˆã¯ nullptr ã‚’è¿”ã™
 	}
 	s_operator = p_info->list.p_position->s_word;
 	if( s_operator == "(" && p_info->list.p_position->type == CBASIC_WORD_TYPE::SYMBOL ) {
 		p_info->list.p_position++;
 		p_result = this->makeup_node_operator_eqv( p_info );
 		if( p_info->list.is_command_end() || p_info->list.p_position->s_word != ")" || p_info->list.p_position->type != CBASIC_WORD_TYPE::SYMBOL ) {
-			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«•Â‚¶Š‡ŒÊ
+			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãé–‰ã˜æ‹¬å¼§
 			return p_result;
 		}
 		p_info->list.p_position++;
@@ -781,7 +781,7 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_term( CCOMPILE_INFO *p_info ) {
 		p_term->p_operand2 = this->makeup_node_operator_eqv( p_info );
 		p_term->p_operand3 = nullptr;
 		if( this->check_word( p_info, ")", NO_ERROR ) ) {
-			//	‘æ3ˆø”‚ªÈ—ª‚³‚ê‚Ä‚¢‚éê‡
+			//	ç¬¬3å¼•æ•°ãŒçœç•¥ã•ã‚Œã¦ã„ã‚‹å ´åˆ
 			return p_result;
 		}
 		if( !this->check_word( p_info, ",", MISSING_OPERAND ) ) {
@@ -1165,7 +1165,7 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_term( CCOMPILE_INFO *p_info ) {
 		}
 		p_term->p_position = p_info->list.p_position;
 		if( !p_info->list.is_command_end() && p_info->list.p_position->s_word == "#" ) {
-			//	VARPTR( #1 ) ‚Ì‚æ‚¤‚ÈŽg‚¢•û‚Ìê‡
+			//	VARPTR( #1 ) ã®ã‚ˆã†ãªä½¿ã„æ–¹ã®å ´åˆ
 			p_info->list.p_position++;
 			if( p_info->list.is_command_end() ) {
 				p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
@@ -1180,7 +1180,7 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_term( CCOMPILE_INFO *p_info ) {
 			p_info->list.p_position++;
 		}
 		else {
-			//	VARPTR( A ) ‚Ì‚æ‚¤‚ÈŽg‚¢•û‚Ìê‡
+			//	VARPTR( A ) ã®ã‚ˆã†ãªä½¿ã„æ–¹ã®å ´åˆ
 			p_term->p_operand = this->makeup_node_operator_eqv( p_info );
 		}
 		if( !this->check_word( p_info, ")", MISSING_OPERAND ) ) {
@@ -1236,7 +1236,7 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_term( CCOMPILE_INFO *p_info ) {
 		return p_result;
 	}
 	else if( p_info->list.p_position->type == CBASIC_WORD_TYPE::UNKNOWN_NAME ) {
-		//	•Ï”‚Ìê‡
+		//	å¤‰æ•°ã®å ´åˆ
 		CEXPRESSION_VARIABLE *p_term = new CEXPRESSION_VARIABLE;
 		CVARIABLE variable = p_info->variable_manager.get_variable_info( p_info, p_term->exp_list );
 		p_term->variable = variable;
@@ -1245,7 +1245,7 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_term( CCOMPILE_INFO *p_info ) {
 		return p_result;
 	}
 	else if( p_info->list.p_position->type == CBASIC_WORD_TYPE::INTEGER ) {
-		//	®”’è”‚Ìê‡
+		//	æ•´æ•°å®šæ•°ã®å ´åˆ
 		CEXPRESSION_TERM *p_term = new CEXPRESSION_TERM;
 		p_term->type = CEXPRESSION_TYPE::INTEGER;
 		p_term->s_value = s_operator;
@@ -1254,7 +1254,7 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_term( CCOMPILE_INFO *p_info ) {
 		return p_result;
 	}
 	else if( p_info->list.p_position->type == CBASIC_WORD_TYPE::SINGLE_REAL ) {
-		//	’P¸“xŽÀ”’è”‚Ìê‡
+		//	å˜ç²¾åº¦å®Ÿæ•°å®šæ•°ã®å ´åˆ
 		CEXPRESSION_TERM *p_term = new CEXPRESSION_TERM;
 		p_term->type = CEXPRESSION_TYPE::SINGLE_REAL;
 		p_term->s_value = s_operator;
@@ -1263,7 +1263,7 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_term( CCOMPILE_INFO *p_info ) {
 		return p_result;
 	}
 	else if( p_info->list.p_position->type == CBASIC_WORD_TYPE::DOUBLE_REAL ) {
-		//	”{¸“xŽÀ”’è”‚Ìê‡
+		//	å€ç²¾åº¦å®Ÿæ•°å®šæ•°ã®å ´åˆ
 		CEXPRESSION_TERM *p_term = new CEXPRESSION_TERM;
 		p_term->type = CEXPRESSION_TYPE::DOUBLE_REAL;
 		p_term->s_value = s_operator;
@@ -1272,7 +1272,7 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_term( CCOMPILE_INFO *p_info ) {
 		return p_result;
 	}
 	else if( p_info->list.p_position->type == CBASIC_WORD_TYPE::STRING ) {
-		//	•¶Žš—ñ’è”‚Ìê‡
+		//	æ–‡å­—åˆ—å®šæ•°ã®å ´åˆ
 		CEXPRESSION_TERM *p_term = new CEXPRESSION_TERM;
 		p_term->type = CEXPRESSION_TYPE::STRING;
 		p_term->s_value = s_operator;
@@ -1296,24 +1296,24 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_operator_power( CCOMPILE_INFO *p_info
 	CEXPRESSION_NODE *p_result;
 	std::string s_operator;
 
-	//	¶€‚ð“¾‚é
+	//	å·¦é …ã‚’å¾—ã‚‹
 	p_left = this->makeup_node_term( p_info );
 	if( p_left == nullptr ) {
-		return nullptr;				//	¶€‚ª“¾‚ç‚ê‚È‚©‚Á‚½ê‡
+		return nullptr;				//	å·¦é …ãŒå¾—ã‚‰ã‚Œãªã‹ã£ãŸå ´åˆ
 	}
 	p_result = p_left;
 	while( !p_info->list.is_command_end() ) {
 		s_operator = p_info->list.p_position->s_word;
 		if( s_operator != "^" || p_info->list.p_position->type != CBASIC_WORD_TYPE::RESERVED_WORD ) {
-			//	Š–]‚Ì‰‰ŽZŽq‚Å‚Í‚È‚¢‚Ì‚Å¶€‚ð‚»‚Ì‚Ü‚Ü•Ô‚·
+			//	æ‰€æœ›ã®æ¼”ç®—å­ã§ã¯ãªã„ã®ã§å·¦é …ã‚’ãã®ã¾ã¾è¿”ã™
 			break;
 		}
 		p_info->list.p_position++;
 		if( p_info->list.is_command_end() ) {
-			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«‰E€‚ª‚È‚¢
+			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãå³é …ãŒãªã„
 			break;
 		}
-		//	‚±‚Ì‰‰ŽZŽq‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬
+		//	ã“ã®æ¼”ç®—å­ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 		p_operator = new CEXPRESSION_OPERATOR_POWER;
 		p_operator->p_left = p_result;
 		p_operator->p_right = this->makeup_node_term( p_info );
@@ -1333,17 +1333,17 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_operator_minus_plus( CCOMPILE_INFO *p
 	}
 	s_operator = p_info->list.p_position->s_word;
 	if( (s_operator != "+" && s_operator != "-") || p_info->list.p_position->type != CBASIC_WORD_TYPE::RESERVED_WORD ) {
-		//	Š–]‚Ì‰‰ŽZŽq‚Å‚Í‚È‚¢
+		//	æ‰€æœ›ã®æ¼”ç®—å­ã§ã¯ãªã„
 		return this->makeup_node_operator_power( p_info );
 	}
 	p_info->list.p_position++;
 	if( p_info->list.is_command_end() ) {
-		p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«‰E€‚ª‚È‚¢
+		p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãå³é …ãŒãªã„
 		return nullptr;
 	}
-	//	‚±‚Ì‰‰ŽZŽq‚Ìˆ—
+	//	ã“ã®æ¼”ç®—å­ã®å‡¦ç†
 	if( s_operator == "+" ) {
-		//	+ ‚ÍŽÀŽ¿‰½‚à‚µ‚È‚¢
+		//	+ ã¯å®Ÿè³ªä½•ã‚‚ã—ãªã„
 		return this->makeup_node_operator_minus_plus( p_info );
 	}
 	else {
@@ -1363,24 +1363,24 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_operator_mul_div( CCOMPILE_INFO *p_in
 	CEXPRESSION_NODE *p_result;
 	std::string s_operator;
 
-	//	¶€‚ð“¾‚é
+	//	å·¦é …ã‚’å¾—ã‚‹
 	p_left = this->makeup_node_operator_minus_plus( p_info );
 	if( p_left == nullptr ) {
-		return nullptr;				//	¶€‚ª“¾‚ç‚ê‚È‚©‚Á‚½ê‡
+		return nullptr;				//	å·¦é …ãŒå¾—ã‚‰ã‚Œãªã‹ã£ãŸå ´åˆ
 	}
 	p_result = p_left;
 	while( !p_info->list.is_command_end() ) {
 		s_operator = p_info->list.p_position->s_word;
 		if( (s_operator != "*" && s_operator != "/") || p_info->list.p_position->type != CBASIC_WORD_TYPE::RESERVED_WORD ) {
-			//	Š–]‚Ì‰‰ŽZŽq‚Å‚Í‚È‚¢‚Ì‚Å¶€‚ð‚»‚Ì‚Ü‚Ü•Ô‚·
+			//	æ‰€æœ›ã®æ¼”ç®—å­ã§ã¯ãªã„ã®ã§å·¦é …ã‚’ãã®ã¾ã¾è¿”ã™
 			break;
 		}
 		p_info->list.p_position++;
 		if( p_info->list.is_command_end() ) {
-			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«‰E€‚ª‚È‚¢
+			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãå³é …ãŒãªã„
 			break;
 		}
-		//	‚±‚Ì‰‰ŽZŽq‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬
+		//	ã“ã®æ¼”ç®—å­ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 		if( s_operator == "*" ) {
 			p_operator_mul = new CEXPRESSION_OPERATOR_MUL;
 			p_operator_mul->p_left = p_result;
@@ -1405,24 +1405,24 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_operator_intdiv( CCOMPILE_INFO *p_inf
 	CEXPRESSION_NODE *p_result;
 	std::string s_operator;
 
-	//	¶€‚ð“¾‚é
+	//	å·¦é …ã‚’å¾—ã‚‹
 	p_left = this->makeup_node_operator_mul_div( p_info );
 	if( p_left == nullptr ) {
-		return nullptr;				//	¶€‚ª“¾‚ç‚ê‚È‚©‚Á‚½ê‡
+		return nullptr;				//	å·¦é …ãŒå¾—ã‚‰ã‚Œãªã‹ã£ãŸå ´åˆ
 	}
 	p_result = p_left;
 	while( !p_info->list.is_command_end() ) {
 		s_operator = p_info->list.p_position->s_word;
 		if( s_operator != "\\" || p_info->list.p_position->type != CBASIC_WORD_TYPE::RESERVED_WORD ) {
-			//	Š–]‚Ì‰‰ŽZŽq‚Å‚Í‚È‚¢‚Ì‚Å¶€‚ð‚»‚Ì‚Ü‚Ü•Ô‚·
+			//	æ‰€æœ›ã®æ¼”ç®—å­ã§ã¯ãªã„ã®ã§å·¦é …ã‚’ãã®ã¾ã¾è¿”ã™
 			break;
 		}
 		p_info->list.p_position++;
 		if( p_info->list.is_command_end() ) {
-			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«‰E€‚ª‚È‚¢
+			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãå³é …ãŒãªã„
 			break;
 		}
-		//	‚±‚Ì‰‰ŽZŽq‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬
+		//	ã“ã®æ¼”ç®—å­ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 		p_operator = new CEXPRESSION_OPERATOR_INTDIV;
 		p_operator->p_left = p_result;
 		p_operator->p_right = this->makeup_node_operator_mul_div( p_info );
@@ -1438,24 +1438,24 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_operator_mod( CCOMPILE_INFO *p_info )
 	CEXPRESSION_NODE *p_result;
 	std::string s_operator;
 
-	//	¶€‚ð“¾‚é
+	//	å·¦é …ã‚’å¾—ã‚‹
 	p_left = this->makeup_node_operator_intdiv( p_info );
 	if( p_left == nullptr ) {
-		return nullptr;				//	¶€‚ª“¾‚ç‚ê‚È‚©‚Á‚½ê‡
+		return nullptr;				//	å·¦é …ãŒå¾—ã‚‰ã‚Œãªã‹ã£ãŸå ´åˆ
 	}
 	p_result = p_left;
 	while( !p_info->list.is_command_end() ) {
 		s_operator = p_info->list.p_position->s_word;
 		if( s_operator != "MOD" ) {
-			//	Š–]‚Ì‰‰ŽZŽq‚Å‚Í‚È‚¢‚Ì‚Å¶€‚ð‚»‚Ì‚Ü‚Ü•Ô‚·
+			//	æ‰€æœ›ã®æ¼”ç®—å­ã§ã¯ãªã„ã®ã§å·¦é …ã‚’ãã®ã¾ã¾è¿”ã™
 			break;
 		}
 		p_info->list.p_position++;
 		if( p_info->list.is_command_end() ) {
-			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«‰E€‚ª‚È‚¢
+			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãå³é …ãŒãªã„
 			break;
 		}
-		//	‚±‚Ì‰‰ŽZŽq‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬
+		//	ã“ã®æ¼”ç®—å­ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 		p_operator = new CEXPRESSION_OPERATOR_MOD;
 		p_operator->p_left = p_result;
 		p_operator->p_right = this->makeup_node_operator_intdiv( p_info );
@@ -1472,24 +1472,24 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_operator_add_sub( CCOMPILE_INFO *p_in
 	CEXPRESSION_NODE *p_result;
 	std::string s_operator;
 
-	//	¶€‚ð“¾‚é
+	//	å·¦é …ã‚’å¾—ã‚‹
 	p_left = this->makeup_node_operator_mod( p_info );
 	if( p_left == nullptr ) {
-		return nullptr;				//	¶€‚ª“¾‚ç‚ê‚È‚©‚Á‚½ê‡
+		return nullptr;				//	å·¦é …ãŒå¾—ã‚‰ã‚Œãªã‹ã£ãŸå ´åˆ
 	}
 	p_result = p_left;
 	while( !p_info->list.is_command_end() ) {
 		s_operator = p_info->list.p_position->s_word;
 		if( (s_operator != "+" && s_operator != "-") || p_info->list.p_position->type != CBASIC_WORD_TYPE::RESERVED_WORD ) {
-			//	Š–]‚Ì‰‰ŽZŽq‚Å‚Í‚È‚¢‚Ì‚Å¶€‚ð‚»‚Ì‚Ü‚Ü•Ô‚·
+			//	æ‰€æœ›ã®æ¼”ç®—å­ã§ã¯ãªã„ã®ã§å·¦é …ã‚’ãã®ã¾ã¾è¿”ã™
 			break;
 		}
 		p_info->list.p_position++;
 		if( p_info->list.is_command_end() ) {
-			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«‰E€‚ª‚È‚¢
+			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãå³é …ãŒãªã„
 			break;
 		}
-		//	‚±‚Ì‰‰ŽZŽq‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬
+		//	ã“ã®æ¼”ç®—å­ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 		if( s_operator == "+" ) {
 			p_operator_add = new CEXPRESSION_OPERATOR_ADD;
 			p_operator_add->p_left = p_result;
@@ -1519,34 +1519,34 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_operator_compare( CCOMPILE_INFO *p_in
 	CEXPRESSION_NODE *p_result;
 	std::string s_operator, s_operator2;
 
-	//	¶€‚ð“¾‚é
+	//	å·¦é …ã‚’å¾—ã‚‹
 	p_left = this->makeup_node_operator_add_sub( p_info );
 	if( p_left == nullptr ) {
-		return nullptr;				//	¶€‚ª“¾‚ç‚ê‚È‚©‚Á‚½ê‡
+		return nullptr;				//	å·¦é …ãŒå¾—ã‚‰ã‚Œãªã‹ã£ãŸå ´åˆ
 	}
 	p_result = p_left;
 	while( !p_info->list.is_command_end() ) {
 		s_operator = p_info->list.p_position->s_word;
 		if( (s_operator != "=" && s_operator != "<" && s_operator != ">") || p_info->list.p_position->type != CBASIC_WORD_TYPE::RESERVED_WORD ) {
-			//	Š–]‚Ì‰‰ŽZŽq‚Å‚Í‚È‚¢‚Ì‚Å¶€‚ð‚»‚Ì‚Ü‚Ü•Ô‚·
+			//	æ‰€æœ›ã®æ¼”ç®—å­ã§ã¯ãªã„ã®ã§å·¦é …ã‚’ãã®ã¾ã¾è¿”ã™
 			break;
 		}
 		p_info->list.p_position++;
 		if( p_info->list.is_command_end() ) {
-			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«‰E€‚ª‚È‚¢
+			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãå³é …ãŒãªã„
 			break;
 		}
 		s_operator2 = p_info->list.p_position->s_word;
 		if( s_operator2 == "=" || s_operator2 == "<" || s_operator2 == ">" ) {
-			//	<>, ><, >=, =>, <=, =< ‚Ìê‡A2‚Â‚Ì’PŒê‚É•ª‚©‚ê‚Ä‚é‚Ì‚Å“‡‚·‚é
+			//	<>, ><, >=, =>, <=, =< ã®å ´åˆã€2ã¤ã®å˜èªžã«åˆ†ã‹ã‚Œã¦ã‚‹ã®ã§çµ±åˆã™ã‚‹
 			s_operator = s_operator + s_operator2;
 			p_info->list.p_position++;
 			if( p_info->list.is_command_end() ) {
-				p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«‰E€‚ª‚È‚¢
+				p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãå³é …ãŒãªã„
 				break;
 			}
 		}
-		//	‚±‚Ì‰‰ŽZŽq‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬
+		//	ã“ã®æ¼”ç®—å­ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 		if( s_operator == "=" ) {
 			p_operator_equ = new CEXPRESSION_OPERATOR_EQU;
 			p_operator_equ->p_left = p_result;
@@ -1598,15 +1598,15 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_operator_not( CCOMPILE_INFO *p_info )
 	}
 	s_operator = p_info->list.p_position->s_word;
 	if( s_operator != "NOT" || p_info->list.p_position->type != CBASIC_WORD_TYPE::RESERVED_WORD ) {
-		//	Š–]‚Ì‰‰ŽZŽq‚Å‚Í‚È‚¢‚Ì‚Å‰E€‚ð‚»‚Ì‚Ü‚Ü•Ô‚·
+		//	æ‰€æœ›ã®æ¼”ç®—å­ã§ã¯ãªã„ã®ã§å³é …ã‚’ãã®ã¾ã¾è¿”ã™
 		return this->makeup_node_operator_compare( p_info );
 	}
 	p_info->list.p_position++;
 	if( p_info->list.is_command_end() ) {
-		p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«‰E€‚ª‚È‚¢
+		p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãå³é …ãŒãªã„
 		return nullptr;
 	}
-	//	‚±‚Ì‰‰ŽZŽq‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬
+	//	ã“ã®æ¼”ç®—å­ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 	p_operator = new CEXPRESSION_OPERATOR_NOT;
 	p_operator->p_right = this->makeup_node_operator_not( p_info );
 	return p_operator;
@@ -1619,24 +1619,24 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_operator_and( CCOMPILE_INFO *p_info )
 	CEXPRESSION_NODE *p_result;
 	std::string s_operator;
 
-	//	¶€‚ð“¾‚é
+	//	å·¦é …ã‚’å¾—ã‚‹
 	p_left = this->makeup_node_operator_not( p_info );
 	if( p_left == nullptr ) {
-		return nullptr;				//	¶€‚ª“¾‚ç‚ê‚È‚©‚Á‚½ê‡
+		return nullptr;				//	å·¦é …ãŒå¾—ã‚‰ã‚Œãªã‹ã£ãŸå ´åˆ
 	}
 	p_result = p_left;
 	while( !p_info->list.is_command_end() ) {
 		s_operator = p_info->list.p_position->s_word;
 		if( s_operator != "AND" || p_info->list.p_position->type != CBASIC_WORD_TYPE::RESERVED_WORD ) {
-			//	Š–]‚Ì‰‰ŽZŽq‚Å‚Í‚È‚¢‚Ì‚Å¶€‚ð‚»‚Ì‚Ü‚Ü•Ô‚·
+			//	æ‰€æœ›ã®æ¼”ç®—å­ã§ã¯ãªã„ã®ã§å·¦é …ã‚’ãã®ã¾ã¾è¿”ã™
 			break;
 		}
 		p_info->list.p_position++;
 		if( p_info->list.is_command_end() ) {
-			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«‰E€‚ª‚È‚¢
+			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãå³é …ãŒãªã„
 			break;
 		}
-		//	‚±‚Ì‰‰ŽZŽq‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬
+		//	ã“ã®æ¼”ç®—å­ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 		p_operator = new CEXPRESSION_OPERATOR_AND;
 		p_operator->p_left = p_result;
 		p_operator->p_right = this->makeup_node_operator_not( p_info );
@@ -1652,24 +1652,24 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_operator_or( CCOMPILE_INFO *p_info ) 
 	CEXPRESSION_NODE *p_result;
 	std::string s_operator;
 
-	//	¶€‚ð“¾‚é
+	//	å·¦é …ã‚’å¾—ã‚‹
 	p_left = this->makeup_node_operator_and( p_info );
 	if( p_left == nullptr ) {
-		return nullptr;				//	¶€‚ª“¾‚ç‚ê‚È‚©‚Á‚½ê‡
+		return nullptr;				//	å·¦é …ãŒå¾—ã‚‰ã‚Œãªã‹ã£ãŸå ´åˆ
 	}
 	p_result = p_left;
 	while( !p_info->list.is_command_end() ) {
 		s_operator = p_info->list.p_position->s_word;
 		if( s_operator != "OR" || p_info->list.p_position->type != CBASIC_WORD_TYPE::RESERVED_WORD ) {
-			//	Š–]‚Ì‰‰ŽZŽq‚Å‚Í‚È‚¢‚Ì‚Å¶€‚ð‚»‚Ì‚Ü‚Ü•Ô‚·
+			//	æ‰€æœ›ã®æ¼”ç®—å­ã§ã¯ãªã„ã®ã§å·¦é …ã‚’ãã®ã¾ã¾è¿”ã™
 			break;
 		}
 		p_info->list.p_position++;
 		if( p_info->list.is_command_end() ) {
-			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«‰E€‚ª‚È‚¢
+			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãå³é …ãŒãªã„
 			break;
 		}
-		//	‚±‚Ì‰‰ŽZŽq‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬
+		//	ã“ã®æ¼”ç®—å­ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 		p_operator = new CEXPRESSION_OPERATOR_OR;
 		p_operator->p_left = p_result;
 		p_operator->p_right = this->makeup_node_operator_and( p_info );
@@ -1685,24 +1685,24 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_operator_xor( CCOMPILE_INFO *p_info )
 	CEXPRESSION_NODE *p_result;
 	std::string s_operator;
 
-	//	¶€‚ð“¾‚é
+	//	å·¦é …ã‚’å¾—ã‚‹
 	p_left = this->makeup_node_operator_or( p_info );
 	if( p_left == nullptr ) {
-		return nullptr;				//	¶€‚ª“¾‚ç‚ê‚È‚©‚Á‚½ê‡
+		return nullptr;				//	å·¦é …ãŒå¾—ã‚‰ã‚Œãªã‹ã£ãŸå ´åˆ
 	}
 	p_result = p_left;
 	while( !p_info->list.is_command_end() ) {
 		s_operator = p_info->list.p_position->s_word;
 		if( s_operator != "XOR" || p_info->list.p_position->type != CBASIC_WORD_TYPE::RESERVED_WORD ) {
-			//	Š–]‚Ì‰‰ŽZŽq‚Å‚Í‚È‚¢‚Ì‚Å¶€‚ð‚»‚Ì‚Ü‚Ü•Ô‚·
+			//	æ‰€æœ›ã®æ¼”ç®—å­ã§ã¯ãªã„ã®ã§å·¦é …ã‚’ãã®ã¾ã¾è¿”ã™
 			break;
 		}
 		p_info->list.p_position++;
 		if( p_info->list.is_command_end() ) {
-			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«‰E€‚ª‚È‚¢
+			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãå³é …ãŒãªã„
 			break;
 		}
-		//	‚±‚Ì‰‰ŽZŽq‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬
+		//	ã“ã®æ¼”ç®—å­ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 		p_operator = new CEXPRESSION_OPERATOR_XOR;
 		p_operator->p_left = p_result;
 		p_operator->p_right = this->makeup_node_operator_or( p_info );
@@ -1718,24 +1718,24 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_operator_imp( CCOMPILE_INFO *p_info )
 	CEXPRESSION_NODE *p_result;
 	std::string s_operator;
 
-	//	¶€‚ð“¾‚é
+	//	å·¦é …ã‚’å¾—ã‚‹
 	p_left = this->makeup_node_operator_xor( p_info );
 	if( p_left == nullptr ) {
-		return nullptr;				//	¶€‚ª“¾‚ç‚ê‚È‚©‚Á‚½ê‡
+		return nullptr;				//	å·¦é …ãŒå¾—ã‚‰ã‚Œãªã‹ã£ãŸå ´åˆ
 	}
 	p_result = p_left;
 	while( !p_info->list.is_command_end() ) {
 		s_operator = p_info->list.p_position->s_word;
 		if( s_operator != "IMP" || p_info->list.p_position->type != CBASIC_WORD_TYPE::RESERVED_WORD ) {
-			//	Š–]‚Ì‰‰ŽZŽq‚Å‚Í‚È‚¢‚Ì‚Å¶€‚ð‚»‚Ì‚Ü‚Ü•Ô‚·
+			//	æ‰€æœ›ã®æ¼”ç®—å­ã§ã¯ãªã„ã®ã§å·¦é …ã‚’ãã®ã¾ã¾è¿”ã™
 			break;
 		}
 		p_info->list.p_position++;
 		if( p_info->list.is_command_end() ) {
-			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«‰E€‚ª‚È‚¢
+			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãå³é …ãŒãªã„
 			break;
 		}
-		//	‚±‚Ì‰‰ŽZŽq‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬
+		//	ã“ã®æ¼”ç®—å­ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 		p_operator = new CEXPRESSION_OPERATOR_IMP;
 		p_operator->p_left = p_result;
 		p_operator->p_right = this->makeup_node_operator_xor( p_info );
@@ -1751,24 +1751,24 @@ CEXPRESSION_NODE *CEXPRESSION::makeup_node_operator_eqv( CCOMPILE_INFO *p_info )
 	CEXPRESSION_NODE *p_result;
 	std::string s_operator;
 
-	//	¶€‚ð“¾‚é
+	//	å·¦é …ã‚’å¾—ã‚‹
 	p_left = this->makeup_node_operator_imp( p_info );
 	if( p_left == nullptr ) {
-		return nullptr;				//	¶€‚ª“¾‚ç‚ê‚È‚©‚Á‚½ê‡
+		return nullptr;				//	å·¦é …ãŒå¾—ã‚‰ã‚Œãªã‹ã£ãŸå ´åˆ
 	}
 	p_result = p_left;
 	while( !p_info->list.is_command_end() ) {
 		s_operator = p_info->list.p_position->s_word;
 		if( s_operator != "EQV" || p_info->list.p_position->type != CBASIC_WORD_TYPE::RESERVED_WORD ) {
-			//	Š–]‚Ì‰‰ŽZŽq‚Å‚Í‚È‚¢‚Ì‚Å¶€‚ð‚»‚Ì‚Ü‚Ü•Ô‚·
+			//	æ‰€æœ›ã®æ¼”ç®—å­ã§ã¯ãªã„ã®ã§å·¦é …ã‚’ãã®ã¾ã¾è¿”ã™
 			break;
 		}
 		p_info->list.p_position++;
 		if( p_info->list.is_command_end() ) {
-			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	‚ ‚é‚×‚«‰E€‚ª‚È‚¢
+			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );	//	ã‚ã‚‹ã¹ãå³é …ãŒãªã„
 			break;
 		}
-		//	‚±‚Ì‰‰ŽZŽq‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬
+		//	ã“ã®æ¼”ç®—å­ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 		p_operator = new CEXPRESSION_OPERATOR_EQV;
 		p_operator->p_left = p_result;
 		p_operator->p_right = this->makeup_node_operator_imp( p_info );
@@ -1782,14 +1782,14 @@ void CEXPRESSION::makeup_node( CCOMPILE_INFO *p_info ) {
 	CEXPRESSION_NODE *p;
 
 	if( this->p_top_node != nullptr ) {
-		//	Šù‚Éƒm[ƒh¶¬Ï‚Ý‚È‚ç‰½‚à‚µ‚È‚¢
+		//	æ—¢ã«ãƒŽãƒ¼ãƒ‰ç”Ÿæˆæ¸ˆã¿ãªã‚‰ä½•ã‚‚ã—ãªã„
 		return;
 	}
 
 	this->p_top_node = this->makeup_node_operator_eqv( p_info );
 
 	if( this->p_top_node != nullptr && p_info->options.optimize_level >= COPTIMIZE_LEVEL::NODE_ONLY ) {
-		//	Node Only ˆÈã‚ÌÅ“K‰»ƒŒƒxƒ‹‚ªŽw’è‚³‚ê‚Ä‚¢‚éê‡ANODE ‚ÌÅ“K‰»‚ðŽÀŽ{‚·‚éB
+		//	Node Only ä»¥ä¸Šã®æœ€é©åŒ–ãƒ¬ãƒ™ãƒ«ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹å ´åˆã€NODE ã®æœ€é©åŒ–ã‚’å®Ÿæ–½ã™ã‚‹ã€‚
 		p = this->p_top_node->optimization( p_info );
 		if( p != nullptr ) {
 			delete this->p_top_node;
@@ -1807,21 +1807,21 @@ bool CEXPRESSION::compile( CCOMPILE_INFO *p_info, CEXPRESSION_TYPE target ) {
 	}
 	this->p_top_node->compile( p_info );
 	if( target == this->p_top_node->type || target == CEXPRESSION_TYPE::UNKNOWN ) {
-		//	Œ^‚ªˆê’v‚µ‚Ä‚¢‚éê‡‚ÆA•ÏŠ·–³‚µ‚ªŽw’è‚³‚ê‚Ä‚¢‚éê‡‚ÍAŒ^•ÏŠ·•s—v
+		//	åž‹ãŒä¸€è‡´ã—ã¦ã„ã‚‹å ´åˆã¨ã€å¤‰æ›ç„¡ã—ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ã€åž‹å¤‰æ›ä¸è¦
 		return true;
 	}
-	//	Œ^•ÏŠ·
+	//	åž‹å¤‰æ›
 	if( target != CEXPRESSION_TYPE::STRING ) {
 		if( this->p_top_node->type == CEXPRESSION_TYPE::STRING ) {
-			//	”’lŒ^‚ð—v‹‚µ‚Ä‚¢‚é‚Ì‚É•¶Žš—ñŒ^‚ªŽw’è‚³‚ê‚Ä‚¢‚éê‡
+			//	æ•°å€¤åž‹ã‚’è¦æ±‚ã—ã¦ã„ã‚‹ã®ã«æ–‡å­—åˆ—åž‹ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹å ´åˆ
 			p_info->errors.add( TYPE_MISMATCH, p_info->list.get_line_no() );
 			return false;
 		}
-		//	”’lŒ^‚Ìê‡
+		//	æ•°å€¤åž‹ã®å ´åˆ
 		this->p_top_node->convert_type( p_info, target, this->p_top_node->type );
 	}
 	else {
-		//	•¶Žš—ñŒ^‚ð—v‹‚µ‚Ä‚¢‚é‚Ì‚É”’lŒ^‚ªŽw’è‚³‚ê‚Ä‚¢‚éê‡
+		//	æ–‡å­—åˆ—åž‹ã‚’è¦æ±‚ã—ã¦ã„ã‚‹ã®ã«æ•°å€¤åž‹ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹å ´åˆ
 		p_info->errors.add( TYPE_MISMATCH, p_info->list.get_line_no() );
 		return false;
 	}

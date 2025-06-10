@@ -11,7 +11,7 @@
 #define __EXPRESSION_CINT_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_CINT: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_CINT() {

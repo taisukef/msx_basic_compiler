@@ -19,7 +19,7 @@ CEXPRESSION_NODE* CEXPRESSION_FRE::optimization( CCOMPILE_INFO *p_info ) {
 		delete this->p_operand;
 		this->p_operand = p;
 	}
-	//	fre�֐��͍œK���ŏ��ł��邱�Ƃ͂Ȃ�
+	//	fre関数は最適化で消滅することはない
 	return nullptr;
 }
 

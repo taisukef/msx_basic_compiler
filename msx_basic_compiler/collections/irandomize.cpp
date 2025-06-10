@@ -8,7 +8,7 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  IRANDOMIZE <シード値>
+//  IRANDOMIZE <繧ｷ繝ｼ繝牙､>
 bool CIRANDOMIZE::exec( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 	CEXPRESSION exp;
@@ -21,7 +21,7 @@ bool CIRANDOMIZE::exec( CCOMPILE_INFO *p_info ) {
 		exp.release();
 	}
 	else {
-		//	IRANDOMIZE だけで終わってる場合は TIME をシードとして使う
+		//	IRANDOMIZE 縺縺代〒邨ゅｏ縺｣縺ｦ繧句ｴ蜷医�ｯ TIME 繧偵す繝ｼ繝峨→縺励※菴ｿ縺�
 		p_info->assembler_list.add_label( "work_jiffy", "0x0fc9e" );
 		asm_line.set( "LD", "", "HL", "[work_jiffy]" );
 		p_info->assembler_list.body.push_back( asm_line );

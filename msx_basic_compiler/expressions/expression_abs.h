@@ -11,7 +11,7 @@
 #define __EXPRESSION_ABS_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_ABS: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_ABS() {

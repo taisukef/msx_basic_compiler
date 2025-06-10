@@ -11,7 +11,7 @@
 #define __CEXPRESSION_OPERATOR_NOT_H__
 
 // --------------------------------------------------------------------
-//	NOT(î€íË)
+//	NOT(Âê¶ÂÆö)
 class CEXPRESSION_OPERATOR_NOT: public CEXPRESSION_NODE {
 public:
 	CEXPRESSION_NODE *p_right;

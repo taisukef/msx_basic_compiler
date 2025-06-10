@@ -11,7 +11,7 @@
 #define __EXPRESSION_MID_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_MID: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_MID() {

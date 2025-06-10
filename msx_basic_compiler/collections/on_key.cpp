@@ -84,7 +84,7 @@ void CONKEY::key( CCOMPILE_INFO *p_info ) {
 }
 
 // --------------------------------------------------------------------
-//  ON KEY GOSUB <”ò‚Ñæ0>, <”ò‚Ñæ1>, ... , <”ò‚Ñæ3>, <”ò‚Ñæ9>
+//  ON KEY GOSUB <é£›ã³å…ˆ0>, <é£›ã³å…ˆ1>, ... , <é£›ã³å…ˆ3>, <é£›ã³å…ˆ9>
 bool CONKEY::exec( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 	int line_no = p_info->list.get_line_no();
@@ -110,7 +110,7 @@ bool CONKEY::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 
-	//	”ò‚Ñæ
+	//	é£›ã³å…ˆ
 	if( p_info->list.p_position->s_word != "GOSUB" ) {
 		p_info->errors.add( SYNTAX_ERROR, line_no );
 		return true;
@@ -123,7 +123,7 @@ bool CONKEY::exec( CCOMPILE_INFO *p_info ) {
 	asm_line.set( CMNEMONIC_TYPE::DI, CCONDITION::NONE, COPERAND_TYPE::NONE, "", COPERAND_TYPE::NONE, "" );
 	p_info->assembler_list.body.push_back( asm_line );
 	for( i = 0; i < 10; i++ ) {
-		//	s”Ô†‚Ì‹Lq‚ª‚È‚¢ê‡‚ÍƒGƒ‰[
+		//	è¡Œç•ªå·ã®è¨˜è¿°ãŒãªã„å ´åˆã¯ã‚¨ãƒ©ãƒ¼
 		if( p_info->list.is_command_end() ) {
 			p_info->errors.add( SYNTAX_ERROR, line_no );
 			return true;
@@ -141,7 +141,7 @@ bool CONKEY::exec( CCOMPILE_INFO *p_info ) {
 			p_info->list.p_position++;
 		}
 		if( p_info->list.is_command_end() ) {
-			//	s”Ô†‚Ì‚·‚®ŽŸ‚ÅƒRƒ}ƒ“ƒh‚ªI‚í‚Á‚Ä‚¢‚ê‚ÎI‚í‚é
+			//	è¡Œç•ªå·ã®ã™ãæ¬¡ã§ã‚³ãƒžãƒ³ãƒ‰ãŒçµ‚ã‚ã£ã¦ã„ã‚Œã°çµ‚ã‚ã‚‹
 			break;
 		}
 		if( p_info->list.p_position->s_word != "," ) {

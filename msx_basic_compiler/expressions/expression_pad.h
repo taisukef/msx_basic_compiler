@@ -11,7 +11,7 @@
 #define __EXPRESSION_PAD_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_PAD: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_PAD() {

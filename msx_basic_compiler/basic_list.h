@@ -14,7 +14,7 @@
 #define __BASIC_LIST_H__
 
 // --------------------------------------------------------------------
-//	BASIC‚Ì’PŒê‚ğ¦‚·
+//	BASICã®å˜èªã‚’ç¤ºã™
 class CBASIC_WORD {
 public:
 	int line_no;
@@ -26,7 +26,7 @@ public:
 };
 
 // --------------------------------------------------------------------
-//	ƒ\[ƒXƒR[ƒh‚ÌˆÊ’u‚ğ¦‚·Œ^
+//	ã‚½ãƒ¼ã‚¹ã‚³ãƒ¼ãƒ‰ã®ä½ç½®ã‚’ç¤ºã™å‹
 class CBASIC_LIST_POSITION {
 public:
 	std::vector< CBASIC_WORD >::const_iterator p_position;
@@ -34,7 +34,7 @@ public:
 };
 
 // --------------------------------------------------------------------
-//	BASIC‚Ì’PŒê”z—ñ
+//	BASICã®å˜èªé…åˆ—
 class CBASIC_LIST {
 private:
 	std::vector< unsigned char > file_image;
@@ -112,7 +112,7 @@ public:
 	void skip_statement( void );
 
 	// ----------------------------------------------------------------
-	//	Ÿ‚ªw’è‚Ì’PŒê‚Å–³‚¯‚ê‚Îw’è‚ÌƒGƒ‰[‚É‚·‚é
+	//	æ¬¡ãŒæŒ‡å®šã®å˜èªã§ç„¡ã‘ã‚Œã°æŒ‡å®šã®ã‚¨ãƒ©ãƒ¼ã«ã™ã‚‹
 	bool check_word( CERROR_LIST *p_error, std::string s, CERROR_ID error_id = SYNTAX_ERROR );
 };
 

@@ -1,9 +1,9 @@
-BIOS ‚Ì LINE•`‰æ‚ÌƒGƒ“ƒgƒŠ
+BIOS ã® LINEæç”»ã®ã‚¨ãƒ³ãƒˆãƒª
 	58FCh
 		GXPOS FCB3h
 		GYPOS FCB5h
-		¨ Žn“_ (x,y)
+		â†’ å§‹ç‚¹ (x,y)
 		BC, DE
-		¨ I“_ (x,y)
+		â†’ çµ‚ç‚¹ (x,y)
 
-	SETATR (011Ah) ‚É A = ƒAƒgƒŠƒrƒ…[ƒg ‚ÅFŽw’èH
+	SETATR (011Ah) ã« A = ã‚¢ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ãƒˆ ã§è‰²æŒ‡å®šï¼Ÿ

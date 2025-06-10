@@ -8,7 +8,7 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  OUT <I/Oポート番号>, <書き込む値>
+//  OUT <I/O繝昴�ｼ繝育分蜿ｷ>, <譖ｸ縺崎ｾｼ繧蛟､>
 bool COUT::exec( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 	bool has_parameter;
@@ -20,7 +20,7 @@ bool COUT::exec( CCOMPILE_INFO *p_info ) {
 	p_info->list.p_position++;
 
 	CEXPRESSION exp;
-	//	第1引数 <I/Oポート番号>
+	//	隨ｬ1蠑墓焚 <I/O繝昴�ｼ繝育分蜿ｷ>
 	has_parameter = false;
 	if( exp.compile( p_info ) ) {
 		asm_line.type = CMNEMONIC_TYPE::PUSH;
@@ -42,7 +42,7 @@ bool COUT::exec( CCOMPILE_INFO *p_info ) {
 		return true;
 	}
 	p_info->list.p_position++;
-	//	第2引数 <書き込む値>
+	//	隨ｬ2蠑墓焚 <譖ｸ縺崎ｾｼ繧蛟､>
 	has_parameter = false;
 	if( exp.compile( p_info ) ) {
 		asm_line.type = CMNEMONIC_TYPE::POP;

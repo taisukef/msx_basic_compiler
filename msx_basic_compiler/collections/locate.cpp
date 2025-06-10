@@ -27,10 +27,10 @@ bool CLOCATE::exec( CCOMPILE_INFO *p_info ) {
 	p_info->assembler_list.add_label( "work_prtflg", "0x0f416" );
 
 	CEXPRESSION exp;
-	//	‘æ1ˆø” <X>
+	//	ç¬¬1å¼•æ•° <X>
 	has_x = false;
 	if( exp.compile( p_info ) ) {
-		//	‘æ1ˆø”‚ª‘¶İ‚µ‚½ê‡
+		//	ç¬¬1å¼•æ•°ãŒå­˜åœ¨ã—ãŸå ´åˆ
 		asm_line.set( "LD", "", "H", "L" );
 		p_info->assembler_list.body.push_back( asm_line );
 		asm_line.set( "INC", "", "H" );
@@ -39,7 +39,7 @@ bool CLOCATE::exec( CCOMPILE_INFO *p_info ) {
 		has_x = true;
 
 		if( p_info->list.is_command_end() ) {
-			//	LOCATE X ‚Ìê‡
+			//	LOCATE X ã®å ´åˆ
 			asm_line.set( "LD", "", "A", "[work_csry]" );
 			p_info->assembler_list.body.push_back( asm_line );
 			asm_line.set( "LD", "", "L", "A" );
@@ -53,13 +53,13 @@ bool CLOCATE::exec( CCOMPILE_INFO *p_info ) {
 		p_info->assembler_list.body.push_back( asm_line );
 	}
 	else {
-		//	‘æ1ˆø”‚ªÈ—ª‚³‚ê‚Ä‚¢‚éê‡
+		//	ç¬¬1å¼•æ•°ãŒçœç•¥ã•ã‚Œã¦ã„ã‚‹å ´åˆ
 		asm_line.set( "LD", "", "A", "[work_csrx]" );
 		p_info->assembler_list.body.push_back( asm_line );
 		asm_line.set( "LD", "", "H", "A" );
 		p_info->assembler_list.body.push_back( asm_line );
 		if( p_info->list.is_command_end() ) {
-			//	LOCATE : ˆø”‚ª‘S‚­‚È‚¢ê‡
+			//	LOCATE : å¼•æ•°ãŒå…¨ããªã„å ´åˆ
 			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );
 			return true;
 		}
@@ -72,12 +72,12 @@ bool CLOCATE::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 
-	//	‘æ2ˆø” <Y>
+	//	ç¬¬2å¼•æ•° <Y>
 	has_y = false;
 	if( exp.compile( p_info ) ) {
-		//	‘æ2ˆø”‚ª‘¶İ‚µ‚½ê‡
+		//	ç¬¬2å¼•æ•°ãŒå­˜åœ¨ã—ãŸå ´åˆ
 		if( !has_x ) {
-			//	LOCATE ,Y : ‘æ1ˆø”‚ÍÈ—ª‚³‚ê‚Ä‚¢‚½ê‡
+			//	LOCATE ,Y : ç¬¬1å¼•æ•°ã¯çœç•¥ã•ã‚Œã¦ã„ãŸå ´åˆ
 			asm_line.set( "LD", "", "A", "[work_csrx]" );
 			p_info->assembler_list.body.push_back( asm_line );
 			asm_line.set( "LD", "", "H", "A" );
@@ -86,7 +86,7 @@ bool CLOCATE::exec( CCOMPILE_INFO *p_info ) {
 			p_info->assembler_list.body.push_back( asm_line );
 		}
 		else {
-			//	LOCATE X, Y : ‘æ1‚à‘æ2‚à‘¶İ‚µ‚½ê‡
+			//	LOCATE X, Y : ç¬¬1ã‚‚ç¬¬2ã‚‚å­˜åœ¨ã—ãŸå ´åˆ
 			asm_line.set( "LD", "", "A", "L" );
 			p_info->assembler_list.body.push_back( asm_line );
 			asm_line.set( "INC", "", "A", "" );
@@ -103,16 +103,16 @@ bool CLOCATE::exec( CCOMPILE_INFO *p_info ) {
 	}
 	else {
 		if( !has_x ) {
-			//	LOCATE , : ‘æ1ˆø”‚à‘æ2ˆø”‚àÈ—ª‚³‚ê‚Ä‚¢‚éê‡
+			//	LOCATE , : ç¬¬1å¼•æ•°ã‚‚ç¬¬2å¼•æ•°ã‚‚çœç•¥ã•ã‚Œã¦ã„ã‚‹å ´åˆ
 			if( p_info->list.is_command_end() ) {
-				//	LOCATE , : ˆø”–³‚µ‚ÅƒJƒ“ƒ}1‚Â‚ÅI‚í‚Á‚Ä‚éê‡
+				//	LOCATE , : å¼•æ•°ç„¡ã—ã§ã‚«ãƒ³ãƒ1ã¤ã§çµ‚ã‚ã£ã¦ã‚‹å ´åˆ
 				p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );
 				return true;
 			}
-			//	LOCATE , , ... : ƒJ[ƒ\ƒ‹ˆÊ’uw’è‚Ìƒpƒ‰ƒ[ƒ^‚ª‚È‚¢‚½‚ßAposit ŒÄ‚Ño‚µ‚ÍÈ—ª
+			//	LOCATE , , ... : ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®æŒ‡å®šã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒãªã„ãŸã‚ã€posit å‘¼ã³å‡ºã—ã¯çœç•¥
 		}
 		else {
-			//	LOCATE X, : ‘æ2ˆø”‚ªÈ—ª‚³‚ê‚Ä‚¢‚éê‡
+			//	LOCATE X, : ç¬¬2å¼•æ•°ãŒçœç•¥ã•ã‚Œã¦ã„ã‚‹å ´åˆ
 			asm_line.set( "POP", "", "HL" );
 			p_info->assembler_list.body.push_back( asm_line );
 			asm_line.set( "LD", "", "A", "[work_csry]" );
@@ -132,7 +132,7 @@ bool CLOCATE::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 
-	//	‘æ3ˆø” <ƒJ[ƒ\ƒ‹ƒXƒCƒbƒ`>
+	//	ç¬¬3å¼•æ•° <ã‚«ãƒ¼ã‚½ãƒ«ã‚¹ã‚¤ãƒƒãƒ>
 	has_x = false;
 	if( exp.compile( p_info ) ) {
 		asm_line.set( "LD", "", "A", "0x1B" );
@@ -163,12 +163,12 @@ bool CLOCATE::exec( CCOMPILE_INFO *p_info ) {
 	}
 	if( p_info->list.is_command_end() ) {
 		if( !has_x ) {
-			//	LOCATE x,y, ‚Ì‚æ‚¤‚É‘æOˆø”‚Ü‚Å‚Å‘æOˆø”‚ªÈ—ª‚³‚ê‚Ä‚¢‚éê‡‚ÍƒGƒ‰[
+			//	LOCATE x,y, ã®ã‚ˆã†ã«ç¬¬ä¸‰å¼•æ•°ã¾ã§ã§ç¬¬ä¸‰å¼•æ•°ãŒçœç•¥ã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ã‚¨ãƒ©ãƒ¼
 			p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );
 		}
 		return true;
 	}
-	//	LOCATE a, b, c d ‚Ì‚æ‚¤‚É‘æOˆø”‚ÌŸ‚É•Ï‚È•¶š‚ª‚ ‚éê‡
+	//	LOCATE a, b, c d ã®ã‚ˆã†ã«ç¬¬ä¸‰å¼•æ•°ã®æ¬¡ã«å¤‰ãªæ–‡å­—ãŒã‚ã‚‹å ´åˆ
 	p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 	return true;
 }

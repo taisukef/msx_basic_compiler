@@ -9,7 +9,7 @@
 #include "../expressions/expression_variable.h"
 
 // --------------------------------------------------------------------
-//  MID$( �ϐ���, �u���J�n�ʒu [, �u���T�C�Y] ) = �u��������
+//  MID$( 変数名, 置換開始位置 [, 置換サイズ] ) = 置換文字列
 bool CMID::exec( CCOMPILE_INFO *p_info ) {
 	CEXPRESSION exp;
 	CASSEMBLER_LINE asm_line;
@@ -29,10 +29,10 @@ bool CMID::exec( CCOMPILE_INFO *p_info ) {
 	p_info->list.p_position++;
 
 	p_info->assembler_list.activate_get_writeable_string();
-	//	�ϐ��̃A�h���X�𓾂āA���̓��e���R�s�[�ɒu��������
+	//	変数のアドレスを得て、その内容をコピーに置き換える
 	std::vector< CBASIC_WORD >::const_iterator p_position_back = p_info->list.p_position;
 	CVARIABLE variable = p_info->p_compiler->get_variable_address();
-	asm_line.set( "LD", "", "E", "[HL]" );					//	DE = �ϐ��Ɋi�[����Ă��镶����̃A�h���X
+	asm_line.set( "LD", "", "E", "[HL]" );					//	DE = 変数に格納されている文字列のアドレス
 	p_info->assembler_list.body.push_back( asm_line );
 	asm_line.set( "INC", "", "HL", "" );
 	p_info->assembler_list.body.push_back( asm_line );
@@ -40,17 +40,17 @@ bool CMID::exec( CCOMPILE_INFO *p_info ) {
 	p_info->assembler_list.body.push_back( asm_line );
 	asm_line.set( "DEC", "", "HL", "" );
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "PUSH", "", "HL", "" );					//	�ϐ��̃A�h���X
+	asm_line.set( "PUSH", "", "HL", "" );					//	変数のアドレス
 	p_info->assembler_list.body.push_back( asm_line );
 	asm_line.set( "EX", "", "DE", "HL" );
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "CALL", "", "get_writeable_string", "" );	//	�ϐ��ɓ����Ă镶������A�K�v�ɉ����ăR�s�[����i�������݉\�ȕ�����ɕϊ�����j
+	asm_line.set( "CALL", "", "get_writeable_string", "" );	//	変数に入ってる文字列を、必要に応じてコピーする（書き込み可能な文字列に変換する）
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "POP", "", "DE" );						//	�ϐ��̃A�h���X���擾
+	asm_line.set( "POP", "", "DE" );						//	変数のアドレスを取得
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "EX", "", "DE", "HL" );					//	HL=�ϐ��̃A�h���X, DE=�R�s�[����������̃A�h���X
+	asm_line.set( "EX", "", "DE", "HL" );					//	HL=変数のアドレス, DE=コピーした文字列のアドレス
 	p_info->assembler_list.body.push_back( asm_line );
-	asm_line.set( "LD", "", "[HL]", "E" );					//	�ϐ��̒��g���A�R�s�[����������ɒu��������
+	asm_line.set( "LD", "", "[HL]", "E" );					//	変数の中身を、コピーした文字列に置き換える
 	p_info->assembler_list.body.push_back( asm_line );
 	asm_line.set( "INC", "", "HL", "" );
 	p_info->assembler_list.body.push_back( asm_line );
@@ -64,7 +64,7 @@ bool CMID::exec( CCOMPILE_INFO *p_info ) {
 	p_info->list.p_position++;
 
 	if( exp.compile( p_info, CEXPRESSION_TYPE::INTEGER ) ) {
-		//	��2�����̏���
+		//	第2引数の処理
 		asm_line.set( "LD", "", "B", "L" );
 		p_info->assembler_list.body.push_back( asm_line );
 		exp.release();
@@ -80,7 +80,7 @@ bool CMID::exec( CCOMPILE_INFO *p_info ) {
 	}
 	if( p_info->list.p_position->s_word == "," ) {
 		p_info->list.p_position++;
-		//	��3�����̏���
+		//	第3引数の処理
 		asm_line.set( "PUSH", "", "BC" );
 		p_info->assembler_list.body.push_back( asm_line );
 		if( exp.compile( p_info, CEXPRESSION_TYPE::INTEGER ) ) {
@@ -98,7 +98,7 @@ bool CMID::exec( CCOMPILE_INFO *p_info ) {
 		}
 	}
 	else {
-		//	��3�������ȗ�����Ă���ꍇ
+		//	第3引数が省略されている場合
 		asm_line.set( "LD", "", "C", "255" );
 		p_info->assembler_list.body.push_back( asm_line );
 		asm_line.set( "PUSH", "", "BC" );
@@ -117,7 +117,7 @@ bool CMID::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 
-	//	= �̉E���̎�������
+	//	= の右側の式を処理
 	exp.makeup_node( p_info );
 
 	bool is_compatible_mode = false;
@@ -133,8 +133,8 @@ bool CMID::exec( CCOMPILE_INFO *p_info ) {
 	asm_line.set( "PUSH", "", "HL" );
 	p_info->assembler_list.body.push_back( asm_line );
 
-	//	�����̎��_�ŁA�u�����̕�����ϐ��ɓ����Ă镶����̃A�h���X�v�u�����̕�����z��ϐ��v
-	//	�̃A�h���X���ς���Ă���\��������B�]���āA�����ł܂��ϐ��̓��e����蒼���B
+	//	ここの時点で、「代入先の文字列変数に入ってる文字列のアドレス」「代入先の文字列配列変数」
+	//	のアドレスが変わっている可能性がある。従って、ここでまた変数の内容を取り直す。
 	std::vector< CBASIC_WORD >::const_iterator p_position_next = p_info->list.p_position;
 	p_info->list.p_position = p_position_back;
 	variable = p_info->p_compiler->get_variable_address();

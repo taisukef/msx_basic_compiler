@@ -11,7 +11,7 @@
 #define __EXPRESSION_CSNG_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_CSNG: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_CSNG() {

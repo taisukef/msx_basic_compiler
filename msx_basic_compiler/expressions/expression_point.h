@@ -11,7 +11,7 @@
 #define __EXPRESSION_POINT_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_POINT: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_POINT() {

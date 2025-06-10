@@ -52,7 +52,7 @@ void CCALL::iotget( CCOMPILE_INFO *p_info ) {
 		return;
 	}
 	p_info->list.p_position++;
-	//	‘æ1ˆø”: ƒfƒoƒCƒXƒpƒX
+	//	ç¬¬1å¼•æ•°: ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ã‚¹
 	if( exp.compile( p_info, CEXPRESSION_TYPE::STRING ) ) {
 		exp.release();
 		asm_line.set( CMNEMONIC_TYPE::PUSH, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "HL", COPERAND_TYPE::NONE, "" );
@@ -67,9 +67,9 @@ void CCALL::iotget( CCOMPILE_INFO *p_info ) {
 		return;
 	}
 	p_info->list.p_position++;
-	//	‘æ2ˆø”: ’l‚ğó‚¯æ‚é•Ï”–¼
+	//	ç¬¬2å¼•æ•°: å€¤ã‚’å—ã‘å–ã‚‹å¤‰æ•°å
 	CVARIABLE variable = p_info->p_compiler->get_variable_address();
-	//	IOTGETƒRƒ}ƒ“ƒh
+	//	IOTGETã‚³ãƒãƒ³ãƒ‰
 	if( variable.type == CVARIABLE_TYPE::STRING ) {
 		p_info->assembler_list.add_label( "blib_iotget_str", "0x0401e" );
 		asm_line.set( CMNEMONIC_TYPE::EX, CCONDITION::NONE, COPERAND_TYPE::MEMORY, "[SP]", COPERAND_TYPE::REGISTER, "HL" );
@@ -133,7 +133,7 @@ void CCALL::iotget( CCOMPILE_INFO *p_info ) {
 		p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 		return;
 	}
-	//	‘ã“üˆ—
+	//	ä»£å…¥å‡¦ç†
 	p_info->p_compiler->write_variable_value( variable );
 
 	if( p_info->list.is_command_end() || p_info->list.p_position->s_word != ")" ) {
@@ -155,7 +155,7 @@ void CCALL::iotput( CCOMPILE_INFO *p_info ) {
 		return;
 	}
 	p_info->list.p_position++;
-	//	‘æ1ˆø”: ƒfƒoƒCƒXƒpƒX
+	//	ç¬¬1å¼•æ•°: ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ã‚¹
 	if( exp.compile( p_info, CEXPRESSION_TYPE::STRING ) ) {
 		exp.release();
 		asm_line.set( CMNEMONIC_TYPE::PUSH, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "HL", COPERAND_TYPE::NONE, "" );
@@ -170,7 +170,7 @@ void CCALL::iotput( CCOMPILE_INFO *p_info ) {
 		return;
 	}
 	p_info->list.p_position++;
-	//	‘æ2ˆø”: ‘—M‚·‚é’l
+	//	ç¬¬2å¼•æ•°: é€ä¿¡ã™ã‚‹å€¤
 	if( exp.compile( p_info, CEXPRESSION_TYPE::UNKNOWN ) ) {
 		if( exp.get_type() == CEXPRESSION_TYPE::STRING ) {
 			p_info->assembler_list.add_label( "blib_iotput_str", "0x04024" );
@@ -217,7 +217,7 @@ void CCALL::iotfind( CCOMPILE_INFO *p_info ) {
 		return;
 	}
 	p_info->list.p_position++;
-	//	‘æ1ˆø”: ƒfƒoƒCƒXƒpƒX
+	//	ç¬¬1å¼•æ•°: ãƒ‡ãƒã‚¤ã‚¹ãƒ‘ã‚¹
 	if( exp.compile( p_info, CEXPRESSION_TYPE::STRING ) ) {
 		exp.release();
 		asm_line.set( CMNEMONIC_TYPE::PUSH, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "HL", COPERAND_TYPE::NONE, "" );
@@ -232,9 +232,9 @@ void CCALL::iotfind( CCOMPILE_INFO *p_info ) {
 		return;
 	}
 	p_info->list.p_position++;
-	//	‘æ2ˆø”: ’l‚ğó‚¯æ‚é•Ï”–¼
+	//	ç¬¬2å¼•æ•°: å€¤ã‚’å—ã‘å–ã‚‹å¤‰æ•°å
 	CVARIABLE variable = p_info->p_compiler->get_variable_address();
-	//	IOTFINDƒRƒ}ƒ“ƒh
+	//	IOTFINDã‚³ãƒãƒ³ãƒ‰
 	if( variable.type == CVARIABLE_TYPE::STRING ) {
 		p_info->assembler_list.add_label( "blib_iotget_str", "0x0401e" );
 		asm_line.set( CMNEMONIC_TYPE::EX, CCONDITION::NONE, COPERAND_TYPE::MEMORY, "[SP]", COPERAND_TYPE::REGISTER, "HL" );
@@ -294,7 +294,7 @@ void CCALL::iotfind( CCOMPILE_INFO *p_info ) {
 		p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 		return;
 	}
-	//	‘ã“üˆ—
+	//	ä»£å…¥å‡¦ç†
 	p_info->p_compiler->write_variable_value( variable );
 
 	if( p_info->list.is_command_end() || p_info->list.p_position->s_word != ")" ) {
@@ -306,7 +306,7 @@ void CCALL::iotfind( CCOMPILE_INFO *p_info ) {
 }
 
 // --------------------------------------------------------------------
-//	CALL TURBO ON/OFF( xxx ) ‚ÍA–³‹‚·‚é
+//	CALL TURBO ON/OFF( xxx ) ã¯ã€ç„¡è¦–ã™ã‚‹
 void CCALL::turbo( CCOMPILE_INFO* p_info ) {
 	CEXPRESSION exp;
 
@@ -347,7 +347,7 @@ void CCALL::turbo( CCOMPILE_INFO* p_info ) {
 }
 
 // --------------------------------------------------------------------
-//  CALL Šg’£–½—ß
+//  CALL æ‹¡å¼µå‘½ä»¤
 bool CCALL::exec( CCOMPILE_INFO *p_info ) {
 	int line_no = p_info->list.get_line_no();
 
@@ -376,7 +376,7 @@ bool CCALL::exec( CCOMPILE_INFO *p_info ) {
 		this->turbo( p_info );
 		return true;
 	}
-	//	”ñ‘Î‰‚Ì–½—ß
+	//	éå¯¾å¿œã®å‘½ä»¤
 	p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 	return true;
 }

@@ -42,7 +42,7 @@ void CONSTOP::stop( CCOMPILE_INFO *p_info ) {
 }
 
 // --------------------------------------------------------------------
-//  ON STOP GOSUB <”ò‚Ñæ>
+//  ON STOP GOSUB <é£›ã³å…ˆ>
 bool CONSTOP::exec( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 	int line_no = p_info->list.get_line_no();
@@ -67,7 +67,7 @@ bool CONSTOP::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 
-	//	”ò‚Ñæ
+	//	é£›ã³å…ˆ
 	if( p_info->list.p_position->s_word != "GOSUB" ) {
 		p_info->errors.add( SYNTAX_ERROR, line_no );
 		return true;
@@ -77,7 +77,7 @@ bool CONSTOP::exec( CCOMPILE_INFO *p_info ) {
 		p_info->errors.add( SYNTAX_ERROR, line_no );
 		return true;
 	}
-	//	s”Ô†‚Ì‹Lq‚ª‚È‚¢ê‡‚ÍƒGƒ‰[
+	//	è¡Œç•ªå·ã®è¨˜è¿°ãŒãªã„å ´åˆã¯ã‚¨ãƒ©ãƒ¼
 	if( p_info->list.is_command_end() ) {
 		p_info->errors.add( SYNTAX_ERROR, line_no );
 		return true;

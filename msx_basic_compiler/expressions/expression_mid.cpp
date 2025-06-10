@@ -39,7 +39,7 @@ CEXPRESSION_NODE* CEXPRESSION_MID::optimization( CCOMPILE_INFO *p_info ) {
 void CEXPRESSION_MID::compile( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 
-	//	æ‚Éˆø”‚ðˆ—
+	//	å…ˆã«å¼•æ•°ã‚’å‡¦ç†
 	this->p_operand1->compile( p_info );
 
 	if( this->p_operand1->type == CEXPRESSION_TYPE::STRING ) {

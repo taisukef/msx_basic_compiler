@@ -11,7 +11,7 @@
 #define __EXPRESSION_SPACE_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_SPACE: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_SPACE() {

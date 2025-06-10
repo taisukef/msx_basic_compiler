@@ -11,7 +11,7 @@
 #define __EXPRESSION_FRE_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_FRE: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_FRE() {

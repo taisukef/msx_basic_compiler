@@ -11,7 +11,7 @@
 #define __EXPRESSION_ATN_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_ATN: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_ATN() {

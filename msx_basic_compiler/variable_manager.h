@@ -15,34 +15,34 @@
 // --------------------------------------------------------------------
 class CVARIABLE_MANAGER {
 private:
-	//	�X�e�[�g�����g��ǂݔ�΂�
+	//	ステートメントを読み飛ばす
 	void skip_statement( class CCOMPILE_INFO *p_info );
 
-	//	DEFxxx �̏����X�V����
+	//	DEFxxx の情報を更新する
 	void update( class CCOMPILE_INFO *p_info, CVARIABLE_TYPE new_type );
 
-	//	�z��̗v�f ( a, b, c ... ) ��]�����āA�v�f����Ԃ�
+	//	配列の要素 ( a, b, c ... ) を評価して、要素数を返す
 	int evaluate_dimensions( class CCOMPILE_INFO *p_info );
 public:
-	//	�ϐ��ǉ�����
+	//	変数追加処理
 	CVARIABLE add_variable( class CCOMPILE_INFO *p_info );
 
-	//	�R�[�h�����߂��ĕϐ����X�g���쐬����
+	//	コードを解釈して変数リストを作成する
 	bool analyze_defvars( class CCOMPILE_INFO *p_info );
 
-	//	���݂̎Q�ƈʒu�̕ϐ��𐶐����ď���Ԃ�
+	//	現在の参照位置の変数を生成して情報を返す
 	CVARIABLE create_variable_info( class CCOMPILE_INFO *p_info, bool with_array = true );
 
-	//	���݂̎Q�ƈʒu�̕ϐ��̏���Ԃ�
+	//	現在の参照位置の変数の情報を返す
 	CVARIABLE get_variable_info( class CCOMPILE_INFO *p_info, std::vector< class CEXPRESSION* > &exp_list, bool with_array = true );
 
-	//	���݂̎Q�ƈʒu�̔z��ϐ�(�v�f�ł͂Ȃ��z��S��)�̏���Ԃ�
+	//	現在の参照位置の配列変数(要素ではなく配列全体)の情報を返す
 	CVARIABLE get_array_info( class CCOMPILE_INFO *p_info );
 
-	//	�z��v�f�̎��̔z�� exp_list ���R���p�C������R�[�h�𐶐�����BHL �ɕϐ��̃A�h���X�������Ă���O��ł���B
+	//	配列要素の式の配列 exp_list をコンパイルするコードを生成する。HL に変数のアドレスが入っている前提である。
 	void compile_array_elements( class CCOMPILE_INFO *p_info, std::vector< class CEXPRESSION* > &exp_list, CVARIABLE &variable );
 
-	//	����ϐ����`����
+	//	特殊変数を定義する
 	CVARIABLE put_special_variable( class CCOMPILE_INFO *p_info, const std::string s_name, CVARIABLE_TYPE var_type, CVARIABLE_TYPE var_name_type = CVARIABLE_TYPE::UNKNOWN, bool is_array = false );
 };
 

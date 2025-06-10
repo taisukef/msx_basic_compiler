@@ -11,7 +11,7 @@
 #define __EXPRESSION_CDBL_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_CDBL: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_CDBL() {

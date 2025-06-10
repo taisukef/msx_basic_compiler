@@ -11,7 +11,7 @@
 #define __EXPRESSION_SIN_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_SIN: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_SIN() {

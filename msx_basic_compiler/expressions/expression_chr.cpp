@@ -22,7 +22,7 @@ CEXPRESSION_NODE* CEXPRESSION_CHR::optimization( CCOMPILE_INFO *p_info ) {
 		this->p_operand = p;
 	}
 	if( (p_info->options.optimize_level >= COPTIMIZE_LEVEL::NODE_ONLY) && this->p_operand->is_constant ) {
-		//	’è”‚Ìê‡
+		//	å®šæ•°ã®å ´åˆ
 		if( this->p_operand->type != CEXPRESSION_TYPE::STRING ) {
 			CEXPRESSION_TERM *p_term = new CEXPRESSION_TERM();
 			CEXPRESSION_TERM *p_operand = reinterpret_cast<CEXPRESSION_TERM*>(this->p_operand);
@@ -50,7 +50,7 @@ void CEXPRESSION_CHR::compile( CCOMPILE_INFO *p_info ) {
 	asm_line.set( CMNEMONIC_TYPE::PUSH, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "HL", COPERAND_TYPE::NONE, "" );
 	p_info->assembler_list.body.push_back( asm_line );
 
-	//	æ‚Éˆø”‚ðˆ—
+	//	å…ˆã«å¼•æ•°ã‚’å‡¦ç†
 	this->p_operand->compile( p_info );
 	this->convert_type( p_info, CEXPRESSION_TYPE::INTEGER, this->p_operand->type );
 

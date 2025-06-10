@@ -7,7 +7,7 @@
 #include "end.h"
 
 // --------------------------------------------------------------------
-//  END I—¹
+//  END çµ‚äº†
 bool CEND::exec( CCOMPILE_INFO *p_info ) {
 	int line_no = p_info->list.get_line_no();
 

@@ -11,7 +11,7 @@
 #define __CEXPRESSION_OPERATOR_EQV_H__
 
 // --------------------------------------------------------------------
-//	EQV(ìØíl)
+//	EQV(ÂêåÂÄ§)
 class CEXPRESSION_OPERATOR_EQV: public CEXPRESSION_NODE {
 public:
 	CEXPRESSION_NODE *p_left;

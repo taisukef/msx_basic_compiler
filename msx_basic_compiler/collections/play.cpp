@@ -20,7 +20,7 @@ bool CPLAY::exec( CCOMPILE_INFO *p_info ) {
 	CEXPRESSION exp;
 	CASSEMBLER_LINE asm_line;
 
-	//	‘æ1ˆø” <Ch1>
+	//	ç¬¬1å¼•æ•° <Ch1>
 	if( exp.compile( p_info, CEXPRESSION_TYPE::STRING ) ) {
 		exp.release();
 		p_info->assembler_list.activate_free_string();
@@ -28,22 +28,22 @@ bool CPLAY::exec( CCOMPILE_INFO *p_info ) {
 		p_info->assembler_list.body.push_back( asm_line );
 	}
 	else if( p_info->list.is_command_end() || p_info->list.p_position->s_word == "," ) {
-		//	‘æ1ˆø”–³‚µ‚ÍAƒGƒ‰[
+		//	ç¬¬1å¼•æ•°ç„¡ã—ã¯ã€ã‚¨ãƒ©ãƒ¼
 		p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );
 		return true;
 	}
-	//	‘æ1ˆø”‚ ‚è‚ÅAƒRƒ}ƒ“ƒhƒGƒ“ƒh‚Í³í
+	//	ç¬¬1å¼•æ•°ã‚ã‚Šã§ã€ã‚³ãƒžãƒ³ãƒ‰ã‚¨ãƒ³ãƒ‰ã¯æ­£å¸¸
 	if( p_info->list.is_command_end() ) {
 		return true;
 	}
 	else if( p_info->list.p_position->s_word != "," ) {
-		//	‘æ1ˆø”‚ ‚è‚ÅAƒRƒ}ƒ“ƒhƒGƒ“ƒh‚Å‚È‚­‚Ä , ‚ª–³‚¢ê‡‚ÍƒGƒ‰[
+		//	ç¬¬1å¼•æ•°ã‚ã‚Šã§ã€ã‚³ãƒžãƒ³ãƒ‰ã‚¨ãƒ³ãƒ‰ã§ãªãã¦ , ãŒç„¡ã„å ´åˆã¯ã‚¨ãƒ©ãƒ¼
 		p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 		return true;
 	}
 	p_info->list.p_position++;
 
-	//	‘æ2ˆø” <Ch2>
+	//	ç¬¬2å¼•æ•° <Ch2>
 	if( exp.compile( p_info, CEXPRESSION_TYPE::STRING ) ) {
 		exp.release();
 		p_info->assembler_list.activate_free_string();
@@ -51,22 +51,22 @@ bool CPLAY::exec( CCOMPILE_INFO *p_info ) {
 		p_info->assembler_list.body.push_back( asm_line );
 	}
 	else if( p_info->list.is_command_end() || p_info->list.p_position->s_word == "," ) {
-		//	‘æ2ˆø”–³‚µ‚ÍAƒGƒ‰[
+		//	ç¬¬2å¼•æ•°ç„¡ã—ã¯ã€ã‚¨ãƒ©ãƒ¼
 		p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );
 		return true;
 	}
-	//	‘æ2ˆø”‚ ‚è‚ÅAƒRƒ}ƒ“ƒhƒGƒ“ƒh‚Í³í
+	//	ç¬¬2å¼•æ•°ã‚ã‚Šã§ã€ã‚³ãƒžãƒ³ãƒ‰ã‚¨ãƒ³ãƒ‰ã¯æ­£å¸¸
 	if( p_info->list.is_command_end() ) {
 		return true;
 	}
 	else if( p_info->list.p_position->s_word != "," ) {
-		//	‘æ2ˆø”‚ ‚è‚ÅAƒRƒ}ƒ“ƒhƒGƒ“ƒh‚Å‚È‚­‚Ä , ‚ª–³‚¢ê‡‚ÍƒGƒ‰[
+		//	ç¬¬2å¼•æ•°ã‚ã‚Šã§ã€ã‚³ãƒžãƒ³ãƒ‰ã‚¨ãƒ³ãƒ‰ã§ãªãã¦ , ãŒç„¡ã„å ´åˆã¯ã‚¨ãƒ©ãƒ¼
 		p_info->errors.add( SYNTAX_ERROR, p_info->list.get_line_no() );
 		return true;
 	}
 	p_info->list.p_position++;
 
-	//	‘æ3ˆø” <Ch2>
+	//	ç¬¬3å¼•æ•° <Ch2>
 	if( exp.compile( p_info, CEXPRESSION_TYPE::STRING ) ) {
 		exp.release();
 		p_info->assembler_list.activate_free_string();
@@ -74,7 +74,7 @@ bool CPLAY::exec( CCOMPILE_INFO *p_info ) {
 		p_info->assembler_list.body.push_back( asm_line );
 	}
 	else {
-		//	‘æ3ˆø”–³‚µ‚ÍAƒGƒ‰[
+		//	ç¬¬3å¼•æ•°ç„¡ã—ã¯ã€ã‚¨ãƒ©ãƒ¼
 		p_info->errors.add( MISSING_OPERAND, p_info->list.get_line_no() );
 		return true;
 	}

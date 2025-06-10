@@ -8,7 +8,7 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  SETBEEP ‰¹F, ‰¹—Ê
+//  SETBEEP éŸ³è‰², éŸ³é‡
 bool CSETBEEP::exec( CCOMPILE_INFO *p_info ) {
 	CEXPRESSION exp;
 	CASSEMBLER_LINE asm_line;
@@ -32,7 +32,7 @@ bool CSETBEEP::exec( CCOMPILE_INFO *p_info ) {
 		p_info->errors.add( MISSING_OPERAND, line_no );
 		return true;
 	}
-	//	‘æ1ˆø” ‰¹F
+	//	ç¬¬1å¼•æ•° éŸ³è‰²
 	if( exp.compile( p_info ) ) {
 		exp.release();
 		asm_line.set( "PUSH", "", "HL" );
@@ -44,7 +44,7 @@ bool CSETBEEP::exec( CCOMPILE_INFO *p_info ) {
 	}
 	if( p_info->list.is_command_end() ) {
 		if( has_type ) {
-			//	SET BEEP <‰¹F> ‚Ìê‡B
+			//	SET BEEP <éŸ³è‰²> ã®å ´åˆã€‚
 			asm_line.set( "POP", "", "DE" );
 			p_info->assembler_list.body.push_back( asm_line );
 			asm_line.set( "LD", "", "HL", "0" );
@@ -56,19 +56,19 @@ bool CSETBEEP::exec( CCOMPILE_INFO *p_info ) {
 			return true;
 		}
 		else {
-			//	ˆø”‚ª‰½‚àw’è‚³‚ê‚Ä‚¢‚È‚¢ê‡‚ÍƒGƒ‰[
+			//	å¼•æ•°ãŒä½•ã‚‚æŒ‡å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯ã‚¨ãƒ©ãƒ¼
 			p_info->errors.add( ILLEGAL_FUNCTION_CALL, line_no );
 			return true;
 		}
 	}
 	//	,
 	if( p_info->list.p_position->s_word != "," ) {
-		//	SET BEEP <‰¹F> ‰ğß•s”\•¶š ‚Ìê‡‚ÍƒGƒ‰[
+		//	SET BEEP <éŸ³è‰²> è§£é‡ˆä¸èƒ½æ–‡å­— ã®å ´åˆã¯ã‚¨ãƒ©ãƒ¼
 		p_info->errors.add( SYNTAX_ERROR, line_no );
 		return true;
 	}
 	p_info->list.p_position++;
-	//	‘æ2ˆø” ‰¹—Ê
+	//	ç¬¬2å¼•æ•° éŸ³é‡
 	if( exp.compile( p_info ) ) {
 		exp.release();
 		if( has_type ) {
@@ -85,7 +85,7 @@ bool CSETBEEP::exec( CCOMPILE_INFO *p_info ) {
 		p_info->assembler_list.body.push_back( asm_line );
 	}
 	else {
-		//	SET BEEP <‰¹F>, ‰ğß•s”\•¶š ‚Ìê‡‚ÍƒGƒ‰[
+		//	SET BEEP <éŸ³è‰²>, è§£é‡ˆä¸èƒ½æ–‡å­— ã®å ´åˆã¯ã‚¨ãƒ©ãƒ¼
 		p_info->errors.add( ILLEGAL_FUNCTION_CALL, line_no );
 		return true;
 	}

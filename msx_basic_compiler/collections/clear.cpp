@@ -8,7 +8,7 @@
 #include "../expressions/expression.h"
 
 // --------------------------------------------------------------------
-//  CLEAR ƒƒ‚ƒŠŠm•Û
+//  CLEAR ãƒ¡ãƒ¢ãƒªç¢ºä¿
 bool CCLEAR::exec( CCOMPILE_INFO *p_info ) {
 	CEXPRESSION exp;
 	CASSEMBLER_LINE asm_line;
@@ -20,11 +20,11 @@ bool CCLEAR::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 
-	//	‘æ1ˆø”‚ğˆ—‚·‚é
+	//	ç¬¬1å¼•æ•°ã‚’å‡¦ç†ã™ã‚‹
 	exp.makeup_node( p_info );
-	exp.release();				//	‚µ‚©‚µAg‚í‚¸‚ÉÌ‚Ä‚é
+	exp.release();				//	ã—ã‹ã—ã€ä½¿ã‚ãšã«æ¨ã¦ã‚‹
 
-	//	, ‚Ìˆ—
+	//	, ã®å‡¦ç†
 	if( p_info->list.is_command_end() ) {
 		return true;
 	}

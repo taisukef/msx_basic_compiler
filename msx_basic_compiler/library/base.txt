@@ -1,13 +1,13 @@
-MSX-BASIC �� BASE() ��ǂ񂾏ꍇ�A�ǂ�ȏ������Ȃ����̂��H
-BIOS�̃��[�N�G���A�����Ă݂�ƁATXTNAM(F3B3H, 2) ����̕��т� BASE(0)�`BASE(19) �ƈ�v���Ă���̂ŁA
-������ F3B3H �̃��[�h�A�N�Z�X�u���C�N��\���āAA=BASE(0) �����s���Ă݂�B
+MSX-BASIC で BASE() を読んだ場合、どんな処理がなされるのか？
+BIOSのワークエリアを見てみると、TXTNAM(F3B3H, 2) からの並びが BASE(0)～BASE(19) と一致しているので、
+試しに F3B3H のリードアクセスブレイクを貼って、A=BASE(0) を実行してみる。
 
-A1GT-BIOS �ŁASUB-ROM �� 2321h �ŃA�N�Z�X���Ă���̂�������B
+A1GT-BIOS で、SUB-ROM の 2321h でアクセスしているのが分かる。
 
-			JR		2325h			; ��������͕ʂ̃��[�`�����낤
-			LD		HL,F3B3h		; �������ǂݏo�������̃G���g���[���Ǝv����B
+			JR		2325h			; 多分これは別のルーチンだろう
+			LD		HL,F3B3h		; ここが読み出し処理のエントリーだと思われる。
 			LD		D,0
-			ADD		HL,DE			; DE=0 (�����炭BASE�̈���)
+			ADD		HL,DE			; DE=0 (おそらくBASEの引数)
 			ADD		HL,DE
 	2321:	LD		A,(HL)			; HL=F3B3h
 			INC		HL

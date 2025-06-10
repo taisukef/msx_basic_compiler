@@ -21,9 +21,9 @@ CEXPRESSION_NODE* CEXPRESSION_ASC::optimization( CCOMPILE_INFO *p_info ) {
 		this->p_operand = p;
 	}
 	if( (p_info->options.optimize_level >= COPTIMIZE_LEVEL::NODE_ONLY) && this->p_operand->is_constant ) {
-		//	’è”‚Ìê‡
+		//	å®šæ•°ã®å ´åˆ
 		if( this->p_operand->type == CEXPRESSION_TYPE::STRING ) {
-			//	•¶š—ñ‚Ìê‡
+			//	æ–‡å­—åˆ—ã®å ´åˆ
 			if( this->p_operand->s_value.size() != 0 ) {
 				CEXPRESSION_TERM *p_term = new CEXPRESSION_TERM();
 				p_term->type = CEXPRESSION_TYPE::INTEGER;
@@ -39,7 +39,7 @@ CEXPRESSION_NODE* CEXPRESSION_ASC::optimization( CCOMPILE_INFO *p_info ) {
 void CEXPRESSION_ASC::compile( CCOMPILE_INFO *p_info ) {
 	CASSEMBLER_LINE asm_line;
 
-	//	æ‚Éˆø”‚ğˆ—
+	//	å…ˆã«å¼•æ•°ã‚’å‡¦ç†
 	if( this->p_operand == nullptr ) {
 		return;
 	}

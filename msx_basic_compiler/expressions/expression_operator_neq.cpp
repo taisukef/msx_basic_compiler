@@ -36,16 +36,16 @@ void CEXPRESSION_OPERATOR_NEQ::compile( CCOMPILE_INFO *p_info ) {
 	if( this->p_left == nullptr || this->p_right == nullptr ) {
 		return;
 	}
-	//	æ‚É€‚ğˆ—
+	//	å…ˆã«é …ã‚’å‡¦ç†
 	this->p_left->compile( p_info );
 	p_info->assembler_list.push_hl( this->p_left->type );
 	this->p_right->compile( p_info );
 
-	//	‚±‚Ì‰‰Zq‚Ì‰‰ZŒ‹‰Ê‚Í•K‚¸®”
+	//	ã“ã®æ¼”ç®—å­ã®æ¼”ç®—çµæœã¯å¿…ãšæ•´æ•°
 	this->type_adjust_2op( p_info, this->p_left, this->p_right );
 
 	if( this->type == CEXPRESSION_TYPE::STRING ) {
-		//	•¶š—ñ‚Ìê‡
+		//	æ–‡å­—åˆ—ã®å ´åˆ
 		p_info->assembler_list.activate_free_string();
 		s_label = p_info->get_auto_label();
 		p_info->assembler_list.add_label( "blib_strcmp", "0x04027" );
@@ -89,7 +89,7 @@ void CEXPRESSION_OPERATOR_NEQ::compile( CCOMPILE_INFO *p_info ) {
 		return;
 	}
 	if( this->type == CEXPRESSION_TYPE::INTEGER ) {
-		//	‚±‚Ì‰‰Zq‚ª®”‚Ìê‡
+		//	ã“ã®æ¼”ç®—å­ãŒæ•´æ•°ã®å ´åˆ
 		p_info->assembler_list.add_label( "bios_icomp", "0x02f4d" );
 		asm_line.set( CMNEMONIC_TYPE::POP, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "DE", COPERAND_TYPE::NONE, "" );
 		p_info->assembler_list.body.push_back( asm_line );
@@ -97,7 +97,7 @@ void CEXPRESSION_OPERATOR_NEQ::compile( CCOMPILE_INFO *p_info ) {
 		p_info->assembler_list.body.push_back( asm_line );
 	}
 	else {
-		//	‚±‚Ì‰‰Zq‚ªÀ”‚Ìê‡
+		//	ã“ã®æ¼”ç®—å­ãŒå®Ÿæ•°ã®å ´åˆ
 		p_info->assembler_list.add_label( "bios_xdcomp", "0x02f5c" );
 		asm_line.set( CMNEMONIC_TYPE::CALL, CCONDITION::NONE, COPERAND_TYPE::CONSTANT, "bios_xdcomp", COPERAND_TYPE::NONE, "" );
 		p_info->assembler_list.body.push_back( asm_line );

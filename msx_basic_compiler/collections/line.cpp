@@ -20,7 +20,7 @@ bool CLINE::exec( CCOMPILE_INFO *p_info ) {
 	}
 	p_info->list.p_position++;
 	if( p_info->list.is_command_end() ) {
-		//	LINE ‚¾‚¯‚ÅI‚í‚Á‚Ä‚éê‡‚Í Syntax error.
+		//	LINE ã ã‘ã§çµ‚ã‚ã£ã¦ã‚‹å ´åˆã¯ Syntax error.
 		p_info->errors.add( SYNTAX_ERROR, line_no );
 		return true;
 	}
@@ -36,10 +36,10 @@ bool CLINE::exec( CCOMPILE_INFO *p_info ) {
 	p_info->assembler_list.add_label( "bios_setatr", "0x0011A" );
 
 	if( p_info->list.p_position->s_word == "(" ) {
-		//	Žn“_À•W‚ÌŽw’è‚ª‚ ‚éê‡
+		//	å§‹ç‚¹åº§æ¨™ã®æŒ‡å®šãŒã‚ã‚‹å ´åˆ
 		//	(
 		p_info->list.p_position++;
-		//	XÀ•W
+		//	Xåº§æ¨™
 		if( exp.compile( p_info, CEXPRESSION_TYPE::INTEGER ) ) {
 			asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::MEMORY, "[work_gxpos]", COPERAND_TYPE::REGISTER, "HL" );
 			p_info->assembler_list.body.push_back( asm_line );
@@ -57,7 +57,7 @@ bool CLINE::exec( CCOMPILE_INFO *p_info ) {
 			return true;
 		}
 		p_info->list.p_position++;
-		//	YÀ•W
+		//	Yåº§æ¨™
 		if( exp.compile( p_info, CEXPRESSION_TYPE::INTEGER ) ) {
 			asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::MEMORY, "[work_gypos]", COPERAND_TYPE::REGISTER, "HL" );
 			p_info->assembler_list.body.push_back( asm_line );
@@ -93,7 +93,7 @@ bool CLINE::exec( CCOMPILE_INFO *p_info ) {
 		return true;
 	}
 	p_info->list.p_position++;
-	//	XÀ•W
+	//	Xåº§æ¨™
 	exp_x.makeup_node( p_info );
 	//	,
 	if( p_info->list.is_command_end() || p_info->list.p_position->s_word != "," ) {
@@ -101,7 +101,7 @@ bool CLINE::exec( CCOMPILE_INFO *p_info ) {
 		return true;
 	}
 	p_info->list.p_position++;
-	//	YÀ•W
+	//	Yåº§æ¨™
 	exp_y.makeup_node( p_info );
 	//	)
 	if( p_info->list.is_command_end() || p_info->list.p_position->s_word != ")" ){
@@ -111,14 +111,14 @@ bool CLINE::exec( CCOMPILE_INFO *p_info ) {
 	p_info->list.p_position++;
 	//	,
 	if( p_info->list.is_command_end() ) {
-		//	LINE (x,y)-(x,y) ‚ÅI‚í‚Á‚Ä‚éê‡Bü‚ð•`‚­B
-		//	ƒƒWƒJƒ‹ƒIƒyƒŒ[ƒVƒ‡ƒ“‚Í PSETŒÅ’è
+		//	LINE (x,y)-(x,y) ã§çµ‚ã‚ã£ã¦ã‚‹å ´åˆã€‚ç·šã‚’æãã€‚
+		//	ãƒ­ã‚¸ã‚«ãƒ«ã‚ªãƒšãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã¯ PSETå›ºå®š
 		p_info->assembler_list.add_label( "work_logopr", "0x0fB02" );
 		asm_line.set( CMNEMONIC_TYPE::XOR, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "A", COPERAND_TYPE::REGISTER, "A" );
 		p_info->assembler_list.body.push_back( asm_line );
 		asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::MEMORY, "[work_logopr]", COPERAND_TYPE::REGISTER, "A" );
 		p_info->assembler_list.body.push_back( asm_line );
-		//	F‚Í‘OŒiF‚É‚È‚é
+		//	è‰²ã¯å‰æ™¯è‰²ã«ãªã‚‹
 		p_info->assembler_list.add_label( "work_forclr", "0x0F3E9" );
 		asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "A", COPERAND_TYPE::MEMORY, "[work_forclr]" );
 		p_info->assembler_list.body.push_back( asm_line );
@@ -176,15 +176,15 @@ bool CLINE::exec( CCOMPILE_INFO *p_info ) {
 		p_info->errors.add( SYNTAX_ERROR, line_no );
 		return true;
 	}
-	//	F
+	//	è‰²
 	if( p_info->list.p_position->s_word != "," ){
-		//	ƒƒWƒJƒ‹ƒIƒyƒŒ[ƒVƒ‡ƒ“‚Í PSETŒÅ’è
+		//	ãƒ­ã‚¸ã‚«ãƒ«ã‚ªãƒšãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã¯ PSETå›ºå®š
 		p_info->assembler_list.add_label( "work_logopr", "0x0fB02" );
 		asm_line.set( CMNEMONIC_TYPE::XOR, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "A", COPERAND_TYPE::REGISTER, "A" );
 		p_info->assembler_list.body.push_back( asm_line );
 		asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::MEMORY, "[work_logopr]", COPERAND_TYPE::REGISTER, "A" );
 		p_info->assembler_list.body.push_back( asm_line );
-		//	F‚ÌŽw’è‚ª‚ ‚é
+		//	è‰²ã®æŒ‡å®šãŒã‚ã‚‹
 		if( exp.compile( p_info, CEXPRESSION_TYPE::INTEGER ) ) {
 			asm_line.set( CMNEMONIC_TYPE::LD, CCONDITION::NONE, COPERAND_TYPE::REGISTER, "A", COPERAND_TYPE::REGISTER, "L" );
 			p_info->assembler_list.body.push_back( asm_line );
@@ -197,7 +197,7 @@ bool CLINE::exec( CCOMPILE_INFO *p_info ) {
 			return true;
 		}
 		if( p_info->list.is_command_end() ) {
-			//	LINE (x,y)-(x,y),c ‚ÅI‚í‚Á‚Ä‚éê‡Bü‚ð•`‚­B
+			//	LINE (x,y)-(x,y),c ã§çµ‚ã‚ã£ã¦ã‚‹å ´åˆã€‚ç·šã‚’æãã€‚
 			if( !exp_x.compile( p_info, CEXPRESSION_TYPE::INTEGER ) ) {
 				p_info->errors.add( SYNTAX_ERROR, line_no );
 				return true;
@@ -247,17 +247,17 @@ bool CLINE::exec( CCOMPILE_INFO *p_info ) {
 		return true;
 	}
 	p_info->list.p_position++;
-	//	B ‚Ü‚½‚Í BF
+	//	B ã¾ãŸã¯ BF
 	if( p_info->list.is_command_end() ) {
 		p_info->errors.add( SYNTAX_ERROR, line_no );
 		return true;
 	}
 	if( p_info->list.p_position->s_word == "B" ) {
-		//	B ‚Ìê‡
+		//	B ã®å ´åˆ
 		p_info->list.p_position++;
-		//	ƒƒWƒJƒ‹ƒIƒyƒŒ[ƒVƒ‡ƒ“
+		//	ãƒ­ã‚¸ã‚«ãƒ«ã‚ªãƒšãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³
 		p_info->p_compiler->put_logical_operation();
-		//	LINE (x,y)-(x,y),c,b ‚ÅI‚í‚Á‚Ä‚éê‡B“h‚è‚Â‚Ô‚µŽlŠp‚ð•`‚­B
+		//	LINE (x,y)-(x,y),c,b ã§çµ‚ã‚ã£ã¦ã‚‹å ´åˆã€‚å¡—ã‚Šã¤ã¶ã—å››è§’ã‚’æãã€‚
 		if( !exp_x.compile( p_info, CEXPRESSION_TYPE::INTEGER ) ) {
 			p_info->errors.add( SYNTAX_ERROR, line_no );
 			return true;
@@ -304,11 +304,11 @@ bool CLINE::exec( CCOMPILE_INFO *p_info ) {
 		p_info->assembler_list.add_label( "work_romver", "0x0002D" );
 		p_info->assembler_list.add_label( "bios_nvbxfl", "0x000CD" );
 		p_info->assembler_list.add_label( "bios_extrom", "0x0015F" );
-		//	BF ‚Ìê‡
+		//	BF ã®å ´åˆ
 		p_info->list.p_position++;
-		//	ƒƒWƒJƒ‹ƒIƒyƒŒ[ƒVƒ‡ƒ“
+		//	ãƒ­ã‚¸ã‚«ãƒ«ã‚ªãƒšãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³
 		p_info->p_compiler->put_logical_operation();
-		//	LINE (x,y)-(x,y),c,bf ‚ÅI‚í‚Á‚Ä‚éê‡B“h‚è‚Â‚Ô‚µŽlŠp‚ð•`‚­B
+		//	LINE (x,y)-(x,y),c,bf ã§çµ‚ã‚ã£ã¦ã‚‹å ´åˆã€‚å¡—ã‚Šã¤ã¶ã—å››è§’ã‚’æãã€‚
 		if( !exp_x.compile( p_info, CEXPRESSION_TYPE::INTEGER ) ) {
 			p_info->errors.add( SYNTAX_ERROR, line_no );
 			return true;
@@ -373,7 +373,7 @@ bool CLINE::exec( CCOMPILE_INFO *p_info ) {
 		return true;
 	}
 	else if( p_info->list.p_position->s_word == "," ) {
-		//	ƒƒWƒJƒ‹ƒIƒyƒŒ[ƒVƒ‡ƒ“
+		//	ãƒ­ã‚¸ã‚«ãƒ«ã‚ªãƒšãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³
 		p_info->p_compiler->put_logical_operation();
 		if( !exp_x.compile( p_info, CEXPRESSION_TYPE::INTEGER ) ) {
 			p_info->errors.add( SYNTAX_ERROR, line_no );

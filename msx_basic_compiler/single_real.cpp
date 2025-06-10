@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------
-//	MSX-BASIC ’P¸“xÀ”
+//	MSX-BASIC å˜ç²¾åº¦å®Ÿæ•°
 // ====================================================================
 //	2023/Aug/14th  t.hara 
 // --------------------------------------------------------------------
@@ -7,7 +7,7 @@
 #include "single_real.h"
 #include <cstring>
 
-//	’P¸“xÀ”‚Ì—LŒøŒ…” 6, lÌŒÜ“ü‚Ì‚½‚ß‚Ì 1Œ…
+//	å˜ç²¾åº¦å®Ÿæ•°ã®æœ‰åŠ¹æ¡æ•° 6, å››æ¨äº”å…¥ã®ãŸã‚ã® 1æ¡
 constexpr int MANTISSA_MAX = 6 + 1;
 
 // --------------------------------------------------------------------
@@ -18,7 +18,7 @@ bool CSINGLE_REAL::set( std::string s ) {
 	bool has_dot = false;
 	bool is_zero = true;
 
-	//	•„†
+	//	ç¬¦å·
 	if( i < s.size() && s[i] == '-' ) {
 		sign = 0x80;
 		i++;
@@ -26,7 +26,7 @@ bool CSINGLE_REAL::set( std::string s ) {
 	else {
 		sign = 0x00;
 	}
-	//	”š.”š‚ÌŒ…‚ğ“Ç‚Ş
+	//	æ•°å­—.æ•°å­—ã®æ¡ã‚’èª­ã‚€
 	mi = 0;
 	exponent_offset = 0;
 	std::memset( mantissa, 0, sizeof(mantissa) );
@@ -49,7 +49,7 @@ bool CSINGLE_REAL::set( std::string s ) {
 		}
 		else if( s[i] == '.' ) {
 			if( has_dot ) {
-				//	¬”“_‚ª2‚ÂˆÈã‘¶İ‚·‚éê‡ƒGƒ‰[
+				//	å°æ•°ç‚¹ãŒ2ã¤ä»¥ä¸Šå­˜åœ¨ã™ã‚‹å ´åˆã‚¨ãƒ©ãƒ¼
 				return false;
 			}
 			has_dot = true;
@@ -60,7 +60,7 @@ bool CSINGLE_REAL::set( std::string s ) {
 		}
 		i++;
 	}
-	//	E+xx, D+xx ‚Ì‹Lq‚ğ“Ç‚Ş
+	//	E+xx, D+xx ã®è¨˜è¿°ã‚’èª­ã‚€
 	exponent = 0;
 	if( i < s.size() && (toupper( s[i] & 255 ) == 'E' || toupper( s[i] & 255 ) == 'D') ) {
 		i++;
@@ -88,16 +88,16 @@ bool CSINGLE_REAL::set( std::string s ) {
 		exponent = exponent_sign * exponent;
 	}
 	exponent += exponent_offset;
-	//	lÌŒÜ“ü
+	//	å››æ¨äº”å…¥
 	if( mantissa[MANTISSA_MAX - 1] >= 5 ) {
-		//	ŒJ‚èã‚°
+		//	ç¹°ã‚Šä¸Šã’
 		for( mi = 0; mi < MANTISSA_MAX - 1; mi++ ) {
 			if( mantissa[mi] != 9 ) {
 				break;
 			}
 		}
 		if( mi == (MANTISSA_MAX - 1) ) {
-			//	‘SŒ… 9 ‚ÅŒJ‚èã‚ª‚è‚ª”­¶‚µ‚½ê‡Aexponent ‚ğ1Œ…‰º‚°‚Ä 1000... ‚É‚·‚é
+			//	å…¨æ¡ 9 ã§ç¹°ã‚Šä¸ŠãŒã‚ŠãŒç™ºç”Ÿã—ãŸå ´åˆã€exponent ã‚’1æ¡ä¸‹ã’ã¦ 1000... ã«ã™ã‚‹
 			mantissa[0] = 0;
 			for( mi = 1; mi < MANTISSA_MAX - 1; mi++ ) {
 				mantissa[mi] = 0;
@@ -105,7 +105,7 @@ bool CSINGLE_REAL::set( std::string s ) {
 			exponent--;
 		}
 		else {
-			//	ŒJ‚èã‚ª‚è‚É”º‚¤ƒCƒ“ƒNƒŠƒƒ“ƒg
+			//	ç¹°ã‚Šä¸ŠãŒã‚Šã«ä¼´ã†ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ
 			for( mi = MANTISSA_MAX - 2; mi >= 0; mi-- ) {
 				mantissa[mi]++;
 				if( mantissa[mi] == 10 ) {
@@ -118,10 +118,10 @@ bool CSINGLE_REAL::set( std::string s ) {
 		}
 	}
 	if( exponent > 63 ) {
-		//	ƒI[ƒo[ƒtƒ[
+		//	ã‚ªãƒ¼ãƒãƒ¼ãƒ•ãƒ­ãƒ¼
 		return false;
 	}
-	//	•ÏŠ·Œ‹‰Ê‚ğŠ–]‚ÌƒtƒH[ƒ}ƒbƒg‚ÉŠi”[‚·‚é
+	//	å¤‰æ›çµæœã‚’æ‰€æœ›ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã«æ ¼ç´ã™ã‚‹
 	this->image[0] = sign | (64 + exponent);
 	for( i = 1, mi = 0; mi < MANTISSA_MAX - 2; i++, mi += 2 ) {
 		this->image[i] = (mantissa[mi] << 4) + mantissa[mi+1];

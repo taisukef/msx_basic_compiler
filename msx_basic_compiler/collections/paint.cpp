@@ -75,18 +75,18 @@ bool CPAINT::exec( CCOMPILE_INFO *p_info ) {
 			exp.release();
 		}
 		else {
-			//	C ‚ªÈ—ª‚³‚ê‚Ä‚¢‚éê‡
+			//	C ãŒçœç•¥ã•ã‚Œã¦ã„ã‚‹å ´åˆ
 			asm_line.set( "LD", "", "A", "[work_forclr]" );
 			p_info->assembler_list.body.push_back( asm_line );
 			has_comma_without_c = true;
 		}
 	}
 	else {
-		//	C ‚ªÈ—ª‚³‚ê‚Ä‚¢‚éê‡
+		//	C ãŒçœç•¥ã•ã‚Œã¦ã„ã‚‹å ´åˆ
 		asm_line.set( "LD", "", "A", "[work_forclr]" );
 		p_info->assembler_list.body.push_back( asm_line );
 	}
-	//	C ‚ğƒZƒbƒg
+	//	C ã‚’ã‚»ãƒƒãƒˆ
 	asm_line.set( "CALL", "", "bios_setatr" );
 	p_info->assembler_list.body.push_back( asm_line );
 	//	,
@@ -94,26 +94,26 @@ bool CPAINT::exec( CCOMPILE_INFO *p_info ) {
 		p_info->list.p_position++;
 		//	B
 		if( exp.compile( p_info ) ) {
-			//	PAINT (X,Y),C,B ‚Ü‚½‚Í PAINT (X,Y),,B ‚Ìê‡
+			//	PAINT (X,Y),C,B ã¾ãŸã¯ PAINT (X,Y),,B ã®å ´åˆ
 			asm_line.set( "LD", "", "A", "L" );
 			p_info->assembler_list.body.push_back( asm_line );
 			exp.release();
 		}
 		else {
-			//	B ‚ªÈ—ª‚³‚ê‚Ä‚¢‚éê‡ PAINT (X,Y),C, ‚© PAINT (X,Y),, ‚Ìê‡
+			//	B ãŒçœç•¥ã•ã‚Œã¦ã„ã‚‹å ´åˆ PAINT (X,Y),C, ã‹ PAINT (X,Y),, ã®å ´åˆ
 			p_info->errors.add( SYNTAX_ERROR, line_no );
 			return true;
 		}
 	}
 	else {
-		//	B ‚ªÈ—ª‚³‚ê‚Ä‚¢‚éê‡
+		//	B ãŒçœç•¥ã•ã‚Œã¦ã„ã‚‹å ´åˆ
 		if( has_comma_without_c ) {
-			//	, ‚¾‚¯‚ ‚Á‚Ä C ‚à B ‚àÈ—ª‚³‚ê‚Ä‚¢‚éê‡‚ÍƒGƒ‰[ PAINT (X,Y), ‚Ìê‡
+			//	, ã ã‘ã‚ã£ã¦ C ã‚‚ B ã‚‚çœç•¥ã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ã‚¨ãƒ©ãƒ¼ PAINT (X,Y), ã®å ´åˆ
 			p_info->errors.add( SYNTAX_ERROR, line_no );
 			return true;
 		}
 		else {
-			//	PAINT (X,Y) ‚Ìê‡
+			//	PAINT (X,Y) ã®å ´åˆ
 			asm_line.set( "LD", "", "A", "[work_atrbyt]" );
 			p_info->assembler_list.body.push_back( asm_line );
 		}

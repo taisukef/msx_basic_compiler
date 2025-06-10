@@ -11,7 +11,7 @@
 #define __CEXPRESSION_VARIABLE_H__
 
 // --------------------------------------------------------------------
-//	ŠÖ”ŒÄ‚Ño‚µ
+//	é–¢æ•°å‘¼ã³å‡ºã—
 class CEXPRESSION_VARIABLE: public CEXPRESSION_NODE {
 public:
 	std::string s_value;

@@ -11,7 +11,7 @@
 #define __EXPRESSION_VDP_H__
 
 // --------------------------------------------------------------------
-//	�֐��Ăяo��
+//	関数呼び出し
 class CEXPRESSION_VDP: public CEXPRESSION_NODE {
 public:
 	~CEXPRESSION_VDP() {
